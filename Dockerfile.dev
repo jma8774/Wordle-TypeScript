@@ -7,13 +7,6 @@ WORKDIR /app
 # Copy/Install dependencies into our directory
 COPY package.json package-lock.json ./
 RUN npm ci
-
-# Test target
-FROM base as test
 COPY . .
-RUN npm run test
-
-# Production target
-FROM base as prod
-COPY . .
+EXPOSE 3000
 CMD ["npm", "start"]

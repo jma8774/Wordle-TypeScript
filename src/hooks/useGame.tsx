@@ -17,7 +17,7 @@ export const useGame = () => {
   useEffect(() => {
     // Function to read my text file from the 'public' folder
     const fetchWords = (filename: string): Promise<string[]> => {
-      return fetch(`${window.location.href}/${filename}`)
+      return fetch(`${process.env.PUBLIC_URL}/${filename}`)
       .then((res) => res.text())
       .then((text) => {
         return text.split('\n')
@@ -46,8 +46,8 @@ export const useGame = () => {
   const guessWord = (word: string): void => {
     if(!words.current.has(word) || status !== 'ongoing')
       return
-    console.log(word === wordle ? "Correct guess" : "Wrong guess")
     history.push(word)
+    console.log(word === wordle ? "Correct guess" : "Wrong guess")
     setGuesses(guesses - 1)
     if(word === wordle) {
       setStatus('win')

@@ -28,7 +28,7 @@ describe("Test isEmpty", () => {
 })
 
 describe("Test push", () => {
-  it('it should push 2 and 3', () => {
+  it('should push 2 and 3', () => {
     const { result } = renderHook(() => useArray<number>([]))
     act(() => {
       result.current.push(2)
@@ -41,28 +41,28 @@ describe("Test push", () => {
 })
 
 describe("Test remove index", () => {
-  it('it should remove first item at index 0', () => {
+  it('should remove first item at index 0', () => {
     const { result } = renderHook(() => useArray<number>([1, 2, 3]))
     act(() => {
       result.current.remove(0)
     })
     expect(result.current.data).toEqual([2, 3])
   })
-  it('it should remove last item at index 2', () => {
+  it('should remove last item at index 2', () => {
     const { result } = renderHook(() => useArray<number>([1, 2, 3]))
     act(() => {
       result.current.remove(2)
     })
     expect(result.current.data).toEqual([1, 2])
   })
-  it('it should remove nonexistent index -1', () => {
+  it('should remove nonexistent index -1', () => {
     const { result } = renderHook(() => useArray<number>([1, 2, 3]))
     act(() => {
       result.current.remove(-1)
     })
     expect(result.current.data).toEqual([1, 2, 3])
   })
-  it('it should remove empty array', () => {
+  it('should remove empty array', () => {
     const { result } = renderHook(() => useArray<number>([]))
     act(() => {
       result.current.remove(0)

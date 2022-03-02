@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FC } from 'react';
+import React, { useState, FC } from 'react';
 import { useGame } from './hooks/useGame'
 
 const App:FC = () => {
