@@ -1,15 +1,22 @@
 {
   "files": {
-    "main.css": "/wordle-ts/static/css/main.e6c13ad2.css",
-    "main.js": "/wordle-ts/static/js/main.e394f526.js",
-    "static/js/787.e01666d6.chunk.js": "/wordle-ts/static/js/787.e01666d6.chunk.js",
+    "main.css": "/wordle-ts/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/wordle-ts/static/js/main.93a627f3.chunk.js",
+    "main.js.map": "/wordle-ts/static/js/main.93a627f3.chunk.js.map",
+    "runtime-main.js": "/wordle-ts/static/js/runtime-main.475fc00a.js",
+    "runtime-main.js.map": "/wordle-ts/static/js/runtime-main.475fc00a.js.map",
+    "static/js/2.beaa9d5f.chunk.js": "/wordle-ts/static/js/2.beaa9d5f.chunk.js",
+    "static/js/2.beaa9d5f.chunk.js.map": "/wordle-ts/static/js/2.beaa9d5f.chunk.js.map",
+    "static/js/3.ff5107a4.chunk.js": "/wordle-ts/static/js/3.ff5107a4.chunk.js",
+    "static/js/3.ff5107a4.chunk.js.map": "/wordle-ts/static/js/3.ff5107a4.chunk.js.map",
     "index.html": "/wordle-ts/index.html",
-    "main.e6c13ad2.css.map": "/wordle-ts/static/css/main.e6c13ad2.css.map",
-    "main.e394f526.js.map": "/wordle-ts/static/js/main.e394f526.js.map",
-    "787.e01666d6.chunk.js.map": "/wordle-ts/static/js/787.e01666d6.chunk.js.map"
+    "static/css/main.6dea0f05.chunk.css.map": "/wordle-ts/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.beaa9d5f.chunk.js.LICENSE.txt": "/wordle-ts/static/js/2.beaa9d5f.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/css/main.e6c13ad2.css",
-    "static/js/main.e394f526.js"
+    "static/js/runtime-main.475fc00a.js",
+    "static/js/2.beaa9d5f.chunk.js",
+    "static/css/main.6dea0f05.chunk.css",
+    "static/js/main.93a627f3.chunk.js"
   ]
 }
