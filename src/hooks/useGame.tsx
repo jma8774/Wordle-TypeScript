@@ -14,6 +14,7 @@ interface CharColor {
 }
 
 export const useGame = () => {
+  console.log("render useGame")
   const [guesses, setGuesses] = useState<number>(6)
   const [wordle, setWordle] = useState<string>('')
   const alphabet = useAlphabet()
@@ -40,17 +41,24 @@ export const useGame = () => {
       const wordsArr = await parseTextFile('words.txt')
       answers.current = answersArr
       words.current = new Set(wordsArr.concat(answersArr))
-      newGame()
     }
 
+    // Pick a random wordle after fetching our words + answers
     fetchWords()
+    .then(() => {
+      const index = randomInt(0, answers.current.length)
+      setWordle(answers.current[index])
+    })
   }, [])
   
   const newGame = (): void => {
-    console.log("New game")
+    console.log("started new game")
     setGuesses(6) // Reset guesses to 6
     const index = randomInt(0, answers.current.length)  // Get a random index
     setWordle(answers.current[index]) // Pick a random wordle
+    history.reset() // Reset history
+    alphabet.reset() // Reset alphabet
+    setStatus('ongoing')  // Reset status
   }
 
   const guessWord = (word: string): void => {

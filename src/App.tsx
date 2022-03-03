@@ -1,41 +1,34 @@
-import React, { useState, FC } from 'react';
+import React, { useState } from 'react';
 import { useGame } from './hooks/useGame'
+import Node from './components/Node'
+import InputWord from './components/InputWord'
 
-const statusColor: Record<string, string> = {
-  success: 'green',
-  almost: 'orange',
-  never: 'black'
-}
+const App = () => {
+  console.log("render app")
+  const { guesses, wordle, history, alphabet, status, newGame, guessWord } = useGame()  
 
-const App:FC = () => {
-  const [input, setInput] = useState<string>('')
-  const game = useGame()
-
-  const handleSubmit = (e: React.FormEvent): void => {
+  const handleSubmit = (e: React.FormEvent, input: string): void => {
     e.preventDefault()
-    game.guessWord(input)
-    setInput('')
+    guessWord(input)
   }
 
   return(
     <div> 
-      {game.status}
+      {`status: ${status}`}
       <br/>
-      {game.guesses}
+      {`guesses left: ${guesses}`}
       <br/>
-      {game.wordle} 
+      {`wordle: ${wordle}`} 
       <br/>
-      <button onClick={game.newGame}> restart </button>
+      <button onClick={newGame}> restart </button>
       <br/>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <input onChange={(e) => setInput(e.target.value)} value={input}/>
-        <button> guess </button>
-      </form>
+      <InputWord handleSubmit={handleSubmit}/>
       {
-        game.history.data.map((guess, index) => 
+        history.data.map((guess, index) => 
           <div key={index} >
+            {`guess #${index+1}: `}
             {
-              guess.map((pair, index) => <span style={{ color: statusColor[pair.color] }} key={`${pair.ch}${index}`}>{pair.ch}</span>)
+              guess.map((pair, index) => <Node key={`${pair.ch}${index}`} pair={pair} />)
             }
           </div>
         )

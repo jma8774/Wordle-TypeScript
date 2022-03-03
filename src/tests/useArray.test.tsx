@@ -70,3 +70,13 @@ describe("Test remove index", () => {
     expect(result.current.data).toEqual([])
   })
 })
+
+describe("Reset array", () => {
+  it('should reset the array to empty', () => {
+    const { result } = renderHook(() => useArray<number>([1, 2, 3]))
+    act(() => {
+      result.current.reset()
+    })
+    expect(result.current.data).toEqual([])
+  })
+})
