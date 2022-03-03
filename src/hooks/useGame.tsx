@@ -48,40 +48,40 @@ export const useGame = () => {
   
   const newGame = (): void => {
     console.log("New game")
-    setGuesses(6)
-    const index = randomInt(0, answers.current.length)
-    setWordle(answers.current[index])
+    setGuesses(6) // Reset guesses to 6
+    const index = randomInt(0, answers.current.length)  // Get a random index
+    setWordle(answers.current[index]) // Pick a random wordle
   }
 
   const guessWord = (word: string): void => {
     if(!words.current.has(word) || status !== 'ongoing')
       return
-    history.push(updateCharColors(word))
-    setGuesses(guesses - 1)
-    if(word === wordle) {
+    history.push(updateCharColors(word))  // Update alphabet highlights + push guess word to history with color highlights
+    setGuesses(guesses - 1) // Decrement guess count
+    if(word === wordle) // Check if game is over
       setStatus('win')
-    }
-    else if(guesses-1 === 0) {
+    else if(guesses-1 === 0)
       setStatus('lose')
-    }
   }
 
   // Input is the current guess
   // Will update the alphabet with green/yellow/black colors and display the new word after
-  const updateCharColors = (word: string): CharColor[] => {
+  const updateCharColors = (guess: string): CharColor[] => {
     let wordColors: CharColor[] = []
     let wordleSet = new Set(wordle)
-    for(let i = 0; i < word.length; i ++) {
-      const ch: string = word[i]
-      if(ch === wordle[i]) {
+
+    // Iterate through each character of the guess word
+    for(let i = 0; i < guess.length; i ++) {
+      const ch: string = guess[i]
+      if(ch === wordle[i]) {  // Character at index i of guess is same as character of wordle
         wordColors.push( { ch: ch, color: 'success' } )
         alphabet.updateSuccess(ch)
       }
-      else if(wordleSet.has(ch)) {
+      else if(wordleSet.has(ch)) {  // Otherwise, check if guess char is a char in the wordle
         wordColors.push( { ch: ch, color: 'almost' } )
         alphabet.updateAlmost(ch)
       }
-      else {
+      else {  // Otherwise, mark the character as 'never' possible
         wordColors.push( { ch: ch, color: 'never' } )
         alphabet.updateNever(ch)
       }

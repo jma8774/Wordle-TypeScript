@@ -14,6 +14,7 @@ const App:FC = () => {
   const handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault()
     game.guessWord(input)
+    setInput('')
   }
 
   return(
@@ -27,7 +28,7 @@ const App:FC = () => {
       <button onClick={game.newGame}> restart </button>
       <br/>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <input onChange={(e) => setInput(e.target.value)}/>
+        <input onChange={(e) => setInput(e.target.value)} value={input}/>
         <button> guess </button>
       </form>
       {
