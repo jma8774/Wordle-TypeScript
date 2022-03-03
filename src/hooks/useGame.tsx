@@ -31,7 +31,7 @@ export const useGame = () => {
       return fetch(`${process.env.PUBLIC_URL}/${filename}`)
       .then((res) => res.text())
       .then((text) => {
-        return text.split('\n')
+        return text.split(/\r?\n/)  // Split by /r/n on windows or /n on Unix using regex
       })
     }
 
