@@ -4,7 +4,7 @@ Just another Wordle game on the web, purpose of this project was to learn Typesc
 
 Made use of custom hooks in React to seperate logic which made the code easier to manage and did unit testing using Jest.
 
-Currently hosted via [GitHub Pages](https://www.jiamingma.me/wordle-ts/).
+Currently hosted via [GitHub Pages](https://www.jiamingma.me/Wordle-Typescript/).
 
 # Usage
 Install [Docker](http://docker.com) container to run the application locally.
