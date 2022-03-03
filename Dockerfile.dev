@@ -1,9 +1,6 @@
-# Base Image
-FROM node:12-alpine as base
-
+FROM node:12-alpine
 # Directory in our container
 WORKDIR /app
-
 # Copy/Install dependencies into our directory
 COPY package.json package-lock.json ./
 RUN npm ci

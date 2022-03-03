@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  prod-frontend:
+    container_name: "wordle-prod"
+    build: 
+      context: .  # Location of dockerfile
+      dockerfile: Dockerfile.prod  # Name of dockerfile
+    ports:
+      - '8080:80' # Expose ports

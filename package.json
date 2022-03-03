@@ -22,6 +22,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build-nginx": "PUBLIC_URL=/ react-scripts build",
     "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject"
   },
