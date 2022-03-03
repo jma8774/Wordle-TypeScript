@@ -2,16 +2,16 @@ version: "3"
 
 services:
   frontend:
-    container_name: "wordle-dev"
+    container_name: "wordle"
     build: 
-      context: .
-      dockerfile: Dockerfile.dev
+      context: .  # Location of dockerfile
+      dockerfile: Dockerfile  # Name of dockerfile
     environment:
       CHOKIDAR_USEPOLLING: true
       NODE_ENV: development
     ports:
-      - '8080:3000'
+      - '8080:3000' # Exposed ports
     stdin_open: true
     volumes:
-      - .:/app
-      - /app/node_modules
+      - .:/app  # Map working src directory to container
+      - /app/node_modules # Excluding node_modules

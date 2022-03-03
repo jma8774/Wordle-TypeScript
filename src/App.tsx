@@ -1,6 +1,12 @@
 import React, { useState, FC } from 'react';
 import { useGame } from './hooks/useGame'
 
+const statusColor: Record<string, string> = {
+  success: 'green',
+  almost: 'orange',
+  never: 'black'
+}
+
 const App:FC = () => {
   const [input, setInput] = useState<string>('')
   const game = useGame()
@@ -21,12 +27,18 @@ const App:FC = () => {
       <button onClick={game.newGame}> restart </button>
       <br/>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <input onChange={(e) => setInput(e.target.value)}></input>
+        <input onChange={(e) => setInput(e.target.value)}/>
         <button> guess </button>
       </form>
-      {game.history.data.map((word, index) => 
-        <div key={`${word}${index}`}> {word} </div>
-      )}
+      {
+        game.history.data.map((guess, index) => 
+          <div key={index} >
+            {
+              guess.map((pair, index) => <span style={{ color: statusColor[pair.color] }} key={`${pair.ch}${index}`}>{pair.ch}</span>)
+            }
+          </div>
+        )
+      }
     </div>
   ) 
 }
