@@ -13,7 +13,7 @@ Install [Docker](http://docker.com) container to run the application locally.
 
 Clone the project from source:
 
-    git clone https://github.com/jma8774/Pathfinding-Visualization.git
+    git clone https://github.com/jma8774/Wordle-Typescript.git
     cd Wordle-Typescript
 
 ### Run production container
