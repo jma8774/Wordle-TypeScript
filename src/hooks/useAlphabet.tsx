@@ -17,8 +17,7 @@ const initializeAlphabet = (): Alphabet => {
 export const useAlphabet = () => {
   const [alphabet, setAlphabet] = useState<Alphabet>(initializeAlphabet())
   
-  useLog('alphabet: ', alphabet)
-
+  // Helper function to use 'setAlphabet' to prevent DRY
   const update = (ch: string, status: string): void => {
     setAlphabet((prevState: Alphabet) => ({...prevState, [ch]: status}))
   }
