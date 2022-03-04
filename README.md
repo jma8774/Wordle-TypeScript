@@ -4,7 +4,9 @@ Just another Wordle game on the web, purpose of this project was to learn Typesc
 
 Made use of custom hooks in React to seperate logic which made the code easier to manage and did unit testing using Jest.
 
-Currently hosted via [GitHub Pages](https://www.jiamingma.me/wordle-ts/).
+Incorporated CI/CD pipeline of automatic tests and deploying on pull-request/push to main by using GitHub Actions.
+
+Currently hosted via [GitHub Pages](https://www.jiamingma.me/Wordle-TypeScript/).
 
 # Usage
 Install [Docker](http://docker.com) container to run the application locally.
@@ -13,7 +15,7 @@ Install [Docker](http://docker.com) container to run the application locally.
 
 Clone the project from source:
 
-    git clone https://github.com/jma8774/Pathfinding-Visualization.git
+    git clone https://github.com/jma8774/Wordle-TypeScript.git
     cd Wordle-Typescript
 
 ### Run production container
