@@ -9,14 +9,16 @@ Incorporated CI/CD pipeline of automatic tests and deploying on pull-request/pus
 Currently hosted via [GitHub Pages](https://www.jiamingma.me/Wordle-TypeScript/).
 
 # Usage
-Install [Docker](http://docker.com) container to run the application locally.
 
-### Install
+### Clone project
 
 Clone the project from source:
 
     git clone https://github.com/jma8774/Wordle-TypeScript.git
     cd Wordle-Typescript
+    
+## Docker Usage
+Install [Docker](http://docker.com) container to run the application locally.
 
 ### Run production container
 
@@ -30,17 +32,12 @@ To stop it:
 
     docker-compose -f docker-compose.prod.yml down
     
-### Run dev container
+## Node.js Usage
+Install dependencies and start it, then go to http://localhost:3000/ to see the app:
 
-Note that running in dev mode will map your host src directory to the container src directory, meaning any changes made to the code on the host machine will be reflected in the docker container (like normal React development).
+### Install and start
 
-Run the docker-compose.dev file and go to http://localhost:3000/ to see the app:
+    npm install
+    npm start
 
-    docker-compose -f docker-compose.dev.yml up -d  
-    
-To stop it:
-
-    docker-compose -f docker-compose.dev.yml down -v  
-    
-    
 
