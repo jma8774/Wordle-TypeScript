@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useLog } from './useLog';
 
 interface Alphabet {
   [key: string]: string
@@ -16,7 +15,6 @@ const initializeAlphabet = (): Alphabet => {
 
 export const useAlphabet = () => {
   const [alphabet, setAlphabet] = useState<Alphabet>(initializeAlphabet())
-  useLog('alphabet: ', alphabet)
 
   // Helper function to use 'setAlphabet' to prevent DRY
   const update = (ch: string, status: string): void => {

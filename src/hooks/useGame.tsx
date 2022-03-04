@@ -24,6 +24,7 @@ export const useGame = () => {
   const words = useRef<Set<string>>(new Set())
 
   useLog('history: ', history.data)
+  useLog('alphabet: ', alphabet.alphabet)
 
   useEffect(() => {
     // Function to read my text file from the 'public' folder

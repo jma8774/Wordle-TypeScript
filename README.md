@@ -6,7 +6,7 @@ Made use of custom hooks in React to seperate logic which made the code easier t
 
 Incorporated CI/CD pipeline of automatic tests and deploying on pull-request/push to main by using GitHub Actions.
 
-Currently hosted via [GitHub Pages](https://www.jiamingma.me/Wordle-Typescript/).
+Currently hosted via [GitHub Pages](https://www.jiamingma.me/Wordle-TypeScript/).
 
 # Usage
 
@@ -14,7 +14,7 @@ Currently hosted via [GitHub Pages](https://www.jiamingma.me/Wordle-Typescript/)
 
 Clone the project from source:
 
-    git clone https://github.com/jma8774/Wordle-Typescript.git
+    git clone https://github.com/jma8774/Wordle-TypeScript.git
     cd Wordle-Typescript
     
 ## Docker Usage
