@@ -4,6 +4,8 @@ Just another Wordle game on the web, purpose of this project was to learn Typesc
 
 Made use of custom hooks in React to seperate logic which made the code easier to manage and did unit testing using Jest.
 
+Incoporated CI/CD pipeline of automatic tests and deploying on pull-request/push to main by using GitHub Actions.
+
 Currently hosted via [GitHub Pages](https://www.jiamingma.me/Wordle-Typescript/).
 
 # Usage
