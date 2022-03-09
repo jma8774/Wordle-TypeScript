@@ -21,6 +21,8 @@ jobs:
         with:
           node-version: "16.x"
           cache: "npm"
+
+      - name: Run tests
         run: |
           npm ci
           npm run test
