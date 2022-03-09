@@ -1,0 +1,35 @@
+# I am deploying on both GitHub pages and AWS, just want to try both with GitHub Action CI/CD
+# On Push:
+#   This action will run tests on the Node project:
+#     If tests pass: 
+#       Deploy GitHub Page
+name: Build to GH Page Branch
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16.x"
+          cache: "npm"
+
+      - name: Run tests
+        run: |
+          npm ci
+          npm run test
+          npm run build
+
+      - name: Deploy to gh-pages branch
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: gh-pages
+          folder: build
