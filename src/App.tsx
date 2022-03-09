@@ -20,7 +20,7 @@ const App = () => {
       <br/>
       {`wordle: ${wordle}`} 
       <br/>
-      <button onClick={newGame}> restart bb </button>
+      <button onClick={newGame}> restart game </button>
       <br/>
       <InputWord handleSubmit={handleSubmit}/>
       {

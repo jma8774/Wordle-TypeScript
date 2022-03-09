@@ -2,7 +2,9 @@
 
 Just another Wordle game on the web, purpose of this project was to learn Typescript and to dockerize the React app with Docker and deploy it onto AWS ECS. 
 
-Built CI/CD pipeline in GitHub Actions that detects any new pull-request/push and will perform automatic tests and deploy to production on success.
+Built CI/CD pipeline in GitHub Actions that detects any new pull-request/push and will perform automatic tests and push/deploy new image to AWS Elastic Container Registry.
+
+Then later on, when all is ready, we can deploy the new image in ECR with by running a service on a cluster.
 
 Made use of custom hooks in React to seperate logic which made the code easier to manage and did unit testing using Jest.
 
