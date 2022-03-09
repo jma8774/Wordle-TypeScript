@@ -15,7 +15,7 @@ Currently hosted via [GitHub Pages](https://www.jiamingma.me/Wordle-TypeScript/)
 Clone the project from source:
 
     git clone https://github.com/jma8774/Wordle-TypeScript.git
-    cd Wordle-Typescript
+    cd Wordle-TypeScript
     
 ## Docker Usage
 Install [Docker](http://docker.com) container to run the application locally.

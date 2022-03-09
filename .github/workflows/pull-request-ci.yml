@@ -1,5 +1,5 @@
 # On pull request, this action will run tests
-name: On Pull-Request CI
+name: Run Tests
 
 on:
   pull_request:
