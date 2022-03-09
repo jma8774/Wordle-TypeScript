@@ -3,7 +3,7 @@
 #     If tests pass: 
 #       Deploy new website
 #       Push new Docker image to DockerHub
-name: On Push CI/CD 
+name: Push new image to AWS ECR
 
 on:
   push:
@@ -13,17 +13,20 @@ jobs:
   test-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Check out code
+        uses: actions/checkout@v2
+
       - name: Use Node.js 16.x
         uses: actions/setup-node@v2
         with:
           node-version: "16.x"
           cache: "npm"
-      - run: npm ci
-      - run: npm run test
-      - run: npm run build
+        run: npm ci
+        run: npm run test
+        run: npm run build
         env:
           CI: false
+
       - name: Deploy to production
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
