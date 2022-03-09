@@ -27,6 +27,8 @@ jobs:
           npm ci
           npm run test
           npm run build
+        env:
+          CI: false
 
       - name: Deploy to gh-pages branch
         uses: JamesIves/github-pages-deploy-action@v4.2.5
