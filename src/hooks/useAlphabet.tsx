@@ -13,7 +13,7 @@ const initializeAlphabet = (): Alphabet => {
   return alphabet
 }
 
-export const useAlphabet = () => {
+const useAlphabet = () => {
   const [alphabet, setAlphabet] = useState<Alphabet>(initializeAlphabet())
 
   // Helper function to use 'setAlphabet' to prevent DRY
@@ -50,3 +50,5 @@ export const useAlphabet = () => {
 
   return { alphabet, updateNever, updateAlmost, updateSuccess, reset } as const
 }
+
+export default useAlphabet;

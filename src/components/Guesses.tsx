@@ -11,7 +11,7 @@ interface Props {
 }
 
 const Guesses = ({ guesses }: Props) => {
-  console.log('render guesses')
+  console.log('log: render guesses')
   return(
     <>
       {guesses.map((guess, index) => (

@@ -1,20 +1,33 @@
-import React, { useState } from "react";
-import { useGame } from "./hooks/useGame";
+import React, { useState, useEffect, useRef } from "react";
+import useGame from "./hooks/useGame";
 import Guesses from "./components/Guesses";
 import Keyboard from "./components/Keyboard";
-import InputWord from "./components/InputWord";
+
+const KEYS = new Set(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'])
 
 const App = () => {
-  console.log("render app");
-  const { row, wordle, history, alphabet, status, newGame, submitGuess } =
+  console.log("log: render app");
+  const { row, wordle, history, alphabet, status, newGame, submitGuess, handleBackspace, handleChar } =
     useGame();
 
-  const handleSubmit = (e: React.FormEvent, input: string): void => {
-    e.preventDefault();
-    submitGuess(input);
-  };
+  const handleKeyPress = (e: KeyboardEvent): void => {
+    if(e.code === 'Enter')
+      submitGuess()
+    else if(e.code === 'Backspace')
+      handleBackspace()
+    else if(KEYS.has(e.key.toLowerCase()))
+      handleChar(e.key.toLowerCase())
+  }
 
-  return (
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyPress);
+    // Remove event listeners on cleanup
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [handleKeyPress])
+
+  return (  
     <div>
       <div><strong> WIP 😂 </strong></div>
       {`status: ${status}`}
@@ -23,9 +36,6 @@ const App = () => {
       <br />
       {`wordle: ${wordle}`}
       <br />
-      <button onClick={newGame}> restart </button>
-      <br />
-      <InputWord handleSubmit={handleSubmit} />
       <br />
       <Guesses guesses={history.data} />
       <br />

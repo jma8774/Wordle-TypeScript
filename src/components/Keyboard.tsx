@@ -16,7 +16,7 @@ interface Props {
 }
 
 const Keyboard = ({ alphabet }: Props) => {
-  console.log("render keyboard");
+  console.log("log: render keyboard");
   return (
     <>
       {rows.map((characters, index) => (

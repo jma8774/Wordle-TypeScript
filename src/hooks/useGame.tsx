@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import { useArray } from './useArray';
-import { useAlphabet } from './useAlphabet';
-import { useLog } from './useLog';
+import useArray from './useArray';
+import useAlphabet from './useAlphabet';
+import useLog from './useLog';
 
 const MAX_GUESSES = 6
 const WORDLE_LEN = 5
@@ -10,7 +10,7 @@ const initHistory = (): CharColor[][] => {
   for(let i = 0; i < MAX_GUESSES; i ++) {
     history.push([])
     for(let j = 0; j < WORDLE_LEN; j ++) {
-      history[i].push( {ch: '_', color: 'never'} )
+      history[i].push( {ch: '_', color: 'init'} )
     }
   }
   return history
@@ -27,9 +27,10 @@ interface CharColor {
   color: string
 }
 
-export const useGame = () => {
-  console.log("render useGame")
+const useGame = () => {
+  console.log("log: render useGame")
   const [row, setRow] = useState<number>(0)
+  const [col, setCol] = useState<number>(0)
   const [wordle, setWordle] = useState<string>('')
   const alphabet = useAlphabet()
   const history = useArray<CharColor[]>(initHistory())
@@ -37,8 +38,8 @@ export const useGame = () => {
   const answers = useRef<string[]>([])
   const words = useRef<Set<string>>(new Set())
 
-  useLog('history: ', history.data)
-  useLog('alphabet: ', alphabet.alphabet)
+  useLog('log: history: ', history.data)
+  useLog('log: alphabet: ', alphabet.alphabet)
 
   useEffect(() => {
     // Function to read my text file from the 'public' folder
@@ -70,21 +71,44 @@ export const useGame = () => {
     console.log("started new game")
     const index = randomInt(0, answers.current.length)  // Get a random index
     setWordle(answers.current[index]) // Pick a random wordle
+    setCol(0) // Reset col
     setRow(0) // Reset row
     history.setData(initHistory()) // Reset history
     alphabet.reset() // Reset alphabet
     setStatus('ongoing')  // Reset status
   }
 
-  const submitGuess = (word: string): void => {
-    if(!words.current.has(word) || status !== 'ongoing')
+  const submitGuess = (): void => {
+    if(status !== 'ongoing')
       return
-    history.update(row, getCharColors(word))  // Update row { guesses } of our history with new guess
-    setRow(row + 1) // Increment guess count
-    if(word === wordle) // Check if game is over
-      setStatus('win')
-    else if(row+1 === MAX_GUESSES)
-      setStatus('lose')
+    const curWord = history.data[row].map(x => x.ch).join('')
+    if(words.current.has(curWord)) {
+      history.update(row, getCharColors(curWord))  // Update row { guesses } of our history with new guess
+      setRow(row + 1) // Increment guess count
+      setCol(0) // New row, reset col back to 0
+      if(curWord === wordle) // Check if game is over
+        setStatus('win')
+      else if(row+1 === MAX_GUESSES)
+        setStatus('lose')
+    }
+  }
+
+  const handleBackspace = (): void => {
+    if(status !== 'ongoing' || col === 0)
+      return
+    const newRow = history.data[row].slice()
+    newRow[col-1] = { ch: '_', color: 'init'}
+    history.update(row, newRow)
+    setCol(col - 1)
+  }
+
+  const handleChar = (ch: string): void => {
+    if(status !== 'ongoing' || col >= WORDLE_LEN)
+      return
+    const newRow = history.data[row].slice()
+    newRow[col] = { ch: ch, color: 'init'}
+    history.update(row, newRow)
+    setCol(col + 1)
   }
 
   // Input is the current guess
@@ -112,5 +136,7 @@ export const useGame = () => {
     return wordColors
   }
 
-  return { row, wordle, history, alphabet, status, newGame, submitGuess } as const
+  return { row, wordle, history, alphabet, status, newGame, submitGuess, handleBackspace, handleChar } as const
 }
+
+export default useGame;
