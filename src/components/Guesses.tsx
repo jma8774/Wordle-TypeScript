@@ -8,9 +8,10 @@ interface CharColor {
 
 interface Props {
   guesses: CharColor[][];
+  row: number;
 }
 
-const Guesses = ({ guesses }: Props) => {
+const Guesses = ({ guesses, row }: Props) => {
   console.log('Log: render guesses')
   return(
     <>
@@ -20,6 +21,7 @@ const Guesses = ({ guesses }: Props) => {
           {guess.map((pair, index) => (
             <Node key={`${pair.ch}${index}`} pair={pair} />
           ))}
+          {index === row && <span> &lt;&lt; </span>}
         </div>
       ))}
     </>

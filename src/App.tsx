@@ -6,7 +6,6 @@ import Keyboard from "./components/Keyboard";
 const KEYS = new Set(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'])
 
 const App = () => {
-  console.log("Log: render app");
   const { row, wordle, history, alphabet, status, newGame, submitGuess, handleBackspace, handleChar } =
     useGame();
 
@@ -17,6 +16,8 @@ const App = () => {
       handleBackspace()
     else if(KEYS.has(e.key.toLowerCase()))
       handleChar(e.key.toLowerCase())
+    else if(e.code === 'Space')
+      newGame()
   }
 
   useEffect(() => {
@@ -39,7 +40,7 @@ const App = () => {
       <button onClick={newGame}> restart </button>
       <br />
       <br />
-      <Guesses guesses={history.data} />
+      <Guesses guesses={history.data} row={row}/>
       <br />
       <Keyboard alphabet={alphabet.alphabet} />
     </div>

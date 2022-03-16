@@ -28,7 +28,6 @@ interface CharColor {
 }
 
 const useGame = () => {
-  console.log("Log: render useGame")
   const [row, setRow] = useState<number>(0)
   const [col, setCol] = useState<number>(0)
   const [wordle, setWordle] = useState<string>('')
