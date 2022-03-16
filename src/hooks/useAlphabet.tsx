@@ -18,6 +18,8 @@ export const useAlphabet = () => {
 
   // Helper function to use 'setAlphabet' to prevent DRY
   const update = (ch: string, status: string): void => {
+    if(alphabet[ch] === status)
+      return
     setAlphabet((prevState: Alphabet) => ({...prevState, [ch]: status}))
   }
 

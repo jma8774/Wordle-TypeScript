@@ -3,10 +3,24 @@ import { useArray } from './useArray';
 import { useAlphabet } from './useAlphabet';
 import { useLog } from './useLog';
 
+const MAX_GUESSES = 6
+const WORDLE_LEN = 5
+const initHistory = (): CharColor[][] => {
+  let history: CharColor[][] = []
+  for(let i = 0; i < MAX_GUESSES; i ++) {
+    history.push([])
+    for(let j = 0; j < WORDLE_LEN; j ++) {
+      history[i].push( {ch: '_', color: 'never'} )
+    }
+  }
+  return history
+}
+
 // Returns random integer from [a, b]
 const randomInt = (start: number, end: number): number => {
   return start + Math.floor(Math.random() * (end - start + 1))
 }
+
 
 interface CharColor {
   ch: string
@@ -15,10 +29,10 @@ interface CharColor {
 
 export const useGame = () => {
   console.log("render useGame")
-  const [guesses, setGuesses] = useState<number>(6)
+  const [row, setRow] = useState<number>(0)
   const [wordle, setWordle] = useState<string>('')
   const alphabet = useAlphabet()
-  const history = useArray<CharColor[]>([])
+  const history = useArray<CharColor[]>(initHistory())
   const [status, setStatus] = useState<string>('ongoing')
   const answers = useRef<string[]>([])
   const words = useRef<Set<string>>(new Set())
@@ -54,28 +68,28 @@ export const useGame = () => {
   
   const newGame = (): void => {
     console.log("started new game")
-    setGuesses(6) // Reset guesses to 6
     const index = randomInt(0, answers.current.length)  // Get a random index
     setWordle(answers.current[index]) // Pick a random wordle
-    history.reset() // Reset history
+    setRow(0) // Reset row
+    history.setData(initHistory()) // Reset history
     alphabet.reset() // Reset alphabet
     setStatus('ongoing')  // Reset status
   }
 
-  const guessWord = (word: string): void => {
+  const submitGuess = (word: string): void => {
     if(!words.current.has(word) || status !== 'ongoing')
       return
-    history.push(updateCharColors(word))  // Update alphabet highlights + push guess word to history with color highlights
-    setGuesses(guesses - 1) // Decrement guess count
+    history.update(row, getCharColors(word))  // Update row { guesses } of our history with new guess
+    setRow(row + 1) // Increment guess count
     if(word === wordle) // Check if game is over
       setStatus('win')
-    else if(guesses-1 === 0)
+    else if(row+1 === MAX_GUESSES)
       setStatus('lose')
   }
 
   // Input is the current guess
   // Will update the alphabet with green/yellow/black colors and display the new word after
-  const updateCharColors = (guess: string): CharColor[] => {
+  const getCharColors = (guess: string): CharColor[] => {
     let wordColors: CharColor[] = []
     let wordleSet = new Set(wordle)
 
@@ -98,5 +112,5 @@ export const useGame = () => {
     return wordColors
   }
 
-  return { guesses, wordle, history, alphabet, status, newGame, guessWord } as const
+  return { row, wordle, history, alphabet, status, newGame, submitGuess } as const
 }
