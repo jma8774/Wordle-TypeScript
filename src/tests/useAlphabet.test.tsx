@@ -1,5 +1,5 @@
 import {act, renderHook} from '@testing-library/react-hooks'
-import { useAlphabet } from '../hooks/useAlphabet';
+import useAlphabet from '../hooks/useAlphabet';
 
 describe("Initialize alphabet object", () => {
   const { result } = renderHook(() => useAlphabet())

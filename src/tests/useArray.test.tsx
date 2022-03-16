@@ -1,5 +1,5 @@
 import {act, renderHook} from '@testing-library/react-hooks'
-import { useArray } from '../hooks/useArray';
+import useArray from '../hooks/useArray';
 
 describe("Initialize generic type array", () => {
   it('should generate string array', () => {
