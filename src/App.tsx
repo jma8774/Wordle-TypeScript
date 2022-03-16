@@ -6,7 +6,7 @@ import Keyboard from "./components/Keyboard";
 const KEYS = new Set(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'])
 
 const App = () => {
-  console.log("log: render app");
+  console.log("Log: render app");
   const { row, wordle, history, alphabet, status, newGame, submitGuess, handleBackspace, handleChar } =
     useGame();
 
@@ -35,6 +35,8 @@ const App = () => {
       {`guesses: ${row}`}
       <br />
       {`wordle: ${wordle}`}
+      <br />
+      <button onClick={newGame}> restart </button>
       <br />
       <br />
       <Guesses guesses={history.data} />

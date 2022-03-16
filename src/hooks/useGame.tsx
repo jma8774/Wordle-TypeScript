@@ -28,7 +28,7 @@ interface CharColor {
 }
 
 const useGame = () => {
-  console.log("log: render useGame")
+  console.log("Log: render useGame")
   const [row, setRow] = useState<number>(0)
   const [col, setCol] = useState<number>(0)
   const [wordle, setWordle] = useState<string>('')
@@ -38,8 +38,8 @@ const useGame = () => {
   const answers = useRef<string[]>([])
   const words = useRef<Set<string>>(new Set())
 
-  useLog('log: history: ', history.data)
-  useLog('log: alphabet: ', alphabet.alphabet)
+  useLog('Log: history: ', history.data)
+  useLog('Log: alphabet: ', alphabet.alphabet)
 
   useEffect(() => {
     // Function to read my text file from the 'public' folder
@@ -68,7 +68,7 @@ const useGame = () => {
   }, [])
   
   const newGame = (): void => {
-    console.log("started new game")
+    console.log("Log: started new game")
     const index = randomInt(0, answers.current.length)  // Get a random index
     setWordle(answers.current[index]) // Pick a random wordle
     setCol(0) // Reset col
