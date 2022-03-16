@@ -28,7 +28,7 @@ The production container will build the React project into static files and will
 
 Run the docker-compose.prod file and go to http://localhost:8080/ to see the app:
 
-    docker-compose -f docker-compose.prod.yml up -d  
+    docker-compose -f docker-compose.prod.yml up --build -d 
     
 To stop it:
 
