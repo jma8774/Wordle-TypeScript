@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 // replace console.* for disable log on production
 if (process.env.NODE_ENV === 'production') {
-  console.log("Log: No logs in production")
+  console.log("Log: no logs in production")
   console.log = () => {}
   console.error = () => {}
   console.debug = () => {}
