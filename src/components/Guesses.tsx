@@ -12,8 +12,8 @@ interface Props {
 }
 
 const Guesses = ({ guesses, row }: Props) => {
-  console.log('Log: render guesses')
-  return(
+  console.log("Log: render guesses");
+  return (
     <>
       {guesses.map((guess, index) => (
         <div key={index}>
@@ -25,7 +25,7 @@ const Guesses = ({ guesses, row }: Props) => {
         </div>
       ))}
     </>
-  )
-}
+  );
+};
 
-export default React.memo(Guesses)
+export default React.memo(Guesses);
