@@ -1,22 +1,15 @@
 {
   "files": {
-    "main.css": "/Wordle-TypeScript/static/css/main.4a4137e4.chunk.css",
-    "main.js": "/Wordle-TypeScript/static/js/main.de12ea98.chunk.js",
-    "main.js.map": "/Wordle-TypeScript/static/js/main.de12ea98.chunk.js.map",
-    "runtime-main.js": "/Wordle-TypeScript/static/js/runtime-main.26823486.js",
-    "runtime-main.js.map": "/Wordle-TypeScript/static/js/runtime-main.26823486.js.map",
-    "static/js/2.3e19f2df.chunk.js": "/Wordle-TypeScript/static/js/2.3e19f2df.chunk.js",
-    "static/js/2.3e19f2df.chunk.js.map": "/Wordle-TypeScript/static/js/2.3e19f2df.chunk.js.map",
-    "static/js/3.fac5684c.chunk.js": "/Wordle-TypeScript/static/js/3.fac5684c.chunk.js",
-    "static/js/3.fac5684c.chunk.js.map": "/Wordle-TypeScript/static/js/3.fac5684c.chunk.js.map",
+    "main.css": "/Wordle-TypeScript/static/css/main.95f7943d.css",
+    "main.js": "/Wordle-TypeScript/static/js/main.c0cf8ead.js",
+    "static/js/787.e01666d6.chunk.js": "/Wordle-TypeScript/static/js/787.e01666d6.chunk.js",
     "index.html": "/Wordle-TypeScript/index.html",
-    "static/css/main.4a4137e4.chunk.css.map": "/Wordle-TypeScript/static/css/main.4a4137e4.chunk.css.map",
-    "static/js/2.3e19f2df.chunk.js.LICENSE.txt": "/Wordle-TypeScript/static/js/2.3e19f2df.chunk.js.LICENSE.txt"
+    "main.95f7943d.css.map": "/Wordle-TypeScript/static/css/main.95f7943d.css.map",
+    "main.c0cf8ead.js.map": "/Wordle-TypeScript/static/js/main.c0cf8ead.js.map",
+    "787.e01666d6.chunk.js.map": "/Wordle-TypeScript/static/js/787.e01666d6.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.26823486.js",
-    "static/js/2.3e19f2df.chunk.js",
-    "static/css/main.4a4137e4.chunk.css",
-    "static/js/main.de12ea98.chunk.js"
+    "static/css/main.95f7943d.css",
+    "static/js/main.c0cf8ead.js"
   ]
 }
