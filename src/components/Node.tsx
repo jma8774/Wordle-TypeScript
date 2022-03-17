@@ -17,11 +17,14 @@ interface Props {
 }
 
 const areEqual = (prevProps: Props, nextProps: Props): boolean => {
-  return prevProps.pair.ch === nextProps.pair.ch && prevProps.pair.color === nextProps.pair.color
-}
+  return (
+    prevProps.pair.ch === nextProps.pair.ch &&
+    prevProps.pair.color === nextProps.pair.color
+  );
+};
 
 const Node = ({ pair }: Props) => {
   return <span style={{ color: statusColor[pair.color] }}>{pair.ch}</span>;
-}
+};
 
-export default React.memo(Node, areEqual)
+export default React.memo(Node, areEqual);
