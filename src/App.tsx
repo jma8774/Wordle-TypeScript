@@ -41,13 +41,13 @@ const App = () => {
   return (
     <div>
       <div>
-        <strong> WIP 😂 </strong>
+        <strong className="underline"> WIP </strong> 😂
       </div>
-      {`status: ${status}`}
+      <span> status: {status}</span>
       <br />
-      {`guesses: ${row}`}
+      <span> guesses: {row} </span>
       <br />
-      {`wordle: ${wordle}`}
+      <span> wordle: {wordle} </span>
       <br />
       <button onClick={newGame}> restart </button>
       <br />
