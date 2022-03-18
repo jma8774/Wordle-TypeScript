@@ -26,9 +26,7 @@ const areEqual = (prevProps: Props, nextProps: Props): boolean => {
 
 const Node = ({ className, pair }: Props) => {
   return (
-    <span className={className}>
-      <span className={`${statusColor[pair.color]}`}>{pair.ch}</span>
-    </span>
+    <span className={`${className} ${statusColor[pair.color]}`}>{pair.ch}</span>
   );
 };
 
