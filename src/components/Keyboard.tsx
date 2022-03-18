@@ -13,23 +13,27 @@ interface Alphabet {
 
 interface Props {
   alphabet: Alphabet;
+  className: string;
 }
 
-const Keyboard = ({ alphabet }: Props) => {
+const Keyboard = ({ className, alphabet }: Props) => {
   console.log("Log: render keyboard");
   return (
-    <>
-      {rows.map((characters, index) => (
-        <div key={index}>
-          {characters.map((ch) => (
-            <Node
-              key={ch}
-              pair={{ ch: ch.toUpperCase(), color: alphabet[ch] }}
-            />
-          ))}
-        </div>
-      ))}
-    </>
+    <div className={className}>
+      <div className="flex flex-col items-center">
+        {rows.map((characters, index) => (
+          <div key={index}>
+            {characters.map((ch) => (
+              <Node
+                key={ch}
+                className="mx-0.5"
+                pair={{ ch: ch.toUpperCase(), color: alphabet[ch] }}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 
