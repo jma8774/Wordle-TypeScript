@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import useGame from "./hooks/useGame";
 import Guesses from "./components/Guesses";
 import Keyboard from "./components/Keyboard";
@@ -22,12 +22,15 @@ const App = () => {
     handleChar,
   } = useGame();
 
-  const handleKeyPress = (e: KeyboardEvent): void => {
-    if (e.code === "Enter") submitGuess();
-    else if (e.code === "Backspace") handleBackspace();
-    else if (KEYS.has(e.key.toLowerCase())) handleChar(e.key.toLowerCase());
-    else if (e.code === "Space") newGame();
-  };
+  const handleKeyPress = useCallback(
+    (e: KeyboardEvent): void => {
+      if (e.code === "Enter") submitGuess();
+      else if (e.code === "Backspace") handleBackspace();
+      else if (KEYS.has(e.key.toLowerCase())) handleChar(e.key.toLowerCase());
+      else if (e.code === "Space") newGame();
+    },
+    [newGame, submitGuess, handleBackspace, handleChar]
+  );
 
   useEffect(() => {
     // Add event listeners on new render
@@ -39,22 +42,33 @@ const App = () => {
   }, [handleKeyPress]);
 
   return (
-    <div>
-      <div>
-        <strong className="underline"> WIP </strong> 😂
+    <div className="min-h-screen bg-slate-800">
+      <div className="w-1/2 flex flex-col items-center gap-2 text-white mx-auto">
+        <div className="flex flex-col items-center gap-1 mt-2 w-full">
+          <strong className="underline"> WIP (Learning Tailwind) 😂 </strong>
+          <p className="text-gray-300 text-center">
+            Finished setting up the functionalities of the application, just
+            need better styling.
+          </p>
+        </div>
+
+        <div className="flex flex-col items-center mt-2">
+          <span> status: {status}</span>
+          <span> guesses: {row} </span>
+          <span> wordle: {wordle} </span>
+          <span className="mt-1">
+            <button
+              className="bg-violet-800 hover:bg-violet-900 rounded-md py-1 px-3"
+              onClick={newGame}
+            >
+              restart
+            </button>
+          </span>
+        </div>
+
+        <Guesses className="mt-2 w-1/5" guesses={history.data} row={row} />
+        <Keyboard className="mt-2" alphabet={alphabet.alphabet} />
       </div>
-      <span> status: {status}</span>
-      <br />
-      <span> guesses: {row} </span>
-      <br />
-      <span> wordle: {wordle} </span>
-      <br />
-      <button onClick={newGame}> restart </button>
-      <br />
-      <br />
-      <Guesses guesses={history.data} row={row} />
-      <br />
-      <Keyboard alphabet={alphabet.alphabet} />
     </div>
   );
 };

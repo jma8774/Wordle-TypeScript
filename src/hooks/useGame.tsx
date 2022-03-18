@@ -12,7 +12,7 @@ const initHistory = (): CharColor[][] => {
   for (let i = 0; i < MAX_GUESSES; i++) {
     history.push([]);
     for (let j = 0; j < WORDLE_LEN; j++) {
-      history[i].push({ ch: "_", color: "init" });
+      history[i].push({ ch: " ", color: "init" });
     }
   }
   return history;
@@ -97,7 +97,7 @@ const useGame = () => {
   const handleBackspace = (): void => {
     if (status !== "ongoing" || col === 0) return;
     const newRow = history.data[row].slice();
-    newRow[col - 1] = { ch: "_", color: "init" };
+    newRow[col - 1] = { ch: " ", color: "init" };
     history.update(row, newRow);
     setCol(col - 1);
   };

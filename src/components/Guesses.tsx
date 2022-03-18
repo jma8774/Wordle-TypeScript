@@ -9,22 +9,25 @@ interface CharColor {
 interface Props {
   guesses: CharColor[][];
   row: number;
+  className: string;
 }
 
-const Guesses = ({ guesses, row }: Props) => {
+const Guesses = ({ className, guesses, row }: Props) => {
   console.log("Log: render guesses");
   return (
-    <>
+    <div className={`${className} bg-slate-900 rounded-md p-5`}>
       {guesses.map((guess, index) => (
-        <div key={index}>
-          {`guess #${index + 1}: `}
-          {guess.map((pair, index) => (
-            <Node key={`${pair.ch}${index}`} pair={pair} />
-          ))}
+        <div className="flex">
+          <span key={index} className="flex-1">
+            guess #{index + 1}:&nbsp;
+            {guess.map((pair, index) => (
+              <Node key={`${pair.ch}${index}`} pair={pair} />
+            ))}
+          </span>
           {index === row && <span> &lt;&lt; </span>}
         </div>
       ))}
-    </>
+    </div>
   );
 };
 
