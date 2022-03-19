@@ -12,7 +12,7 @@ const initHistory = (): CharColor[][] => {
   for (let i = 0; i < MAX_GUESSES; i++) {
     history.push([]);
     for (let j = 0; j < WORDLE_LEN; j++) {
-      history[i].push({ ch: " ", color: "init" });
+      history[i].push({ ch: "_", color: "init" });
     }
   }
   return history;

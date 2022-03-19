@@ -1,13 +1,14 @@
 import React from "react";
-import ButtonWrapper from "./buttons/ButtonWrapper";
-import StatIcon from "./icons/StatIcon";
-import SettingIcon from "./icons/SettingIcon";
+import ButtonWrapper from "../buttons/ButtonWrapper";
+import StatIcon from "../icons/StatIcon";
+import SettingIcon from "../icons/SettingIcon";
+import QuestionIcon from "../icons/QuestionIcon";
 
 const handleStatClick = () => {
   console.log("Stat icon clicked");
 };
 
-const handleSettingClick = () => {
+const handleQuestionClick = () => {
   console.log("Setting icon clicked");
 };
 
@@ -21,8 +22,11 @@ const Header = () => {
 
       <span>Just Wordle</span>
 
-      <ButtonWrapper onClick={handleSettingClick}>
+      {/* <ButtonWrapper onClick={handleSettingClick}>
         <SettingIcon className="h-8 w-8 stroke-blue-400 fill-blue-400 hover:fill-blue-600 hover:stroke-blue-600" />
+      </ButtonWrapper>       */}
+      <ButtonWrapper onClick={handleQuestionClick}>
+        <QuestionIcon className="h-8 w-8 stroke-blue-400 fill-blue-400 hover:fill-blue-600 hover:stroke-blue-600" />
       </ButtonWrapper>
     </div>
   );

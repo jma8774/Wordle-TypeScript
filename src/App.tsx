@@ -1,8 +1,6 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import useGame from "./hooks/useGame";
-import Header from "./components/Header";
-import Guesses from "./components/Guesses";
-import Keyboard from "./components/Keyboard";
+import { Header, Guesses, Keyboard } from "./components";
 
 // set of letters from 'a' to 'z'
 const KEYS = new Set();
