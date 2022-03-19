@@ -17,8 +17,8 @@ const Guesses = ({ className, guesses, row }: Props) => {
   return (
     <div className={`${className} bg-slate-900 rounded-md p-5`}>
       {guesses.map((guess, index) => (
-        <div className="flex">
-          <span key={index} className="flex-1">
+        <div key={index} className="flex">
+          <span className="flex-1">
             guess #{index + 1}:&nbsp;
             {guess.map((pair, index) => (
               <Node key={`${pair.ch}${index}`} pair={pair} />
