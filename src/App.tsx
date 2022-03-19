@@ -66,7 +66,7 @@ const App = () => {
           </span>
         </div>
 
-        <Guesses className="mt-2 w-1/5" guesses={history.data} row={row} />
+        <Guesses className="mt-2 w-56" guesses={history.data} row={row} />
         <Keyboard className="mt-2" alphabet={alphabet.alphabet} />
       </div>
     </div>
