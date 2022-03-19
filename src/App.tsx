@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import useGame from "./hooks/useGame";
+import Header from "./components/Header";
 import Guesses from "./components/Guesses";
 import Keyboard from "./components/Keyboard";
 
@@ -43,15 +44,9 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-slate-800">
-      <div className="w-1/2 flex flex-col items-center gap-2 text-white mx-auto">
-        <div className="flex flex-col items-center gap-1 mt-2 w-full">
-          <strong className="underline"> WIP (Learning Tailwind) 😂 </strong>
-          <p className="text-gray-300 text-center">
-            Finished setting up the functionalities of the application, just
-            need better styling.
-          </p>
-        </div>
+      <Header />
 
+      <div className="w-1/2 flex flex-col items-center gap-2 text-white mx-auto">
         <div className="flex flex-col items-center mt-2">
           <span> status: {status}</span>
           <span> guesses: {row} </span>
