@@ -8,6 +8,7 @@ const statusColor: Record<string, string> = {
 };
 
 interface CharColor {
+  id: number;
   ch: string;
   color: string;
 }

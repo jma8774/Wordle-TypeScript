@@ -6,13 +6,19 @@ import useLog from "./useLog";
 const MAX_GUESSES = 6;
 const WORDLE_LEN = 5;
 
+interface CharColor {
+  id: number;
+  ch: string;
+  color: string;
+}
+
 // Returns a 2d array of our initial history array for our game
 const initHistory = (): CharColor[][] => {
   let history: CharColor[][] = [];
   for (let i = 0; i < MAX_GUESSES; i++) {
     history.push([]);
     for (let j = 0; j < WORDLE_LEN; j++) {
-      history[i].push({ ch: "_", color: "init" });
+      history[i].push({ id: i * WORDLE_LEN + j, ch: " ", color: "init" });
     }
   }
   return history;
@@ -22,11 +28,6 @@ const initHistory = (): CharColor[][] => {
 const randomInt = (start: number, end: number): number => {
   return start + Math.floor(Math.random() * (end - start + 1));
 };
-
-interface CharColor {
-  ch: string;
-  color: string;
-}
 
 const useGame = () => {
   const [row, setRow] = useState<number>(0);
@@ -97,7 +98,7 @@ const useGame = () => {
   const handleBackspace = (): void => {
     if (status !== "ongoing" || col === 0) return;
     const newRow = history.data[row].slice();
-    newRow[col - 1] = { ch: " ", color: "init" };
+    newRow[col - 1] = { ...newRow[col - 1], ch: " ", color: "init" };
     history.update(row, newRow);
     setCol(col - 1);
   };
@@ -106,34 +107,34 @@ const useGame = () => {
   const handleChar = (ch: string): void => {
     if (status !== "ongoing" || col >= WORDLE_LEN) return;
     const newRow = history.data[row].slice();
-    newRow[col] = { ch: ch, color: "init" };
+    newRow[col] = { ...newRow[col], ch: ch, color: "init" };
     history.update(row, newRow);
     setCol(col + 1);
   };
 
   // Will update the alphabet with green/yellow/black colors and return the CharColor[] for this guesss
   const getCharColors = (guess: string): CharColor[] => {
-    let wordColors: CharColor[] = [];
-    let wordleSet = new Set(wordle);
+    const newRow = history.data[row].slice();
+    const wordleSet = new Set(wordle);
 
     // Iterate through each character of the guess word
     for (let i = 0; i < guess.length; i++) {
       const ch: string = guess[i];
       if (ch === wordle[i]) {
         // Character at index i of guess is same as character of wordle
-        wordColors.push({ ch: ch, color: "success" });
+        newRow[i] = { ...newRow[i], ch: ch, color: "success" };
         alphabet.updateSuccess(ch);
       } else if (wordleSet.has(ch)) {
         // Otherwise, check if guess char is a char in the wordle
-        wordColors.push({ ch: ch, color: "almost" });
+        newRow[i] = { ...newRow[i], ch: ch, color: "almost" };
         alphabet.updateAlmost(ch);
       } else {
         // Otherwise, mark the character as 'never' possible
-        wordColors.push({ ch: ch, color: "never" });
+        newRow[i] = { ...newRow[i], ch: ch, color: "never" };
         alphabet.updateNever(ch);
       }
     }
-    return wordColors;
+    return newRow;
   };
 
   return {

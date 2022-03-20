@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-const statusColor: Record<string, string> = {
-  init: "text-white-500",
-  success: "text-green-500",
-  almost: "text-orange-500",
-  never: "text-zinc-500",
+const background: Record<string, string> = {
+  init: "bg-transparent",
+  success: "bg-green-600",
+  almost: "bg-yellow-600",
+  never: "bg-zinc-700",
 };
 
 interface CharColor {
+  id: number;
   ch: string;
   color: string;
 }
@@ -25,8 +26,22 @@ const areEqual = (prevProps: Props, nextProps: Props): boolean => {
 };
 
 const Node = ({ className, pair }: Props) => {
+  const [transition, setTransition] = useState("scale-100");
+
+  useEffect(() => {
+    if (pair.ch === " ") return;
+    setTransition("scale-110");
+  }, [pair.ch]);
+
   return (
-    <span className={`${className} ${statusColor[pair.color]}`}>{pair.ch}</span>
+    <span
+      className={`${className} ${background[pair.color]} ${
+        pair.ch === " " ? "border-zinc-500" : "border-zinc-700"
+      } w-16 h-16 text-slate-200 flex justify-center items-center border-2 text-3xl font-bold rounded shadow-md transition ease-linear duration-100 ${transition}`}
+      onTransitionEnd={() => setTransition("scale-100")}
+    >
+      {pair.ch.toUpperCase()}
+    </span>
   );
 };
 

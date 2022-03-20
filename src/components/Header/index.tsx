@@ -6,10 +6,12 @@ import QuestionIcon from "../icons/QuestionIcon";
 
 const handleStatClick = () => {
   console.log("Stat icon clicked");
+  alert("Stat icon clicked");
 };
 
 const handleQuestionClick = () => {
   console.log("Setting icon clicked");
+  alert("Setting icon clicked");
 };
 
 const Header = () => {
