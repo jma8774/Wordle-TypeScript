@@ -1,8 +1,6 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import useGame from "./hooks/useGame";
-import Header from "./components/Header";
-import Guesses from "./components/Guesses";
-import Keyboard from "./components/Keyboard";
+import { Header, Guesses, Keyboard } from "./components";
 
 // set of letters from 'a' to 'z'
 const KEYS = new Set();
@@ -47,7 +45,10 @@ const App = () => {
       <Header />
 
       <div className="w-1/2 flex flex-col items-center gap-2 text-white mx-auto">
-        <div className="flex flex-col items-center mt-2">
+        <Guesses className="mt-5" guesses={history.data} row={row} />
+        <Keyboard className="mt-5" alphabet={alphabet.alphabet} />
+        <div className="flex flex-col items-center mt-10 bg-slate-900 rounded p-5">
+          <span className="font-bold text-red-500">DEBUG DATA</span>
           <span> status: {status}</span>
           <span> guesses: {row} </span>
           <span> wordle: {wordle} </span>
@@ -60,9 +61,6 @@ const App = () => {
             </button>
           </span>
         </div>
-
-        <Guesses className="mt-2 w-56" guesses={history.data} row={row} />
-        <Keyboard className="mt-2" alphabet={alphabet.alphabet} />
       </div>
     </div>
   );

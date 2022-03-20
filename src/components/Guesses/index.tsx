@@ -2,6 +2,7 @@ import React from "react";
 import Node from "./Node";
 
 interface CharColor {
+  id: number;
   ch: string;
   color: string;
 }
@@ -15,16 +16,12 @@ interface Props {
 const Guesses = ({ className, guesses, row }: Props) => {
   console.log("Log: render guesses");
   return (
-    <div className={`${className} bg-slate-900 rounded-md p-5`}>
+    <div className={`${className}`}>
       {guesses.map((guess, index) => (
-        <div key={index} className="flex">
-          <span className="flex-1">
-            guess #{index + 1}:&nbsp;
-            {guess.map((pair, index) => (
-              <Node key={`${pair.ch}${index}`} pair={pair} />
-            ))}
-          </span>
-          {index === row && <span> &lt;&lt; </span>}
+        <div key={index} className="flex justify-center gap-1.5 mt-1.5">
+          {guess.map((pair) => (
+            <Node key={pair.id} pair={pair} />
+          ))}
         </div>
       ))}
     </div>

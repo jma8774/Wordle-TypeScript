@@ -26,7 +26,7 @@ const Keyboard = ({ className, alphabet }: Props) => {
             <Node
               key={ch}
               className="mx-0.5"
-              pair={{ ch: ch.toUpperCase(), color: alphabet[ch] }}
+              pair={{ id: -1, ch: ch.toUpperCase(), color: alphabet[ch] }}
             />
           ))}
         </div>
