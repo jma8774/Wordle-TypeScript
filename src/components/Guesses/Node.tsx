@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const background: Record<string, string> = {
+const backgroundColor: Record<string, string> = {
   init: "bg-transparent",
   success: "bg-green-600",
   almost: "bg-yellow-600",
@@ -15,18 +15,29 @@ interface CharColor {
 
 interface Props {
   pair: CharColor;
-  className?: string;
 }
 
-const areEqual = (prevProps: Props, nextProps: Props): boolean => {
-  return (
-    prevProps.pair.ch === nextProps.pair.ch &&
-    prevProps.pair.color === nextProps.pair.color
-  );
+const borderColor = ({ ch, color }: CharColor): string => {
+  const colorMap: Record<string, string> = {
+    success: "border-green-600",
+    almost: "border-yellow-600",
+    never: "border-zinc-700",
+  };
+  if (color === "init")
+    return ch === " " ? "border-zinc-500" : "border-zinc-700";
+  else return colorMap[color];
 };
 
-const Node = ({ className, pair }: Props) => {
+const Node = ({ pair }: Props) => {
   const [transition, setTransition] = useState("scale-100");
+  const classNames = [
+    backgroundColor[pair.color],
+    borderColor(pair),
+    transition,
+    "w-12 h-12 sm:w-20 sm:h-20 border-2 rounded", // Box size/shape
+    "flex justify-center items-center", // Center the character
+    "transition ease-linear duration-100", // Transition for new character
+  ].join(" ");
 
   useEffect(() => {
     if (pair.ch === " ") return;
@@ -35,9 +46,7 @@ const Node = ({ className, pair }: Props) => {
 
   return (
     <span
-      className={`${className} ${background[pair.color]} ${
-        pair.ch === " " ? "border-zinc-500" : "border-zinc-700"
-      } w-16 h-16 text-slate-200 flex justify-center items-center border-2 text-3xl font-bold rounded shadow-md transition ease-linear duration-100 ${transition}`}
+      className={classNames}
       onTransitionEnd={() => setTransition("scale-100")}
     >
       {pair.ch.toUpperCase()}
@@ -45,4 +54,4 @@ const Node = ({ className, pair }: Props) => {
   );
 };
 
-export default React.memo(Node, areEqual);
+export default React.memo(Node);

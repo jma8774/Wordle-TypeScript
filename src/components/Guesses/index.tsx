@@ -9,16 +9,18 @@ interface CharColor {
 
 interface Props {
   guesses: CharColor[][];
-  row: number;
-  className: string;
+  className?: string;
 }
 
-const Guesses = ({ className, guesses, row }: Props) => {
+const Guesses = ({ className, guesses }: Props) => {
   console.log("Log: render guesses");
   return (
-    <div className={`${className}`}>
+    <div className={className}>
       {guesses.map((guess, index) => (
-        <div key={index} className="flex justify-center gap-1.5 mt-1.5">
+        <div
+          key={index}
+          className="flex gap-1.5 mt-1.5 text-slate-200 text-3xl font-bold"
+        >
           {guess.map((pair) => (
             <Node key={pair.id} pair={pair} />
           ))}

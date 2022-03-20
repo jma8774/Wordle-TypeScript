@@ -51,12 +51,36 @@ const useAlphabet = () => {
     update(ch, "success");
   };
 
+  const applyChanges = (guess: string, wordle: string): void => {
+    const wordleSet = new Set(wordle);
+    const alphabetChanges: Alphabet = { ...alphabet };
+
+    for (let i = 0; i < guess.length; i++) {
+      const ch = guess[i];
+      const color = alphabetChanges?.[ch];
+      if (ch === wordle[i]) {
+        alphabetChanges[ch] = "success";
+      } else if (color !== "success") {
+        alphabetChanges[ch] = wordleSet.has(ch) ? "almost" : "never";
+      }
+    }
+
+    setAlphabet(alphabetChanges);
+  };
+
   // Reset alphabet to default
   const reset = (): void => {
     setAlphabet(initializeAlphabet());
   };
 
-  return { alphabet, updateNever, updateAlmost, updateSuccess, reset } as const;
+  return {
+    alphabet,
+    updateNever,
+    updateAlmost,
+    updateSuccess,
+    applyChanges,
+    reset,
+  } as const;
 };
 
 export default useAlphabet;

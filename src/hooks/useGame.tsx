@@ -1,10 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import useArray from "./useArray";
 import useAlphabet from "./useAlphabet";
 import useLog from "./useLog";
-
-const MAX_GUESSES = 6;
-const WORDLE_LEN = 5;
+import { MAX_GUESSES, WORDLE_LEN } from "../constants";
 
 interface CharColor {
   id: number;
@@ -39,8 +37,8 @@ const useGame = () => {
   const answers = useRef<string[]>([]);
   const words = useRef<Set<string>>(new Set());
 
-  useLog("Log: history: ", history.data);
-  useLog("Log: alphabet: ", alphabet.alphabet);
+  // useLog("Log: history: ", history.data);
+  // useLog("Log: alphabet: ", alphabet.alphabet);
 
   // Function to read my text file from the 'public' folder on load
   useEffect(() => {
@@ -68,7 +66,8 @@ const useGame = () => {
   }, []);
 
   // Runs when the user presses space
-  const newGame = (): void => {
+  // useCallback because there is no need to recreate this function
+  const newGame = useCallback((): void => {
     console.log("Log: started new game");
     const index = randomInt(0, answers.current.length); // Get a random index
     setWordle(answers.current[index]); // Pick a random wordle
@@ -77,7 +76,7 @@ const useGame = () => {
     history.setData(initHistory()); // Reset history
     alphabet.reset(); // Reset alphabet
     setStatus("ongoing"); // Reset status
-  };
+  }, []);
 
   // Runs when the user presses enter
   const submitGuess = (): void => {
@@ -114,6 +113,7 @@ const useGame = () => {
 
   // Will update the alphabet with green/yellow/black colors and return the CharColor[] for this guesss
   const getCharColors = (guess: string): CharColor[] => {
+    alphabet.applyChanges(guess, wordle);
     const newRow = history.data[row].slice();
     const wordleSet = new Set(wordle);
 
@@ -123,22 +123,21 @@ const useGame = () => {
       if (ch === wordle[i]) {
         // Character at index i of guess is same as character of wordle
         newRow[i] = { ...newRow[i], ch: ch, color: "success" };
-        alphabet.updateSuccess(ch);
       } else if (wordleSet.has(ch)) {
         // Otherwise, check if guess char is a char in the wordle
         newRow[i] = { ...newRow[i], ch: ch, color: "almost" };
-        alphabet.updateAlmost(ch);
       } else {
         // Otherwise, mark the character as 'never' possible
         newRow[i] = { ...newRow[i], ch: ch, color: "never" };
-        alphabet.updateNever(ch);
       }
     }
+
     return newRow;
   };
 
   return {
     row,
+    col,
     wordle,
     history,
     alphabet,

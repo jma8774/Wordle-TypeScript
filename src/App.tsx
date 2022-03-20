@@ -45,7 +45,7 @@ const App = () => {
       <div className="flex flex-col items-center gap-1 w-min text-white mx-auto">
         <Header className="mt-3" />
         <Toolbar className="mt-4" handleRefresh={newGame} />
-        <Guesses guesses={history.data} row={row} />
+        <Guesses guesses={history.data} />
         <Keyboard className="mt-3" alphabet={alphabet.alphabet} />
         <div className="flex flex-col items-center mt-10 bg-slate-900 rounded p-5">
           <span className="font-bold text-red-500">DEBUG DATA</span>
