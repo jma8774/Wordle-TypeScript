@@ -6,7 +6,7 @@ interface ButtonProps {
   onClick?: () => void;
 }
 
-const ButtonWrapper = ({ children, onClick, className }: ButtonProps) => {
+const ButtonWrapper = ({ children, onClick, className = "" }: ButtonProps) => {
   return (
     <span onClick={onClick} className={`${className} hover:cursor-pointer`}>
       {children}

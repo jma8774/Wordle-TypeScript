@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import useGame from "./hooks/useGame";
-import { Header, Guesses, Keyboard } from "./components";
+import { Header, Toolbar, Guesses, Keyboard } from "./components";
 
 // set of letters from 'a' to 'z'
 const KEYS = new Set();
@@ -42,11 +42,11 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-slate-800">
-      <Header />
-
-      <div className="w-1/2 flex flex-col items-center gap-2 text-white mx-auto">
-        <Guesses className="mt-5" guesses={history.data} row={row} />
-        <Keyboard className="mt-5" alphabet={alphabet.alphabet} />
+      <div className="flex flex-col items-center gap-1 w-min text-white mx-auto">
+        <Header className="mt-3" />
+        <Toolbar className="mt-4" handleRefresh={newGame} />
+        <Guesses guesses={history.data} />
+        <Keyboard className="mt-3" alphabet={alphabet.alphabet} />
         <div className="flex flex-col items-center mt-10 bg-slate-900 rounded p-5">
           <span className="font-bold text-red-500">DEBUG DATA</span>
           <span> status: {status}</span>
