@@ -45,7 +45,7 @@ const App = () => {
   }, [handleKeyPress]);
 
   return (
-    <div className="min-h-screen bg-slate-800">
+    <div className="min-h-screen min-w-screen bg-slate-800">
       <div className="flex flex-col items-center gap-1 text-slate-200 mx-auto">
         <Header className="mt-3" />
         <div className="w-min">
