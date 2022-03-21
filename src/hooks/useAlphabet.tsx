@@ -68,6 +68,11 @@ const useAlphabet = () => {
     setAlphabet(alphabetChanges);
   };
 
+  const hint = () => {
+    alert("Hint icon clicked");
+    console.log("hint");
+  };
+
   // Reset alphabet to default
   const reset = (): void => {
     setAlphabet(initializeAlphabet());
@@ -79,6 +84,7 @@ const useAlphabet = () => {
     updateAlmost,
     updateSuccess,
     applyChanges,
+    hint,
     reset,
   } as const;
 };

@@ -49,7 +49,11 @@ const App = () => {
       <div className="flex flex-col items-center gap-1 text-slate-200 mx-auto">
         <Header className="mt-3" />
         <div className="w-min">
-          <Toolbar className="mt-10" handleRefresh={newGame} />
+          <Toolbar
+            className="mt-10"
+            handleRefresh={newGame}
+            handleHint={alphabet.hint}
+          />
           <Guesses guesses={history.data} />
         </div>
         <Keyboard
