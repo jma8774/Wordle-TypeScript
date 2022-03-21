@@ -34,7 +34,7 @@ const Node = ({ pair }: Props) => {
     backgroundColor[pair.color],
     borderColor(pair),
     transition,
-    "w-12 h-12 sm:w-20 sm:h-20 border-2 rounded", // Box size/shape
+    "w-12 h-12 sm:w-16 sm:h-16 border-2 rounded", // Box size/shape
     "flex justify-center items-center", // Center the character
     "transition ease-linear duration-100", // Transition for new character
   ].join(" ");

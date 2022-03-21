@@ -1,6 +1,6 @@
 import React from "react";
 import ButtonWrapper from "../buttons/ButtonWrapper";
-import { StatIcon, QuestionIcon, RefreshIcon } from "../icons";
+import { StatIcon, QuestionIcon, RefreshIcon, CodeIcon } from "../icons";
 
 interface ToolbarProps {
   className?: string;
@@ -17,24 +17,34 @@ const handleQuestionClick = () => {
   alert("Setting icon clicked");
 };
 
+const handleCodeClick = () => {
+  window.open("https://github.com/jma8774/Wordle-TypeScript", "_blank");
+};
+
 const Toolbar = ({ className, handleRefresh }: ToolbarProps) => {
   console.log("Log: render toolbar");
   return (
     <div className={`${className} flex w-full`}>
-      <span className="grow">
+      <span className="flex grow gap-1">
         <RefreshIcon
           onClick={handleRefresh}
-          className="h-8 w-8 400 fill-neutral-400 hover:fill-neutral-500"
+          className="h-6 w-6 sm:h-7 sm:w-7 fill-neutral-400 hover:fill-neutral-500"
+        />
+        <CodeIcon
+          onClick={handleCodeClick}
+          className="h-6 w-6 sm:h-7 sm:w-7 fill-neutral-400 hover:fill-neutral-500"
         />
       </span>
-      <StatIcon
-        onClick={handleStatClick}
-        className="h-8 w-8 stroke-green-400 fill-green-400 hover:fill-green-600 hover:stroke-green-600"
-      />
-      <QuestionIcon
-        onClick={handleQuestionClick}
-        className="h-8 w-8 fill-blue-400 hover:fill-blue-600"
-      />
+      <span className="flex gap-1">
+        <StatIcon
+          onClick={handleStatClick}
+          className="h-6 w-6 sm:h-7 sm:w-7 stroke-green-400 fill-green-400 hover:fill-green-600 hover:stroke-green-600"
+        />
+        <QuestionIcon
+          onClick={handleQuestionClick}
+          className="h-6 w-6 sm:h-7 sm:w-7 fill-blue-400 hover:fill-blue-600"
+        />
+      </span>
     </div>
   );
 };

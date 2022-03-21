@@ -20,7 +20,7 @@ const IconWrapper = ({ children, onClick, className = "" }: IconProps) => {
         className={`${className} inline-block`}
         fill="currentColor"
         strokeWidth="1"
-        viewBox="0 0 24 24"
+        viewBox="0 0 20 20"
       >
         {children}
       </svg>
