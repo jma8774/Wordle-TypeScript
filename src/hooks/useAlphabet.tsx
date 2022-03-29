@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 interface Alphabet {
   [key: string]: string;
@@ -51,27 +51,25 @@ const useAlphabet = () => {
     update(ch, "success");
   };
 
-  const applyChanges = (guess: string, wordle: string): void => {
-    const wordleSet = new Set(wordle);
-    const alphabetChanges: Alphabet = { ...alphabet };
+  const applyChanges = useCallback(
+    (guess: string, wordle: string): void => {
+      const wordleSet = new Set(wordle);
+      const alphabetChanges: Alphabet = { ...alphabet };
 
-    for (let i = 0; i < guess.length; i++) {
-      const ch = guess[i];
-      const color = alphabetChanges?.[ch];
-      if (ch === wordle[i]) {
-        alphabetChanges[ch] = "success";
-      } else if (color !== "success") {
-        alphabetChanges[ch] = wordleSet.has(ch) ? "almost" : "never";
+      for (let i = 0; i < guess.length; i++) {
+        const ch = guess[i];
+        const color = alphabetChanges?.[ch];
+        if (!color) continue;
+        if (ch === wordle[i]) {
+          alphabetChanges[ch] = "success";
+        } else if (color !== "success") {
+          alphabetChanges[ch] = wordleSet.has(ch) ? "almost" : "never";
+        }
       }
-    }
-
-    setAlphabet(alphabetChanges);
-  };
-
-  const hint = () => {
-    alert("Hint icon clicked");
-    console.log("hint");
-  };
+      setAlphabet(alphabetChanges);
+    },
+    [alphabet]
+  );
 
   // Reset alphabet to default
   const reset = (): void => {
@@ -84,7 +82,6 @@ const useAlphabet = () => {
     updateAlmost,
     updateSuccess,
     applyChanges,
-    hint,
     reset,
   } as const;
 };

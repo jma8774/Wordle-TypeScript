@@ -12,6 +12,7 @@ interface ToolbarProps {
   className?: string;
   handleRefresh: () => void;
   handleHint: () => void;
+  openInstruction: () => void;
 }
 
 const handleStatClick = () => {
@@ -19,16 +20,16 @@ const handleStatClick = () => {
   alert("Stat icon clicked");
 };
 
-const handleQuestionClick = () => {
-  console.log("Setting icon clicked");
-  alert("Setting icon clicked");
-};
-
 const handleCodeClick = () => {
   window.open("https://github.com/jma8774/Wordle-TypeScript", "_blank");
 };
 
-const Toolbar = ({ className, handleRefresh, handleHint }: ToolbarProps) => {
+const Toolbar = ({
+  className,
+  handleRefresh,
+  handleHint,
+  openInstruction,
+}: ToolbarProps) => {
   console.log("Log: render toolbar");
   return (
     <div className={`${className} flex w-full`}>
@@ -48,7 +49,7 @@ const Toolbar = ({ className, handleRefresh, handleHint }: ToolbarProps) => {
           className="h-6 w-6 sm:h-7 sm:w-7 stroke-green-400 fill-green-400 hover:fill-green-600 hover:stroke-green-600"
         />
         <QuestionIcon
-          onClick={handleQuestionClick}
+          onClick={openInstruction}
           className="h-6 w-6 sm:h-7 sm:w-7 fill-blue-400 hover:fill-blue-600"
         />
         <CodeIcon
