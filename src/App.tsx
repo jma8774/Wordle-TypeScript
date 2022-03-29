@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import useGame from "./hooks/useGame";
-import { Header, Toolbar, Guesses, Keyboard } from "./components";
+import { Header, Toolbar, Guesses, Keyboard, Instruction } from "./components";
 
 // set of letters from 'a' to 'z'
 const KEYS = new Set();
@@ -19,7 +19,9 @@ const App = () => {
     submitGuess,
     handleBackspace,
     handleChar,
+    getHint,
   } = useGame();
+  const [showInstruction, setShowInstruction] = useState(false);
 
   const handleKeyPress = useCallback(
     (e: KeyboardEvent): void => {
@@ -45,14 +47,18 @@ const App = () => {
   }, [handleKeyPress]);
 
   return (
-    <div className="min-h-screen min-w-screen bg-slate-800">
+    <div className="min-h-screen min-w-screen bg-slate-800 brightness-100">
+      {showInstruction && (
+        <Instruction closeInstruction={() => setShowInstruction(false)} />
+      )}
       <div className="flex flex-col items-center gap-1 text-slate-200 mx-auto">
         <Header className="mt-3" />
         <div className="w-min">
           <Toolbar
             className="mt-10"
             handleRefresh={newGame}
-            handleHint={alphabet.hint}
+            handleHint={getHint}
+            openInstruction={() => setShowInstruction(true)}
           />
           <Guesses guesses={history.data} />
         </div>

@@ -34,6 +34,7 @@ const useGame = () => {
   const alphabet = useAlphabet();
   const history = useArray<CharColor[]>(initHistory());
   const [status, setStatus] = useState<string>("ongoing");
+  const hintGiven = useRef(false);
   const answers = useRef<string[]>([]);
   const words = useRef<Set<string>>(new Set());
 
@@ -76,6 +77,7 @@ const useGame = () => {
     history.setData(initHistory()); // Reset history
     alphabet.reset(); // Reset alphabet
     setStatus("ongoing"); // Reset status
+    hintGiven.current = false; // Allow hint again
   }, []);
 
   // Runs when the user presses enter
@@ -83,7 +85,7 @@ const useGame = () => {
     if (status !== "ongoing") return;
     const curWord = history.data[row].map((x) => x.ch).join("");
     if (words.current.has(curWord)) {
-      history.update(row, getCharColors(curWord)); // Update row { guesses } of our history with new guess
+      history.update(row, getCharColors(curWord)); // Update and color the new guess
       setRow(row + 1); // Increment guess count
       setCol(0); // New row, reset col back to 0
       if (curWord === wordle)
@@ -111,7 +113,7 @@ const useGame = () => {
     setCol(col + 1);
   };
 
-  // Will update the alphabet with green/yellow/black colors and return the CharColor[] for this guesss
+  // Will update the keyboard with green/yellow/black colors and return the CharColor[] for this guesss
   const getCharColors = (guess: string): CharColor[] => {
     alphabet.applyChanges(guess, wordle);
     const newRow = history.data[row].slice();
@@ -135,6 +137,14 @@ const useGame = () => {
     return newRow;
   };
 
+  // Will color all the characters in our world as yellow in the keyboard
+  const getHint = (): void => {
+    if (hintGiven.current) return;
+    const offset = "#".repeat(WORDLE_LEN);
+    alphabet.applyChanges(wordle + offset, offset + wordle);
+    hintGiven.current = true;
+  };
+
   return {
     row,
     col,
@@ -146,6 +156,7 @@ const useGame = () => {
     submitGuess,
     handleBackspace,
     handleChar,
+    getHint,
   } as const;
 };
 
