@@ -37,6 +37,15 @@ const App = () => {
     [newGame, submitGuess, handleBackspace, handleChar]
   );
 
+  const closeInstruction = useCallback(
+    () => setShowInstruction(false),
+    [showInstruction]
+  );
+
+  const openInstruction = useCallback(
+    () => setShowInstruction(true),
+    [showInstruction]
+  );
   useEffect(() => {
     // Add event listeners on new render
     window.addEventListener("keydown", handleKeyPress);
@@ -47,33 +56,38 @@ const App = () => {
   }, [handleKeyPress]);
 
   return (
-    <div className="min-h-screen min-w-screen bg-slate-800 brightness-100">
-      {showInstruction && (
-        <Instruction closeInstruction={() => setShowInstruction(false)} />
-      )}
-      <div className="flex flex-col items-center gap-1 text-slate-200 mx-auto">
-        <Header className="mt-3" />
-        <div className="w-min">
-          <Toolbar
-            className="mt-10"
-            handleRefresh={newGame}
-            handleHint={getHint}
-            openInstruction={() => setShowInstruction(true)}
+    <div>
+      {showInstruction && <Instruction closeInstruction={closeInstruction} />}
+      <div
+        className={
+          "min-h-screen min-w-screen bg-slate-800" +
+          (showInstruction ? " brightness-50 " : " brightness-100 ")
+        }
+      >
+        <div className="flex flex-col items-center gap-1 text-slate-200 mx-auto">
+          <Header className="mt-3" />
+          <div className="w-min">
+            <Toolbar
+              className="mt-10"
+              handleRefresh={newGame}
+              handleHint={getHint}
+              openInstruction={openInstruction}
+            />
+            <Guesses guesses={history.data} />
+          </div>
+          <Keyboard
+            className="mt-12"
+            alphabet={alphabet.alphabet}
+            handleChar={handleChar}
+            handleBackspace={handleBackspace}
+            submitGuess={submitGuess}
           />
-          <Guesses guesses={history.data} />
-        </div>
-        <Keyboard
-          className="mt-12"
-          alphabet={alphabet.alphabet}
-          handleChar={handleChar}
-          handleBackspace={handleBackspace}
-          submitGuess={submitGuess}
-        />
-        <div className="flex flex-col items-center mt-10 bg-slate-900 rounded p-5">
-          <span className="font-bold text-red-500">DEBUG DATA</span>
-          <span> status: {status}</span>
-          <span> guesses: {row} </span>
-          <span> wordle: {wordle} </span>
+          <div className="flex flex-col items-center mt-10 bg-slate-900 rounded p-5">
+            <span className="font-bold text-red-500">DEBUG DATA</span>
+            <span> status: {status}</span>
+            <span> guesses: {row} </span>
+            <span> wordle: {wordle} </span>
+          </div>
         </div>
       </div>
     </div>
