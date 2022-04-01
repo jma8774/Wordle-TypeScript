@@ -6,11 +6,11 @@ interface Alphabet {
 }
 
 // Define a type for the slice state
-interface KeyboardState {
+export interface KeyboardState {
   keyboard: Alphabet;
 }
 
-const initAlphabet = (): Alphabet => {
+export const initAlphabet = (): Alphabet => {
   let alphabet: Alphabet = {};
   const start = "a".charCodeAt(0);
   for (let i = start; i < start + 26; i++) {
