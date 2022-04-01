@@ -1,6 +1,7 @@
 import React from "react";
 import Node from "./Node";
 import { BackspaceIcon } from "../icons";
+import { useAppDispatch } from "../../redux/hooks";
 
 const rows = [
   ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
@@ -27,7 +28,7 @@ const Keyboard = ({
   handleBackspace,
   submitGuess,
 }: Props) => {
-  console.log("Log: render keyboard");
+  const dispatch = useAppDispatch();
   const rowClasses = "flex gap-1 sm:gap-1.5 justify-center";
   return (
     <div className={`${className} flex flex-col gap-1 sm:gap-1.5`}>
