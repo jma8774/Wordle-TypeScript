@@ -45,13 +45,14 @@ const App = () => {
 
       if (preventDefault) e.preventDefault();
     };
+
     // Add event listeners on new render
     window.addEventListener("keydown", handleKeyPress);
     // Remove event listeners on cleanup
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
     };
-  }, [answers, dispatch, guesses, row, status, wordle, words]);
+  }, [dispatch, answers, guesses, row, status, wordle, words]);
 
   return (
     <div>

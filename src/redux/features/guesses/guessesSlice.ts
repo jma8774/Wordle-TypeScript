@@ -3,7 +3,7 @@ import type { RootState } from "../../store";
 import { MAX_GUESSES, WORDLE_LEN } from "../../../constants";
 
 // Returns a 2d array of our initial history array for our game
-const initGuesses = (): CharColor[][] => {
+export const initGuesses = (): CharColor[][] => {
   let history: CharColor[][] = [];
   for (let i = 0; i < MAX_GUESSES; i++) {
     history.push([]);
@@ -21,7 +21,7 @@ interface CharColor {
 }
 
 // Define a type for the slice state
-interface GuessesState {
+export interface GuessesState {
   row: number;
   col: number;
   guesses: CharColor[][];
