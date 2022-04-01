@@ -29,29 +29,29 @@ const App = () => {
   const { answers, words } = useFetchWords();
 
   console.log("App render");
-  const handleKeyPress = (e: KeyboardEvent): void => {
-    let preventDefault = true;
-    if (e.code === "Enter") {
-      submitWord(dispatch, row, guesses, words.current, wordle);
-    } else if (e.code === "Backspace") {
-      submitBackspace(dispatch, status);
-    } else if (KEYS.has(e.key.toLowerCase())) {
-      submitChar(dispatch, status, e.key.toLowerCase());
-    } else if (e.code === "Space") {
-      newGame(dispatch, answers.current);
-    } else preventDefault = false;
-
-    if (preventDefault) e.preventDefault();
-  };
 
   useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent): void => {
+      let preventDefault = true;
+      if (e.code === "Enter") {
+        submitWord(dispatch, row, guesses, words.current, wordle);
+      } else if (e.code === "Backspace") {
+        submitBackspace(dispatch, status);
+      } else if (KEYS.has(e.key.toLowerCase())) {
+        submitChar(dispatch, status, e.key.toLowerCase());
+      } else if (e.code === "Space") {
+        newGame(dispatch, answers.current);
+      } else preventDefault = false;
+
+      if (preventDefault) e.preventDefault();
+    };
     // Add event listeners on new render
     window.addEventListener("keydown", handleKeyPress);
     // Remove event listeners on cleanup
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
     };
-  }, [handleKeyPress]);
+  }, [answers, dispatch, guesses, row, status, wordle, words]);
 
   return (
     <div>
