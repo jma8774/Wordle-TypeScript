@@ -137,7 +137,7 @@ const useGame = () => {
     return newRow;
   };
 
-  // Will color all the characters in our world as yellow in the keyboard
+  // Will color all the characters in our wordle as yellow in the keyboard
   const getHint = (): void => {
     if (hintGiven.current) return;
     const offset = "#".repeat(WORDLE_LEN);

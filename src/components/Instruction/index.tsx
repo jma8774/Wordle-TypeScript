@@ -8,7 +8,7 @@ const Instuction = ({ closeInstruction }: Props) => {
   return (
     <div
       onClick={closeInstruction}
-      className="absolute w-64 h-64 top-10 bg-slate-700 z-10"
+      className="absolute bg-slate-700 z-10 rounded"
     >
       click to close
     </div>
