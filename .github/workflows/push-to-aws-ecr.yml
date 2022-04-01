@@ -1,6 +1,6 @@
 # On Push:
 #   This action will run tests on the Node project:
-#     If tests pass: 
+#     If tests pass:
 #       Push new Docker image to AWS ECR (then I can deploy it to production later)
 name: Push Image to AWS ECR
 
@@ -42,5 +42,5 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: wordle-typescript
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY -f Dockerfile.prod .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY -f ./docker/Dockerfile.prod .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY
