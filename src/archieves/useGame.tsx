@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import useArray from "./useArray";
+import useArray from "../hooks/useArray";
 import useAlphabet from "./useAlphabet";
-import useLog from "./useLog";
 import { MAX_GUESSES, WORDLE_LEN } from "../constants";
 
 interface CharColor {

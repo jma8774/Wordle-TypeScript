@@ -1,5 +1,4 @@
 import React from "react";
-import ButtonWrapper from "../buttons/ButtonWrapper";
 import {
   StatIcon,
   QuestionIcon,
@@ -12,7 +11,6 @@ interface ToolbarProps {
   className?: string;
   handleRefresh: () => void;
   handleHint: () => void;
-  openInstruction: () => void;
 }
 
 const handleStatClick = () => {
@@ -24,13 +22,7 @@ const handleCodeClick = () => {
   window.open("https://github.com/jma8774/Wordle-TypeScript", "_blank");
 };
 
-const Toolbar = ({
-  className,
-  handleRefresh,
-  handleHint,
-  openInstruction,
-}: ToolbarProps) => {
-  console.log("Log: render toolbar");
+const Toolbar = ({ className, handleRefresh, handleHint }: ToolbarProps) => {
   return (
     <div className={`${className} flex w-full`}>
       <span className="flex grow gap-1">
@@ -49,7 +41,7 @@ const Toolbar = ({
           className="h-6 w-6 sm:h-7 sm:w-7 stroke-green-400 fill-green-400 hover:fill-green-600 hover:stroke-green-600"
         />
         <QuestionIcon
-          onClick={openInstruction}
+          onClick={() => console.log("DO INSTRUCTION")}
           className="h-6 w-6 sm:h-7 sm:w-7 fill-blue-400 hover:fill-blue-600"
         />
         <CodeIcon
