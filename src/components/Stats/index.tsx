@@ -1,10 +1,18 @@
+import classNames from "classnames";
 import React, { useRef } from "react";
 import useCloseOnClickOutside from "../../hooks/useCloseOnClickOutside";
 import { resetModals } from "../../redux/features/setting/settingSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import Divider from "../Divider";
 import { CloseIcon } from "../icons";
 
 interface Props {}
+
+const WrapText = (prop: { text: string; textColor?: string }) => {
+  const { text, textColor } = prop;
+  const divClass = classNames("max-w-fit", textColor);
+  return <div className={divClass}> {text} </div>;
+};
 
 const Stats = (props: Props) => {
   const dispatch = useAppDispatch();
@@ -27,6 +35,12 @@ const Stats = (props: Props) => {
             className="h-6 w-6 sm:h-7 sm:w-7 fill-red-400 hover:fill-red-500"
           />
         </span>
+        <WrapText
+          text="You can view your achievements here."
+          textColor="text-slate-300"
+        />
+        <Divider />
+        <div> Under construction, please come back at another time later. </div>
       </div>
     </div>
   );

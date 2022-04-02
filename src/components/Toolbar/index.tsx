@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 import { useAppDispatch } from "../../redux/hooks";
-import { showHelp } from "../../redux/features/setting/settingSlice";
+import { showHelp, showStat } from "../../redux/features/setting/settingSlice";
 import {
   StatIcon,
   QuestionIcon,
@@ -15,11 +15,6 @@ interface ToolbarProps {
   handleRefresh: () => void;
   handleHint: () => void;
 }
-
-const handleStatClick = () => {
-  console.log("Stat icon clicked");
-  alert("Stat icon clicked");
-};
 
 const handleCodeClick = () => {
   window.open("https://github.com/jma8774/Wordle-TypeScript", "_blank");
@@ -42,7 +37,7 @@ const Toolbar = ({ className, handleRefresh, handleHint }: ToolbarProps) => {
       </span>
       <span className="flex gap-1">
         <StatIcon
-          onClick={handleStatClick}
+          onClick={() => dispatch(showStat())}
           className="h-6 w-6 sm:h-7 sm:w-7 stroke-green-400 fill-green-400 hover:fill-green-600 hover:stroke-green-600"
         />
         <QuestionIcon

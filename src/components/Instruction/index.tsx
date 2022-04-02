@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { CloseIcon } from "../icons";
 import { Divider } from "../";
 import Node from "../Guesses/Node";
+import classNames from "classnames";
 
 interface Props {}
 
@@ -32,8 +33,10 @@ const Row = ({
   );
 };
 
-const WrapText = ({ text }: { text: string }) => {
-  return <div className="max-w-fit"> {text} </div>;
+const WrapText = (prop: { text: string; textColor?: string }) => {
+  const { text, textColor } = prop;
+  const divClass = classNames("max-w-fit", textColor);
+  return <div className={divClass}> {text} </div>;
 };
 
 const Instuction = (props: Props) => {
@@ -57,8 +60,11 @@ const Instuction = (props: Props) => {
             className="h-6 w-6 sm:h-7 sm:w-7 fill-red-400 hover:fill-red-500"
           />
         </span>
-        <div className="max-w-fit">Try to guess the word in 6 tries.</div>
-        <Divider pb={5} pt={10} />
+        <WrapText
+          text="Try to guess the word in 6 tries."
+          textColor="text-slate-300"
+        />
+        <Divider />
         <Row guess="hello" wordle="h####" colorCol={0} />
         <WrapText text="The letter H is in the word and in the correct spot." />
         <Row guess="world" wordle="o####" colorCol={1} />
