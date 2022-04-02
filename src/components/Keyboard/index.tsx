@@ -27,9 +27,9 @@ const Keyboard = ({
   handleBackspace,
   submitGuess,
 }: Props) => {
-  const rowClasses = "flex gap-1 sm:gap-1.5 justify-center";
+  const rowClasses = "flex gap-1.5 justify-center";
   return (
-    <div className={`${className} flex flex-col gap-1 sm:gap-1.5`}>
+    <div className={`${className} flex flex-col gap-1.5`}>
       <div className={rowClasses}>
         {rows[0].map((ch) => (
           <Node

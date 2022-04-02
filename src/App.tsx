@@ -47,8 +47,6 @@ const App = () => {
         submitChar(dispatch, status, e.key.toLowerCase());
       } else if (e.code === "Space") {
         newGame(dispatch, answers.current);
-      } else if (e.code === "Digit9") {
-        dispatch(resetModals());
       } else preventDefault = false;
 
       if (preventDefault) e.preventDefault();

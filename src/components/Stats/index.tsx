@@ -29,7 +29,7 @@ const Stats = (props: Props) => {
         ref={ref}
       >
         <span className="flex items-center">
-          <div className="grow font-bold text-3xl">Statistics</div>
+          <div className="grow font-bold text-3xl w-60">Statistics</div>
           <CloseIcon
             onClick={() => dispatch(resetModals())}
             className="h-6 w-6 sm:h-7 sm:w-7 fill-red-400 hover:fill-red-500"
@@ -40,7 +40,7 @@ const Stats = (props: Props) => {
           textColor="text-slate-300"
         />
         <Divider />
-        <div> Under construction, please come back at another time later. </div>
+        <WrapText text="Under construction, please come back at another time later." />
       </div>
     </div>
   );
