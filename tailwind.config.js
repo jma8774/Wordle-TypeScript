@@ -38,6 +38,18 @@ module.exports = {
       serif: ["ui-serif", "Georgia"],
       mono: ["ui-monospace", "SFMono-Regular"],
     },
+    extend: {
+      keyframes: {
+        pop: {
+          "0%": { transform: "scale(70%)" },
+          "80%": { transform: "scale(110%)" },
+          "100%": { transform: "scale(100%)" },
+        },
+      },
+      animation: {
+        modal: "pop 0.2s ease-in-out 1",
+      },
+    },
   },
   plugins: [],
 };

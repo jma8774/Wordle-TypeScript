@@ -8,7 +8,7 @@ const backgroundColor: Record<string, string> = {
 };
 
 interface CharColor {
-  id: number;
+  id?: number;
   ch: string;
   color: string;
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import useFetchWords from "./hooks/useFetchWords";
 import {
   Header,
@@ -6,6 +6,7 @@ import {
   Guesses,
   Keyboard,
   Instruction,
+  Stats,
   Confetti,
 } from "./components";
 import { useAppDispatch, useAppSelector } from "./redux/hooks";
@@ -25,6 +26,7 @@ import classNames from "classnames";
 import { resetModals } from "./redux/features/setting/settingSlice";
 
 const App = () => {
+  console.log("App render");
   const dispatch = useAppDispatch();
   const { status, wordle } = useAppSelector((state) => state.game);
   const { guesses, row, col } = useAppSelector((state) => state.guesses);
@@ -32,10 +34,10 @@ const App = () => {
   const { showHelp, showStat } = useAppSelector((state) => state.setting);
   const { answers, words } = useFetchWords();
 
-  console.log("App render");
-
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent): void => {
+      if (showHelp || showStat) return;
+
       let preventDefault = true;
       if (e.code === "Enter") {
         submitWord(dispatch, row, guesses, words.current, wordle);
@@ -45,27 +47,33 @@ const App = () => {
         submitChar(dispatch, status, e.key.toLowerCase());
       } else if (e.code === "Space") {
         newGame(dispatch, answers.current);
+      } else if (e.code === "Digit9") {
+        dispatch(resetModals());
       } else preventDefault = false;
 
       if (preventDefault) e.preventDefault();
     };
-
     // Add event listeners on new render
     window.addEventListener("keydown", handleKeyPress);
     // Remove event listeners on cleanup
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
     };
-  }, [dispatch, answers, guesses, row, status, wordle, words]);
+  }); // Empty dependency because this relies on pretty much all the states
 
-  const bodyClass = classNames("min-h-screen min-w-screen bg-slate-800", {
-    "brightness-50": showHelp || showStat,
-    "brightness-100": !(showHelp || showStat),
-  });
+  const bodyClass = classNames(
+    "min-h-screen min-w-screen flex flex-col items-center gap-1 text-slate-200 mx-auto bg-slate-800",
+    {
+      "brightness-50": showHelp || showStat,
+      "brightness-100": !(showHelp || showStat),
+    }
+  );
   return (
-    <div className={bodyClass}>
+    <>
       <Confetti status={status} />
-      <div className="flex flex-col items-center gap-1 text-slate-200 mx-auto">
+      <Instruction />
+      <Stats />
+      <div className={bodyClass}>
         <Header className="mt-3" />
         <div className="w-min">
           <Toolbar
@@ -92,7 +100,7 @@ const App = () => {
           <span> wordle: {wordle} </span>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
