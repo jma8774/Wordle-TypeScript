@@ -14,7 +14,7 @@ export const initGuesses = (): CharColor[][] => {
   return history;
 };
 
-interface CharColor {
+export interface CharColor {
   id: number;
   ch: string;
   color: string;

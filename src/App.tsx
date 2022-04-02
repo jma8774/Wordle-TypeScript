@@ -20,19 +20,16 @@ import {
   submitWord,
   handleHint,
 } from "./redux/batches";
-
-// set of letters from 'a' to 'z'
-const KEYS = new Set();
-for (let i = 0; i < 26; i++) {
-  KEYS.add(String.fromCharCode("a".charCodeAt(0) + i));
-}
+import { KEYS } from "./constants";
+import classNames from "classnames";
+import { resetModals } from "./redux/features/setting/settingSlice";
 
 const App = () => {
   const dispatch = useAppDispatch();
-  const [showInstruction, setShowInstruction] = useState(false);
   const { status, wordle } = useAppSelector((state) => state.game);
   const { guesses, row, col } = useAppSelector((state) => state.guesses);
   const { keyboard } = useAppSelector((state) => state.keyboard);
+  const { showHelp, showStat } = useAppSelector((state) => state.setting);
   const { answers, words } = useFetchWords();
 
   console.log("App render");
@@ -61,41 +58,38 @@ const App = () => {
     };
   }, [dispatch, answers, guesses, row, status, wordle, words]);
 
+  const bodyClass = classNames("min-h-screen min-w-screen bg-slate-800", {
+    "brightness-50": showHelp || showStat,
+    "brightness-100": !(showHelp || showStat),
+  });
   return (
-    <div>
+    <div className={bodyClass}>
       <Confetti status={status} />
-      <div
-        className={
-          "min-h-screen min-w-screen bg-slate-800" +
-          (showInstruction ? " brightness-50 " : " brightness-100 ")
-        }
-      >
-        <div className="flex flex-col items-center gap-1 text-slate-200 mx-auto">
-          <Header className="mt-3" />
-          <div className="w-min">
-            <Toolbar
-              className="mt-10"
-              handleRefresh={() => newGame(dispatch, answers.current)}
-              handleHint={() => handleHint(dispatch, wordle)}
-            />
-            <Guesses guesses={guesses} />
-          </div>
-          <Keyboard
-            className="mt-12"
-            alphabet={keyboard}
-            handleChar={(ch) => dispatch(handleChar(ch))}
-            handleBackspace={() => dispatch(handleBackspace())}
-            submitGuess={() =>
-              submitWord(dispatch, row, guesses, words.current, wordle)
-            }
+      <div className="flex flex-col items-center gap-1 text-slate-200 mx-auto">
+        <Header className="mt-3" />
+        <div className="w-min">
+          <Toolbar
+            className="mt-10"
+            handleRefresh={() => newGame(dispatch, answers.current)}
+            handleHint={() => handleHint(dispatch, wordle)}
           />
-          <div className="flex flex-col items-center mt-10 bg-slate-900 rounded p-5">
-            <span className="font-bold text-red-500">DEBUG DATA</span>
-            <span> status: {status}</span>
-            <span> row: {row} </span>
-            <span> col: {col} </span>
-            <span> wordle: {wordle} </span>
-          </div>
+          <Guesses guesses={guesses} />
+        </div>
+        <Keyboard
+          className="mt-12"
+          alphabet={keyboard}
+          handleChar={(ch) => dispatch(handleChar(ch))}
+          handleBackspace={() => dispatch(handleBackspace())}
+          submitGuess={() =>
+            submitWord(dispatch, row, guesses, words.current, wordle)
+          }
+        />
+        <div className="flex flex-col items-center mt-10 bg-slate-900 rounded p-5">
+          <span className="font-bold text-red-500">DEBUG DATA</span>
+          <span> status: {status}</span>
+          <span> row: {row} </span>
+          <span> col: {col} </span>
+          <span> wordle: {wordle} </span>
         </div>
       </div>
     </div>

@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import React, { useState, useEffect } from "react";
 
 const backgroundColor: Record<string, string> = {
@@ -27,19 +28,19 @@ const Node = ({ className, children, onClick, pair }: Props) => {
     setTransition("scale-110");
   }, [pair.color]);
 
-  const classNames = [
+  const containerClass = classNames(
     className,
     backgroundColor[pair.color],
     transition,
     "w-8 h-8 xs:w-11 xs:h-11 sm:w-12 sm:h-12 rounded hover:cursor-pointer", // Box size/shape
     "flex justify-center items-center", // Center the character
-    "transition ease-linear duration-200", // Transition for color change
-  ].join(" ");
+    "transition ease-linear duration-200" // Transition for color change
+  );
 
   return (
     <span
       onClick={onClick}
-      className={classNames}
+      className={containerClass}
       onTransitionEnd={() => setTransition("scale-100")}
     >
       {children ? children : pair.ch}

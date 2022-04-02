@@ -1,4 +1,7 @@
+import classNames from "classnames";
 import React from "react";
+import { useAppDispatch } from "../../redux/hooks";
+import { showHelp } from "../../redux/features/setting/settingSlice";
 import {
   StatIcon,
   QuestionIcon,
@@ -23,8 +26,10 @@ const handleCodeClick = () => {
 };
 
 const Toolbar = ({ className, handleRefresh, handleHint }: ToolbarProps) => {
+  const dispatch = useAppDispatch();
+  const containerClass = classNames("flex w-full", className);
   return (
-    <div className={`${className} flex w-full`}>
+    <div className={containerClass}>
       <span className="flex grow gap-1">
         <RefreshIcon
           onClick={handleRefresh}
@@ -41,7 +46,7 @@ const Toolbar = ({ className, handleRefresh, handleHint }: ToolbarProps) => {
           className="h-6 w-6 sm:h-7 sm:w-7 stroke-green-400 fill-green-400 hover:fill-green-600 hover:stroke-green-600"
         />
         <QuestionIcon
-          onClick={() => console.log("DO INSTRUCTION")}
+          onClick={() => dispatch(showHelp())}
           className="h-6 w-6 sm:h-7 sm:w-7 fill-blue-400 hover:fill-blue-600"
         />
         <CodeIcon
