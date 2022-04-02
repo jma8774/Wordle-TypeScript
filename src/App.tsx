@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import useFetchWords from "./hooks/useFetchWords";
-import { Header, Toolbar, Guesses, Keyboard, Instruction } from "./components";
+import {
+  Header,
+  Toolbar,
+  Guesses,
+  Keyboard,
+  Instruction,
+  Confetti,
+} from "./components";
 import { useAppDispatch, useAppSelector } from "./redux/hooks";
 import {
   handleBackspace,
@@ -56,6 +63,7 @@ const App = () => {
 
   return (
     <div>
+      <Confetti status={status} />
       <div
         className={
           "min-h-screen min-w-screen bg-slate-800" +
