@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import Confetti from "react-confetti";
 import useFetchWords from "./hooks/useFetchWords";
+import useWindowSize from "./hooks/useWindowSize";
 import { Header, Toolbar, Guesses, Keyboard, Instruction } from "./components";
 import { useAppDispatch, useAppSelector } from "./redux/hooks";
 import {
@@ -22,6 +24,7 @@ for (let i = 0; i < 26; i++) {
 
 const App = () => {
   const dispatch = useAppDispatch();
+  const windowSize = useWindowSize();
   const [showInstruction, setShowInstruction] = useState(false);
   const { status, wordle } = useAppSelector((state) => state.game);
   const { guesses, row, col } = useAppSelector((state) => state.guesses);
@@ -56,6 +59,13 @@ const App = () => {
 
   return (
     <div>
+      <Confetti
+        width={windowSize.width - 25}
+        height={windowSize.height - 25}
+        tweenDuration={7500}
+        recycle={false}
+        run={status === "win"}
+      />
       <div
         className={
           "min-h-screen min-w-screen bg-slate-800" +
