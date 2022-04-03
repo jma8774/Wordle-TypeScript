@@ -6,9 +6,11 @@ Built CI/CD pipeline in GitHub Actions that detects any new pull-request/push an
 
 Then later on, when all is ready, we can deploy the new image in ECR by running a service on an AWS cluster.
 
-Made use of custom hooks in React to seperate logic which made the code easier to manage and did unit testing using Jest.
-
 Currently hosted via [GitHub Pages](https://www.jiamingma.me/Wordle-TypeScript/).
+
+<div align="center">
+    <img src="https://i.imgur.com/e83w6I7.png" width="500">
+</div>
 
 # Usage
 
