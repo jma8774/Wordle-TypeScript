@@ -5,7 +5,7 @@ interface Props {
   pt?: number;
   pb?: number;
   width?: number;
-  color?: number;
+  color?: string;
 }
 
 const Divider = ({ pt, pb, width, color }: Props) => {

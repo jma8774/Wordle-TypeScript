@@ -34,10 +34,7 @@ const randomInt = (start: number, end: number): number => {
   return start + Math.floor(Math.random() * (end - start + 1));
 };
 
-export const newGame = (
-  dispatch: AppDispatchState,
-  answers: string[]
-): void => {
+const newGame = (dispatch: AppDispatchState, answers: string[]): void => {
   batch(() => {
     // Reset everything
     dispatch(resetGame());
@@ -50,7 +47,7 @@ export const newGame = (
   });
 };
 
-export const submitChar = (
+const submitChar = (
   dispatch: AppDispatchState,
   status: "ongoing" | "lose" | "win",
   ch: string
@@ -58,14 +55,14 @@ export const submitChar = (
   if (status === "ongoing") dispatch(handleChar(ch));
 };
 
-export const submitBackspace = (
+const submitBackspace = (
   dispatch: AppDispatchState,
   status: "ongoing" | "lose" | "win"
 ): void => {
   if (status === "ongoing") dispatch(handleBackspace());
 };
 
-export const submitWord = (
+const submitWord = (
   dispatch: AppDispatchState,
   row: number,
   guesses: CharColor[][],
@@ -87,13 +84,12 @@ export const submitWord = (
   });
 };
 
-export const handleHint = (
-  dispatch: AppDispatchState,
-  wordle: string
-): void => {
+const handleHint = (dispatch: AppDispatchState, wordle: string): void => {
   const offset = "#".repeat(WORDLE_LEN);
   dispatch(
     keyboardSubmit({ wordle: offset + wordle, curGuess: wordle + offset })
   );
   dispatch(openHint());
 };
+
+export { newGame, submitChar, submitBackspace, submitWord, handleHint };

@@ -9,6 +9,8 @@ import {
   Stats,
   Confetti,
   Notification,
+  Divider,
+  MadeWithLove,
 } from "./components";
 import { useAppDispatch, useAppSelector } from "./redux/hooks";
 import {
@@ -24,7 +26,6 @@ import {
 } from "./redux/batches";
 import { KEYS } from "./constants";
 import classNames from "classnames";
-import { resetModals } from "./redux/features/setting/settingSlice";
 
 const App = () => {
   console.log("App render");
@@ -92,13 +93,14 @@ const App = () => {
             submitWord(dispatch, row, guesses, words.current, wordle)
           }
         />
-        <div className="flex flex-col items-center mt-10 bg-slate-900 rounded p-5">
+        {/* <div className="flex flex-col items-center mt-10 bg-slate-900 rounded p-5">
           <span className="font-bold text-red-500">DEBUG DATA</span>
           <span> status: {status}</span>
           <span> row: {row} </span>
           <span> col: {col} </span>
           <span> wordle: {wordle} </span>
-        </div>
+        </div> */}
+        <MadeWithLove />
       </div>
     </>
   );
