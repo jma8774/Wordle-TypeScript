@@ -4,6 +4,7 @@ import {
   resetGame,
   updateWordle,
   changeStatus,
+  openHint,
 } from "./features/game/gameSlice";
 import {
   resetGuesses,
@@ -16,6 +17,11 @@ import {
   keyboardSubmit,
 } from "./features/keyboard/keyboardSlice";
 import { MAX_GUESSES, WORDLE_LEN } from "../constants";
+import {
+  closeErrorSubmit,
+  showErrorSubmit,
+  showRestart,
+} from "./features/setting/settingSlice";
 
 interface CharColor {
   id: number;
@@ -40,6 +46,7 @@ export const newGame = (
     // Get new word
     const index = randomInt(0, answers.length);
     dispatch(updateWordle(answers[index]));
+    dispatch(showRestart());
   });
 };
 
@@ -74,6 +81,8 @@ export const submitWord = (
       dispatch(keyboardSubmit({ wordle, curGuess }));
       if (curGuess === wordle) dispatch(changeStatus("win"));
       else if (row === MAX_GUESSES - 1) dispatch(changeStatus("lose"));
+    } else {
+      dispatch(showErrorSubmit());
     }
   });
 };
@@ -86,4 +95,5 @@ export const handleHint = (
   dispatch(
     keyboardSubmit({ wordle: offset + wordle, curGuess: wordle + offset })
   );
+  dispatch(openHint());
 };

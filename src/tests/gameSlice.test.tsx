@@ -23,6 +23,7 @@ describe("reset state", () => {
     const previousState: GameState = {
       status: "win",
       wordle: "hello",
+      hintGiven: false,
     };
     expect(reducer(previousState, resetGame())).toEqual({
       status: "ongoing",
@@ -33,6 +34,7 @@ describe("reset state", () => {
     const previousState: GameState = {
       status: "ongoing",
       wordle: "hello",
+      hintGiven: false,
     };
     expect(reducer(previousState, resetGame())).toEqual({
       status: "ongoing",
@@ -43,6 +45,7 @@ describe("reset state", () => {
     const previousState: GameState = {
       status: "lose",
       wordle: "hello",
+      hintGiven: false,
     };
     expect(reducer(previousState, resetGame())).toEqual({
       status: "ongoing",
@@ -56,6 +59,7 @@ describe("update wordle", () => {
     const previousState: GameState = {
       status: "ongoing",
       wordle: "",
+      hintGiven: false,
     };
     expect(reducer(previousState, updateWordle("books"))).toEqual({
       status: "ongoing",
@@ -66,6 +70,7 @@ describe("update wordle", () => {
     const previousState: GameState = {
       status: "lose",
       wordle: "hello",
+      hintGiven: false,
     };
     expect(reducer(previousState, updateWordle("trees"))).toEqual({
       status: "lose",
@@ -78,6 +83,7 @@ describe("update status", () => {
   const previousState: GameState = {
     status: "ongoing",
     wordle: "",
+    hintGiven: false,
   };
   it("status should be ongoing", () => {
     expect(reducer(previousState, changeStatus("ongoing"))).toEqual({

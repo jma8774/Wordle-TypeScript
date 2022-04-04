@@ -84,5 +84,10 @@ export const { resetGuesses, handleBackspace, handleChar, handleSubmit } =
 export const selectValue = (state: RootState) => state.guesses.guesses;
 export const selectRow = (state: RootState) => state.guesses.row;
 export const selectCol = (state: RootState) => state.guesses.col;
+export const selectCurrentWord = (state: RootState) => {
+  const guessState = state.guesses;
+  const wordRow = guessState.guesses[guessState.row];
+  return wordRow.map((node) => node.ch).join("");
+};
 
 export default guessesSlice.reducer;

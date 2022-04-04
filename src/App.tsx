@@ -8,6 +8,7 @@ import {
   Instruction,
   Stats,
   Confetti,
+  Notification,
 } from "./components";
 import { useAppDispatch, useAppSelector } from "./redux/hooks";
 import {
@@ -69,6 +70,7 @@ const App = () => {
   return (
     <>
       <Confetti status={status} />
+      <Notification />
       <Instruction />
       <Stats />
       <div className={bodyClass}>

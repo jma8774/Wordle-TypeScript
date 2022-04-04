@@ -45,9 +45,14 @@ module.exports = {
           "80%": { transform: "scale(110%)" },
           "100%": { transform: "scale(100%)" },
         },
+        slideInFromRight: {
+          "0%": { transform: "translate(50%)", opacity: "0.5" },
+          "100%": { transform: "translate(0%)", opacity: "1" },
+        },
       },
       animation: {
         modal: "pop 0.2s ease-in-out 1",
+        notification: "slideInFromRight 0.25s ease-in-out 1",
       },
     },
   },

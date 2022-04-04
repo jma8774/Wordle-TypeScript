@@ -6,3 +6,4 @@ export { default as Stats } from "./Stats/index";
 export { default as Instruction } from "./Instruction/index";
 export { default as Confetti } from "./Confetti/index";
 export { default as Divider } from "./Divider/index";
+export { default as Notification } from "./Notification/index";

@@ -17,7 +17,7 @@ const Confetti = ({ status }: Props) => {
     const timeId = setTimeout(() => {
       // After 3.5 seconds set the show value to false
       setShow(false);
-    }, 3500);
+    }, 5500);
 
     return () => {
       clearTimeout(timeId);

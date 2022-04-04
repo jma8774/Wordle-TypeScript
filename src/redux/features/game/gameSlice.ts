@@ -5,12 +5,14 @@ import type { RootState } from "../../store";
 export interface GameState {
   status: "ongoing" | "lose" | "win";
   wordle: string;
+  hintGiven: boolean;
 }
 
 // Define the initial state using that type
 const initialState: GameState = {
   status: "ongoing",
   wordle: "",
+  hintGiven: false,
 };
 
 export const gameSlice = createSlice({
@@ -21,6 +23,7 @@ export const gameSlice = createSlice({
     resetGame: (state) => {
       state.status = "ongoing";
       state.wordle = "";
+      state.hintGiven = false;
     },
     updateWordle: (state, action: PayloadAction<string>) => {
       state.wordle = action.payload;
@@ -31,10 +34,17 @@ export const gameSlice = createSlice({
     ) => {
       state.status = action.payload;
     },
+    openHint: (state) => {
+      state.hintGiven = true;
+    },
+    closeHint: (state) => {
+      state.hintGiven = false;
+    },
   },
 });
 
-export const { resetGame, updateWordle, changeStatus } = gameSlice.actions;
+export const { resetGame, updateWordle, changeStatus, openHint, closeHint } =
+  gameSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectStatus = (state: RootState) => state.game.status;
