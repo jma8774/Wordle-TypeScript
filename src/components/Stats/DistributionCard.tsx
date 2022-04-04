@@ -1,3 +1,5 @@
+import { useAppSelector } from "../../redux/hooks";
+
 const Bar = ({
   row,
   wins,
@@ -12,7 +14,7 @@ const Bar = ({
       <div>{row}</div>
       <div
         style={{ flexBasis: `${percent}%` }}
-        className="text-right rounded bg-blue-600 px-1"
+        className={`text-right rounded bg-blue-600 px-1`}
       >
         {wins}
       </div>
@@ -21,17 +23,18 @@ const Bar = ({
 };
 
 const DistributionCard = () => {
-  const totalWins = 999;
-  const distributions = [0, 200, 300, 200, 100, 99];
+  const { gamesWon, distribution } = useAppSelector(
+    (state) => state.localStorage
+  );
   return (
     <div className="flex flex-col gap-2 grow basis-full min-h-[120px] text-slate-200 mt-1">
       <div className="text-lg font-semibold"> Guess Distribution </div>
-      {distributions.map((wins, idx) => (
+      {Object.values(distribution).map((wins, idx) => (
         <Bar
           key={idx}
           row={idx + 1}
           wins={wins}
-          percent={Math.floor((wins / totalWins) * 100)}
+          percent={Math.floor((wins / gamesWon) * 100)}
         />
       ))}
     </div>

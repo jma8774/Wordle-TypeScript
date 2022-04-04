@@ -6,14 +6,6 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 
-// replace console.* for disable log on production
-if (process.env.NODE_ENV === "production") {
-  console.log("Log: no logs in production");
-  console.log = () => {};
-  console.error = () => {};
-  console.debug = () => {};
-}
-
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

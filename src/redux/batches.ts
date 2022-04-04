@@ -22,6 +22,12 @@ import {
   showErrorSubmit,
   showRestart,
 } from "./features/setting/settingSlice";
+import {
+  incrementPlayed,
+  handleWin,
+  resetStreak,
+  resetStats,
+} from "./features/localStorage/localStorageSlice";
 
 interface CharColor {
   id: number;
@@ -29,13 +35,20 @@ interface CharColor {
   color: string;
 }
 
+type Status = "ongoing" | "lose" | "win";
+
 // Returns random integer from [a, b]
 const randomInt = (start: number, end: number): number => {
   return start + Math.floor(Math.random() * (end - start + 1));
 };
 
-const newGame = (dispatch: AppDispatchState, answers: string[]): void => {
+const newGame = (
+  dispatch: AppDispatchState,
+  answers: string[],
+  status: Status
+): void => {
   batch(() => {
+    if (status === "ongoing") dispatch(resetStreak());
     // Reset everything
     dispatch(resetGame());
     dispatch(resetGuesses());
@@ -49,16 +62,13 @@ const newGame = (dispatch: AppDispatchState, answers: string[]): void => {
 
 const submitChar = (
   dispatch: AppDispatchState,
-  status: "ongoing" | "lose" | "win",
+  status: Status,
   ch: string
 ): void => {
   if (status === "ongoing") dispatch(handleChar(ch));
 };
 
-const submitBackspace = (
-  dispatch: AppDispatchState,
-  status: "ongoing" | "lose" | "win"
-): void => {
+const submitBackspace = (dispatch: AppDispatchState, status: Status): void => {
   if (status === "ongoing") dispatch(handleBackspace());
 };
 
@@ -74,10 +84,16 @@ const submitWord = (
     const curGuess = guesses[row].map((x) => x.ch).join("");
     // Update guesses and keyboard
     if (words.has(curGuess)) {
+      if (row === 0) dispatch(incrementPlayed());
       dispatch(handleSubmit(wordle));
       dispatch(keyboardSubmit({ wordle, curGuess }));
-      if (curGuess === wordle) dispatch(changeStatus("win"));
-      else if (row === MAX_GUESSES - 1) dispatch(changeStatus("lose"));
+      if (curGuess === wordle) {
+        dispatch(changeStatus("win"));
+        dispatch(handleWin(row + 1));
+      } else if (row === MAX_GUESSES - 1) {
+        dispatch(changeStatus("lose"));
+        dispatch(resetStreak());
+      }
     } else {
       dispatch(showErrorSubmit());
     }

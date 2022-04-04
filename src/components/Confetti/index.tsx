@@ -15,11 +15,11 @@ const Confetti = ({ status }: Props) => {
 
     setShow(true);
     const timeId = setTimeout(() => {
-      // After 3.5 seconds set the show value to false
       setShow(false);
-    }, 5500);
+    }, 5000);
 
     return () => {
+      setShow(false);
       clearTimeout(timeId);
     };
   }, [status]);
@@ -30,7 +30,7 @@ const Confetti = ({ status }: Props) => {
 
   return (
     <ConfettiBody
-      width={windowSize.width - 1}
+      width={windowSize.width - 50}
       height={windowSize.height - 1}
       tweenDuration={7500}
       recycle={false}

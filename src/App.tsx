@@ -28,7 +28,7 @@ import { KEYS } from "./constants";
 import classNames from "classnames";
 
 const App = () => {
-  console.log("App render");
+  // console.log("App render");
   const dispatch = useAppDispatch();
   const { status, wordle } = useAppSelector((state) => state.game);
   const { guesses, row, col } = useAppSelector((state) => state.guesses);
@@ -48,7 +48,7 @@ const App = () => {
       } else if (KEYS.has(e.key.toLowerCase())) {
         submitChar(dispatch, status, e.key.toLowerCase());
       } else if (e.code === "Space") {
-        newGame(dispatch, answers.current);
+        newGame(dispatch, answers.current, status);
       } else preventDefault = false;
 
       if (preventDefault) e.preventDefault();
@@ -71,15 +71,15 @@ const App = () => {
   return (
     <>
       <Confetti status={status} />
-      <Notification />
-      <Instruction />
       <Stats />
+      <Instruction />
+      <Notification />
       <div className={bodyClass}>
         <Header className="mt-3" />
         <div className="w-min">
           <Toolbar
             className="mt-10"
-            handleRefresh={() => newGame(dispatch, answers.current)}
+            handleRefresh={() => newGame(dispatch, answers.current, status)}
             handleHint={() => handleHint(dispatch, wordle)}
           />
           <Guesses guesses={guesses} />
@@ -93,13 +93,13 @@ const App = () => {
             submitWord(dispatch, row, guesses, words.current, wordle)
           }
         />
-        {/* <div className="flex flex-col items-center mt-10 bg-slate-900 rounded p-5">
-          <span className="font-bold text-red-500">DEBUG DATA</span>
+        <div className="flex flex-col items-center mt-10 bg-slate-900 rounded p-5">
+          <span className="font-bold text-red-500">DEBUG</span>
           <span> status: {status}</span>
           <span> row: {row} </span>
           <span> col: {col} </span>
           <span> wordle: {wordle} </span>
-        </div> */}
+        </div>
         <MadeWithLove />
       </div>
     </>
