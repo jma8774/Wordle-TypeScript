@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { AnyAction, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import { gameSlice } from "./features/game/gameSlice";
 import { guessesSlice } from "./features/guesses/guessesSlice";
 import { keyboardSlice } from "./features/keyboard/keyboardSlice";
@@ -43,5 +43,5 @@ store.subscribe(() => {
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatchState = typeof store.dispatch;
-
+export type AppThunkAction = ThunkAction<void, RootState, unknown, AnyAction>;
 export default store;

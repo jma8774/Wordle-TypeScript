@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 import useCloseOnClickOutside from "../../hooks/useCloseOnClickOutside";
-import { batchResetStats } from "../../redux/batches";
 import { resetStats } from "../../redux/features/localStorage/localStorageSlice";
 import { resetModals } from "../../redux/features/setting/settingSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { handleResetStats } from "../../redux/thunkActions/toolbarActions";
 import Divider from "../Divider";
 import { CloseIcon } from "../icons";
 import { DistributionCard } from "./DistributionCard";
@@ -51,7 +51,7 @@ const Stats = (props: Props) => {
 
   const handleDelete = () => {
     if (!deleteOnce) return setDeleteOnce(true);
-    batchResetStats();
+    dispatch(handleResetStats());
     setDeleteOnce(false);
   };
 

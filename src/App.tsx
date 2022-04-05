@@ -1,4 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+// Package imports
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "./redux/hooks";
+import classNames from "classnames";
+
+// Custom imports
 import useFetchWords from "./hooks/useFetchWords";
 import {
   Header,
@@ -11,21 +16,14 @@ import {
   Notification,
   MadeWithLove,
 } from "./components";
-import { useAppDispatch, useAppSelector } from "./redux/hooks";
-import {
-  handleBackspace,
-  handleChar,
-} from "./redux/features/guesses/guessesSlice";
-import {
-  newGame,
-  submitChar,
-  submitBackspace,
-  submitWord,
-  handleHint,
-} from "./redux/batches";
 import { KEYS } from "./constants";
-import classNames from "classnames";
 import { openHelp, openStat } from "./redux/features/setting/settingSlice";
+import {
+  submitBackspace,
+  submitChar,
+  submitWord,
+} from "./redux/thunkActions/gameActions";
+import { handleHint, newGame } from "./redux/thunkActions/toolbarActions";
 
 const App = () => {
   // console.log("App render");
@@ -42,13 +40,13 @@ const App = () => {
 
       let preventDefault = true;
       if (e.code === "Enter") {
-        submitWord(row, guesses, words.current, wordle);
+        dispatch(submitWord(words.current));
       } else if (e.code === "Backspace") {
-        submitBackspace(status);
+        dispatch(submitBackspace());
       } else if (KEYS.has(e.key.toLowerCase())) {
-        submitChar(status, e.key.toLowerCase());
+        dispatch(submitChar(e.key.toLowerCase()));
       } else if (e.code === "Space") {
-        newGame(answers.current, status);
+        dispatch(newGame(answers.current));
       } else preventDefault = false;
 
       if (preventDefault) e.preventDefault();
@@ -79,8 +77,8 @@ const App = () => {
         <div className="w-min">
           <Toolbar
             className="mt-10"
-            handleRefresh={() => newGame(answers.current, status)}
-            handleHint={() => handleHint(wordle)}
+            handleRefresh={() => dispatch(newGame(answers.current))}
+            handleHint={() => dispatch(handleHint())}
             handleHelp={() => dispatch(openHelp())}
             handleStat={() => dispatch(openStat())}
           />
@@ -89,9 +87,9 @@ const App = () => {
         <Keyboard
           className="mt-12"
           alphabet={keyboard}
-          handleChar={(ch) => dispatch(handleChar(ch))}
-          handleBackspace={() => dispatch(handleBackspace())}
-          submitGuess={() => submitWord(row, guesses, words.current, wordle)}
+          handleChar={(ch) => dispatch(submitChar(ch))}
+          handleBackspace={() => dispatch(submitBackspace())}
+          submitGuess={() => dispatch(submitWord(words.current))}
         />
         <div className="flex flex-col items-center mt-10 bg-slate-900 rounded p-5">
           <span className="font-bold text-red-500">DEBUG</span>
