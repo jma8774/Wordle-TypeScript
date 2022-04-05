@@ -10,8 +10,8 @@ const Bar = ({
   percent: number;
 }) => {
   return (
-    <div className="flex gap-3">
-      <div>{row}</div>
+    <div className="flex">
+      <div className="w-4 shrink-0">{row}</div>
       <div
         style={{ flexBasis: `${percent}%` }}
         className={`text-right rounded bg-blue-600 px-1`}
