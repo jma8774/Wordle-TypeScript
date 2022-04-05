@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import useCloseOnClickOutside from "../../hooks/useCloseOnClickOutside";
 import { batchResetStats } from "../../redux/batches";
 import { resetStats } from "../../redux/features/localStorage/localStorageSlice";
@@ -15,17 +15,45 @@ import {
   WonIcon,
 } from "./StatIcons";
 
+const GarbageIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-6 w-6 stroke-slate-200 rounded mx-auto animate-modal"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={2}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+      />
+    </svg>
+  );
+};
+
 interface Props {}
 
 const Stats = (props: Props) => {
   const dispatch = useAppDispatch();
+  const [deleteOnce, setDeleteOnce] = useState(false);
   const { gamesPlayed, gamesWon, currentStreak, longestStreak } =
     useAppSelector((state) => state.localStorage);
   const { showStat } = useAppSelector((state) => state.setting);
   const ref = useRef<HTMLDivElement>(null);
-  useCloseOnClickOutside(ref, () => dispatch(resetModals()));
+  useCloseOnClickOutside(ref, () => {
+    dispatch(resetModals());
+    setDeleteOnce(false);
+  });
 
   if (!showStat) return null;
+
+  const handleDelete = () => {
+    if (!deleteOnce) return setDeleteOnce(true);
+    batchResetStats();
+    setDeleteOnce(false);
+  };
 
   return (
     <div className="absolute bg-transparent w-screen h-screen z-10">
@@ -66,10 +94,10 @@ const Stats = (props: Props) => {
           <DistributionCard />
           <div className="flex justify-end w-full mt-1">
             <button
-              onClick={batchResetStats}
-              className="bg-red-500 hover:bg-red-600 rounded p-2 w-20"
+              onClick={handleDelete}
+              className="bg-red-500/25 hover:bg-red-600/70 border border-red-600 rounded p-2 h-11 w-24"
             >
-              Reset
+              {deleteOnce ? <GarbageIcon /> : "Reset"}
             </button>
           </div>
         </div>

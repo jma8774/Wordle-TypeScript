@@ -40,13 +40,13 @@ export const settingSlice = createSlice({
     closeResetStats: (state) => {
       state.resetStats = false;
     },
-    showHelp: (state) => {
+    openHelp: (state) => {
       state.showHelp = true;
     },
     closeHelp: (state) => {
       state.showHelp = false;
     },
-    showStat: (state) => {
+    openStat: (state) => {
       state.showStat = true;
     },
     closeStat: (state) => {
@@ -67,9 +67,9 @@ export const settingSlice = createSlice({
 
 export const {
   toggleTheme,
-  showHelp,
+  openHelp,
   closeHelp,
-  showStat,
+  openStat,
   closeStat,
   showErrorSubmit,
   closeErrorSubmit,

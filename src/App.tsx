@@ -9,7 +9,6 @@ import {
   Stats,
   Confetti,
   Notification,
-  Divider,
   MadeWithLove,
 } from "./components";
 import { useAppDispatch, useAppSelector } from "./redux/hooks";
@@ -26,6 +25,7 @@ import {
 } from "./redux/batches";
 import { KEYS } from "./constants";
 import classNames from "classnames";
+import { openHelp, openStat } from "./redux/features/setting/settingSlice";
 
 const App = () => {
   // console.log("App render");
@@ -81,6 +81,8 @@ const App = () => {
             className="mt-10"
             handleRefresh={() => newGame(answers.current, status)}
             handleHint={() => handleHint(wordle)}
+            handleHelp={() => dispatch(openHelp())}
+            handleStat={() => dispatch(openStat())}
           />
           <Guesses guesses={guesses} />
         </div>
