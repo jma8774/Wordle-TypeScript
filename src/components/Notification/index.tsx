@@ -3,6 +3,7 @@ import useCloseNotificationAfter from "../../hooks/useCloseNotificationAfter";
 import { closeHint } from "../../redux/features/game/gameSlice";
 import {
   closeErrorSubmit,
+  closeResetStats,
   closeRestart,
 } from "../../redux/features/setting/settingSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -13,7 +14,9 @@ interface Props {}
 
 const Notification = (props: Props) => {
   const dispatch = useAppDispatch();
-  const { restart, errorSubmit } = useAppSelector((state) => state.setting);
+  const { restart, errorSubmit, resetStats } = useAppSelector(
+    (state) => state.setting
+  );
   const { hintGiven } = useAppSelector((state) => state.game);
 
   useCloseNotificationAfter(
@@ -23,6 +26,11 @@ const Notification = (props: Props) => {
   );
   useCloseNotificationAfter(hintGiven, () => dispatch(closeHint()), 3000);
   useCloseNotificationAfter(restart, () => dispatch(closeRestart()), 2000);
+  useCloseNotificationAfter(
+    resetStats,
+    () => dispatch(closeResetStats()),
+    3000
+  );
 
   return (
     <div className="absolute flex flex-col gap-2 top-0 right-0 w-fit z-10 p-4 overflow-x-hidden">
@@ -34,6 +42,9 @@ const Notification = (props: Props) => {
       )}
       {restart && (
         <Success title="Game Restarted" body="A new word has been selected!" />
+      )}
+      {resetStats && (
+        <Success title="Stats Reset" body="Enjoy your fresh start!" />
       )}
     </div>
   );

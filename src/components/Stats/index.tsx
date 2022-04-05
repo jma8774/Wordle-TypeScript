@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import useCloseOnClickOutside from "../../hooks/useCloseOnClickOutside";
+import { batchResetStats } from "../../redux/batches";
 import { resetStats } from "../../redux/features/localStorage/localStorageSlice";
 import { resetModals } from "../../redux/features/setting/settingSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -65,7 +66,7 @@ const Stats = (props: Props) => {
           <DistributionCard />
           <div className="flex justify-end w-full mt-1">
             <button
-              onClick={() => dispatch(resetStats())}
+              onClick={batchResetStats}
               className="bg-red-500 hover:bg-red-600 rounded p-2 w-20"
             >
               Reset

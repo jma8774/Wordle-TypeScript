@@ -5,6 +5,7 @@ import type { RootState } from "../../store";
 export interface SettingState {
   theme: "dark" | "light";
   restart: boolean;
+  resetStats: boolean;
   showHelp: boolean;
   showStat: boolean;
   errorSubmit: boolean;
@@ -14,6 +15,7 @@ export interface SettingState {
 const initialState: SettingState = {
   theme: "dark",
   restart: false,
+  resetStats: false,
   showHelp: false,
   showStat: false,
   errorSubmit: false,
@@ -31,6 +33,12 @@ export const settingSlice = createSlice({
     },
     closeRestart: (state) => {
       state.restart = false;
+    },
+    showResetStats: (state) => {
+      state.resetStats = true;
+    },
+    closeResetStats: (state) => {
+      state.resetStats = false;
     },
     showHelp: (state) => {
       state.showHelp = true;
@@ -68,6 +76,8 @@ export const {
   resetModals,
   showRestart,
   closeRestart,
+  showResetStats,
+  closeResetStats,
 } = settingSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type

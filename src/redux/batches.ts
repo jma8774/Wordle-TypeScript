@@ -1,5 +1,4 @@
 import { batch } from "react-redux";
-import { AppDispatchState } from "./store";
 import {
   resetGame,
   updateWordle,
@@ -18,8 +17,8 @@ import {
 } from "./features/keyboard/keyboardSlice";
 import { MAX_GUESSES, WORDLE_LEN } from "../constants";
 import {
-  closeErrorSubmit,
   showErrorSubmit,
+  showResetStats,
   showRestart,
 } from "./features/setting/settingSlice";
 import {
@@ -28,13 +27,13 @@ import {
   resetStreak,
   resetStats,
 } from "./features/localStorage/localStorageSlice";
+import store from "./store";
 
 interface CharColor {
   id: number;
   ch: string;
   color: string;
 }
-
 type Status = "ongoing" | "lose" | "win";
 
 // Returns random integer from [a, b]
@@ -42,38 +41,29 @@ const randomInt = (start: number, end: number): number => {
   return start + Math.floor(Math.random() * (end - start + 1));
 };
 
-const newGame = (
-  dispatch: AppDispatchState,
-  answers: string[],
-  status: Status
-): void => {
+const newGame = (answers: string[], status: Status): void => {
   batch(() => {
-    if (status === "ongoing") dispatch(resetStreak());
+    if (status === "ongoing") store.dispatch(resetStreak());
     // Reset everything
-    dispatch(resetGame());
-    dispatch(resetGuesses());
-    dispatch(resetKeyboard());
+    store.dispatch(resetGame());
+    store.dispatch(resetGuesses());
+    store.dispatch(resetKeyboard());
     // Get new word
     const index = randomInt(0, answers.length);
-    dispatch(updateWordle(answers[index]));
-    dispatch(showRestart());
+    store.dispatch(updateWordle(answers[index]));
+    store.dispatch(showRestart());
   });
 };
 
-const submitChar = (
-  dispatch: AppDispatchState,
-  status: Status,
-  ch: string
-): void => {
-  if (status === "ongoing") dispatch(handleChar(ch));
+const submitChar = (status: Status, ch: string): void => {
+  if (status === "ongoing") store.dispatch(handleChar(ch));
 };
 
-const submitBackspace = (dispatch: AppDispatchState, status: Status): void => {
-  if (status === "ongoing") dispatch(handleBackspace());
+const submitBackspace = (status: Status): void => {
+  if (status === "ongoing") store.dispatch(handleBackspace());
 };
 
 const submitWord = (
-  dispatch: AppDispatchState,
   row: number,
   guesses: CharColor[][],
   words: Set<string>,
@@ -84,28 +74,42 @@ const submitWord = (
     const curGuess = guesses[row].map((x) => x.ch).join("");
     // Update guesses and keyboard
     if (words.has(curGuess)) {
-      if (row === 0) dispatch(incrementPlayed());
-      dispatch(handleSubmit(wordle));
-      dispatch(keyboardSubmit({ wordle, curGuess }));
+      if (row === 0) store.dispatch(incrementPlayed());
+      store.dispatch(handleSubmit(wordle));
+      store.dispatch(keyboardSubmit({ wordle, curGuess }));
       if (curGuess === wordle) {
-        dispatch(changeStatus("win"));
-        dispatch(handleWin(row + 1));
+        store.dispatch(changeStatus("win"));
+        store.dispatch(handleWin(row + 1));
       } else if (row === MAX_GUESSES - 1) {
-        dispatch(changeStatus("lose"));
-        dispatch(resetStreak());
+        store.dispatch(changeStatus("lose"));
+        store.dispatch(resetStreak());
       }
     } else {
-      dispatch(showErrorSubmit());
+      store.dispatch(showErrorSubmit());
     }
   });
 };
 
-const handleHint = (dispatch: AppDispatchState, wordle: string): void => {
+const handleHint = (wordle: string): void => {
   const offset = "#".repeat(WORDLE_LEN);
-  dispatch(
+  store.dispatch(
     keyboardSubmit({ wordle: offset + wordle, curGuess: wordle + offset })
   );
-  dispatch(openHint());
+  store.dispatch(openHint());
 };
 
-export { newGame, submitChar, submitBackspace, submitWord, handleHint };
+const batchResetStats = (): void => {
+  batch(() => {
+    store.dispatch(resetStats());
+    store.dispatch(showResetStats());
+  });
+};
+
+export {
+  newGame,
+  submitChar,
+  submitBackspace,
+  submitWord,
+  handleHint,
+  batchResetStats,
+};

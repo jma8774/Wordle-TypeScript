@@ -42,13 +42,13 @@ const App = () => {
 
       let preventDefault = true;
       if (e.code === "Enter") {
-        submitWord(dispatch, row, guesses, words.current, wordle);
+        submitWord(row, guesses, words.current, wordle);
       } else if (e.code === "Backspace") {
-        submitBackspace(dispatch, status);
+        submitBackspace(status);
       } else if (KEYS.has(e.key.toLowerCase())) {
-        submitChar(dispatch, status, e.key.toLowerCase());
+        submitChar(status, e.key.toLowerCase());
       } else if (e.code === "Space") {
-        newGame(dispatch, answers.current, status);
+        newGame(answers.current, status);
       } else preventDefault = false;
 
       if (preventDefault) e.preventDefault();
@@ -79,8 +79,8 @@ const App = () => {
         <div className="w-min">
           <Toolbar
             className="mt-10"
-            handleRefresh={() => newGame(dispatch, answers.current, status)}
-            handleHint={() => handleHint(dispatch, wordle)}
+            handleRefresh={() => newGame(answers.current, status)}
+            handleHint={() => handleHint(wordle)}
           />
           <Guesses guesses={guesses} />
         </div>
@@ -89,9 +89,7 @@ const App = () => {
           alphabet={keyboard}
           handleChar={(ch) => dispatch(handleChar(ch))}
           handleBackspace={() => dispatch(handleBackspace())}
-          submitGuess={() =>
-            submitWord(dispatch, row, guesses, words.current, wordle)
-          }
+          submitGuess={() => submitWord(row, guesses, words.current, wordle)}
         />
         <div className="flex flex-col items-center mt-10 bg-slate-900 rounded p-5">
           <span className="font-bold text-red-500">DEBUG</span>
