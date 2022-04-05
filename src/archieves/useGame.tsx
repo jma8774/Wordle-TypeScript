@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import useArray from "../hooks/useArray";
 import useAlphabet from "./useAlphabet";
-import { MAX_GUESSES, WORDLE_LEN } from "../constants";
+import { MAX_GUESSES, WORDLE_LEN } from "../utils/constants";
 
 interface CharColor {
   id: number;

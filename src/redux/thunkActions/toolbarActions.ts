@@ -10,12 +10,8 @@ import {
 } from "../features/localStorage/localStorageSlice";
 import { AppThunkAction } from "../store";
 import { showResetStats, showRestart } from "../features/setting/settingSlice";
-import { WORDLE_LEN } from "../../constants";
-
-// Returns random integer from [a, b]
-const randomInt = (start: number, end: number): number => {
-  return start + Math.floor(Math.random() * (end - start + 1));
-};
+import { WORDLE_LEN } from "../../utils/constants";
+import { randomInt } from "../../utils/helper";
 
 const newGame = (answers: string[]): AppThunkAction => {
   return (dispatch, getState) => {

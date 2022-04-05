@@ -9,7 +9,7 @@ import {
   initialState as localStorageInitState,
 } from "./features/localStorage/localStorageSlice";
 
-const getStatsFromLocalStorage = (): LocalStorageState => {
+const loadStatsFromLocalStorage = (): LocalStorageState => {
   try {
     const persistedStats = localStorage.getItem("stats");
     if (persistedStats) return JSON.parse(persistedStats);
@@ -19,8 +19,16 @@ const getStatsFromLocalStorage = (): LocalStorageState => {
     return localStorageInitState;
   } catch (e) {
     console.log(e);
-    localStorage.setItem("stats", JSON.stringify(localStorageInitState));
     return localStorageInitState;
+  }
+};
+
+const saveStatsToLocalStorage = (): void => {
+  try {
+    const reduxStatState = store.getState().localStorage;
+    localStorage.setItem("stats", JSON.stringify(reduxStatState));
+  } catch (e) {
+    console.log(e);
   }
 };
 
@@ -32,12 +40,12 @@ const store = configureStore({
     setting: settingSlice.reducer,
     localStorage: localStorageSlice.reducer,
   },
-  preloadedState: { localStorage: getStatsFromLocalStorage() },
+  preloadedState: { localStorage: loadStatsFromLocalStorage() },
 });
 
 // Update my local storage
 store.subscribe(() => {
-  localStorage.setItem("stats", JSON.stringify(store.getState().localStorage));
+  saveStatsToLocalStorage();
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

@@ -8,3 +8,4 @@ export { default as Confetti } from "./Confetti/index";
 export { default as Divider } from "./Divider/index";
 export { default as Notification } from "./Notification/index";
 export { default as MadeWithLove } from "./MadeWithLove/index";
+export { default as Debug } from "./Debug/index";

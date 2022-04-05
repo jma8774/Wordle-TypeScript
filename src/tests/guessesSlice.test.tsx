@@ -1,4 +1,4 @@
-import { WORDLE_LEN } from "../constants";
+import { WORDLE_LEN } from "../utils/constants";
 import reducer, {
   GuessesState,
   initGuesses,

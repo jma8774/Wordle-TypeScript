@@ -15,8 +15,9 @@ import {
   Confetti,
   Notification,
   MadeWithLove,
+  Debug,
 } from "./components";
-import { KEYS } from "./constants";
+import { KEYS } from "./utils/constants";
 import { openHelp, openStat } from "./redux/features/setting/settingSlice";
 import {
   submitBackspace,
@@ -91,13 +92,7 @@ const App = () => {
           handleBackspace={() => dispatch(submitBackspace())}
           submitGuess={() => dispatch(submitWord(words.current))}
         />
-        <div className="flex flex-col items-center mt-10 bg-slate-900 rounded p-5">
-          <span className="font-bold text-red-500">DEBUG</span>
-          <span> status: {status}</span>
-          <span> row: {row} </span>
-          <span> col: {col} </span>
-          <span> wordle: {wordle} </span>
-        </div>
+        <Debug />
         <MadeWithLove />
       </div>
     </>

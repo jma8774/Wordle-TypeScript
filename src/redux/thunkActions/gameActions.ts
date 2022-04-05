@@ -1,4 +1,4 @@
-import { MAX_GUESSES } from "../../constants";
+import { MAX_GUESSES } from "../../utils/constants";
 import { changeStatus } from "../features/game/gameSlice";
 import {
   handleBackspace,

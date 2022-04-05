@@ -44,6 +44,7 @@ export const localStorageSlice = createSlice({
     },
     handleWin: (state, action: PayloadAction<number>) => {
       state.gamesWon += 1;
+      state.gamesPlayed = Math.max(state.gamesPlayed, state.gamesWon);
       const row = action.payload as keyof Distribution;
       state.distribution[row] += 1;
       state.currentStreak += 1;

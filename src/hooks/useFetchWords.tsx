@@ -1,11 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useAppDispatch } from "../redux/hooks";
 import { updateWordle } from "../redux/features/game/gameSlice";
-
-// Returns random integer from [a, b]
-const randomInt = (start: number, end: number): number => {
-  return start + Math.floor(Math.random() * (end - start + 1));
-};
+import { randomInt } from "../utils/helper";
 
 // Purpose of this hook is to mimic normal arrays, this allows us to 'mutate' our state which we otherwise wouldn't be able to in React
 const useFetchWords = () => {

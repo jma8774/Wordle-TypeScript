@@ -27,7 +27,13 @@ const Row = ({
   return (
     <div className="flex gap-1.5 mt-1.5 text-3xl font-bold">
       {Array.from(guess).map((ch, idx) => {
-        return <Node key={idx} pair={{ ch: ch, color: getColor(idx) }} />;
+        return (
+          <Node
+            key={idx}
+            pair={{ ch: ch, color: getColor(idx) }}
+            animate={false}
+          />
+        );
       })}
     </div>
   );

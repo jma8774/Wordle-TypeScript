@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../../store";
-import { MAX_GUESSES, WORDLE_LEN } from "../../../constants";
+import { MAX_GUESSES, WORDLE_LEN } from "../../../utils/constants";
 
 // Returns a 2d array of our initial history array for our game
 export const initGuesses = (): CharColor[][] => {
