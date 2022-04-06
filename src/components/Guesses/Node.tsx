@@ -56,8 +56,8 @@ const Node = ({ pair, animate = true }: Props) => {
     "flex justify-center items-center", // Center the character
     "transition ease-linear duration-100", // Transition for new character
     animationDelay,
-    allBrowserIsAnimating ? "bg-green-200" : backgroundColors[pair.color],
-    allBrowserIsAnimating ? "border-green-200" : getBorderColor(pair),
+    allBrowserIsAnimating ? "bg-transparent" : backgroundColors[pair.color],
+    allBrowserIsAnimating ? "border-zinc-700" : getBorderColor(pair),
     flipAnimation.cardAnim
   );
 

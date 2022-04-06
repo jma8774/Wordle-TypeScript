@@ -1,88 +1,49 @@
 .animation-delay-0 {
-  -webkit-animation-delay: 100ms;
   animation-delay: 100ms;
 }
 
 .animation-delay-1 {
-  -webkit-animation-delay: 200ms;
   animation-delay: 200ms;
 }
 
 .animation-delay-2 {
-  -webkit-animation-delay: 300ms;
   animation-delay: 300ms;
 }
 
 .animation-delay-3 {
-  -webkit-animation-delay: 400ms;
   animation-delay: 400ms;
 }
 
 .animation-delay-4 {
-  -webkit-animation-delay: 500ms;
   animation-delay: 500ms;
 }
 
 .animate-flipNever {
-  -webkit-animation-duration: 5s;
-  animation-duration: 5s;
-  -webkit-animation-name: flip-never;
+  animation-duration: 0.5s;
   animation-name: flip-never;
-  -webkit-animation-timing-function: ease-in;
   animation-timing-function: ease-in;
-  -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 }
 
 .animate-flipSuccess {
-  -webkit-animation-duration: 5s;
-  animation-duration: 5s;
-  -webkit-animation-name: flip-success;
+  animation-duration: 0.5s;
   animation-name: flip-success;
-  -webkit-animation-timing-function: ease-in;
   animation-timing-function: ease-in;
-  -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 }
 
 .animate-flipAlmost {
-  -webkit-animation-duration: 5s;
-  animation-duration: 5s;
-  -webkit-animation-name: flip-almost;
+  animation-duration: 0.5s;
   animation-name: flip-almost;
-  -webkit-animation-timing-function: ease-in;
   animation-timing-function: ease-in;
-  -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 }
 
 .animate-flipCharReverse {
-  -webkit-animation-duration: 5s;
-  animation-duration: 5s;
-  -webkit-animation-name: flip-char-reverse;
+  animation-duration: 0.5s;
   animation-name: flip-char-reverse;
-  -webkit-animation-timing-function: ease-in;
   animation-timing-function: ease-in;
-  -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
-}
-
-@-webkit-keyframes flip-never {
-  0% {
-    -webkit-transform: rotateY(0deg);
-    background-color: transparent;
-    border-color: rgb(63 63 70);
-  }
-  50% {
-    -webkit-transform: rotateY(90deg);
-    background-color: transparent;
-    border-color: rgb(63 63 70);
-  }
-  100% {
-    -webkit-transform: rotateY(180deg);
-    background-color: rgb(63 63 70);
-    border-color: rgb(63 63 70);
-  }
 }
 
 @keyframes flip-never {
@@ -100,24 +61,6 @@
     transform: rotateY(180deg);
     background-color: rgb(63 63 70);
     border-color: rgb(63 63 70);
-  }
-}
-
-@-webkit-keyframes flip-success {
-  0% {
-    -webkit-transform: rotateY(0deg);
-    background-color: transparent;
-    border-color: rgb(63 63 70);
-  }
-  50% {
-    -webkit-transform: rotateY(90deg);
-    background-color: transparent;
-    border-color: rgb(63 63 70);
-  }
-  100% {
-    -webkit-transform: rotateY(180deg);
-    background-color: rgb(22 163 74);
-    border-color: rgb(22 163 74);
   }
 }
 
@@ -139,24 +82,6 @@
   }
 }
 
-@-webkit-keyframes flip-almost {
-  0% {
-    -webkit-transform: rotateY(0deg);
-    background-color: transparent;
-    border-color: rgb(63 63 70);
-  }
-  50% {
-    -webkit-transform: rotateY(90deg);
-    background-color: transparent;
-    border-color: rgb(63 63 70);
-  }
-  100% {
-    -webkit-transform: rotateY(180deg);
-    background-color: rgb(202 138 4);
-    border-color: rgb(202 138 4);
-  }
-}
-
 @keyframes flip-almost {
   0% {
     transform: rotateY(0deg);
@@ -172,18 +97,6 @@
     transform: rotateY(180deg);
     background-color: rgb(202 138 4);
     border-color: rgb(202 138 4);
-  }
-}
-
-@-webkit-keyframes flip-char-reverse {
-  0% {
-    -webkit-transform: rotateY(0deg);
-  }
-  50% {
-    -webkit-transform: rotateY(-90deg);
-  }
-  100% {
-    -webkit-transform: rotateY(-180deg);
   }
 }
 
