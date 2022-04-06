@@ -48,8 +48,7 @@ const Node = ({ pair, animate = true }: Props) => {
   const animationDelay =
     pair?.id !== undefined ? `animation-delay-${pair.id % WORDLE_LEN}` : ``;
   // hacky fix for: this prevents animation blinking effect at the beginning or end on different browsers (safari, firefox, chrome, edge)
-  const allBrowserIsAnimating =
-    !flipAnimation.animating && flipAnimation.cardAnim;
+  const allBrowserIsAnimating = flipAnimation.cardAnim;
 
   const cardClass = classNames(
     transition,
@@ -57,8 +56,8 @@ const Node = ({ pair, animate = true }: Props) => {
     "flex justify-center items-center", // Center the character
     "transition ease-linear duration-100", // Transition for new character
     animationDelay,
-    allBrowserIsAnimating ? "bg-transparent" : backgroundColors[pair.color],
-    allBrowserIsAnimating ? "border-zinc-700" : getBorderColor(pair),
+    allBrowserIsAnimating ? "bg-green-200" : backgroundColors[pair.color],
+    allBrowserIsAnimating ? "border-green-200" : getBorderColor(pair),
     flipAnimation.cardAnim
   );
 
