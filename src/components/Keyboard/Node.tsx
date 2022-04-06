@@ -57,7 +57,7 @@ const Node = ({ className, children, onClick, pair }: Props) => {
 
   const nodeClass = classNames(
     className,
-    "w-8 h-8 xs:w-10 xs:h-10 sm:w-12 sm:h-12 rounded hover:cursor-pointer overflow-hidden", // Box size/shape
+    "relative w-8 h-8 xs:w-10 xs:h-10 sm:w-12 sm:h-12 rounded hover:cursor-pointer overflow-x-hidden", // Box size/shape
     "flex justify-center items-center", // Center the character
     "transition ease-in duration-200", // Transition properties
     nodeTransition.bg,
