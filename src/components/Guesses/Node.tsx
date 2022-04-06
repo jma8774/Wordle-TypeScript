@@ -40,6 +40,9 @@ const getBorderColor = ({ ch, color }: CharColor): string => {
 
 const Node = ({ pair, animate = true }: Props) => {
   const [transition, setTransition] = useState("scale-100");
+  const [backgroundColor, setBackgroundColor] = useState(
+    backgroundColors[pair.color]
+  );
   const [flipAnimation, setFlipAnimation] = useState({
     animating: false,
     cardAnim: "",
@@ -47,21 +50,6 @@ const Node = ({ pair, animate = true }: Props) => {
   });
   const animationDelay =
     pair?.id !== undefined ? `animation-delay-${pair.id % WORDLE_LEN}` : ``;
-  // hacky fix for: this prevents animation blinking effect at the beginning or end on different browsers (safari, firefox, chrome, edge)
-  const allBrowserIsAnimating = flipAnimation.cardAnim;
-
-  const cardClass = classNames(
-    transition,
-    "w-12 h-12 sm:w-16 sm:h-16 border-2 rounded", // Box size/shape
-    "flex justify-center items-center", // Center the character
-    "transition ease-linear duration-100", // Transition for new character
-    animationDelay,
-    allBrowserIsAnimating ? "bg-transparent" : backgroundColors[pair.color],
-    allBrowserIsAnimating ? "border-zinc-700" : getBorderColor(pair),
-    flipAnimation.cardAnim
-  );
-
-  const charClass = classNames("block", flipAnimation.charAnim, animationDelay);
 
   useEffect(() => {
     if (pair.ch === " " || !animate) return;
@@ -75,7 +63,21 @@ const Node = ({ pair, animate = true }: Props) => {
       cardAnim: cardAnimation[pair.color],
       charAnim: "animate-flipCharReverse", // Reverse the effect to prevent the character from rotating too
     });
+    setBackgroundColor(backgroundColors[pair.color]);
   }, [pair.color]);
+
+  const cardClass = classNames(
+    transition,
+    "w-12 h-12 sm:w-16 sm:h-16 border-2 rounded", // Box size/shape
+    "flex justify-center items-center", // Center the character
+    "transition ease-linear duration-100", // Transition for new character
+    animationDelay,
+    flipAnimation.cardAnim ? "bg-transparent" : backgroundColor,
+    flipAnimation.cardAnim ? "border-zinc-700" : getBorderColor(pair),
+    flipAnimation.cardAnim
+  );
+
+  const charClass = classNames("block", flipAnimation.charAnim, animationDelay);
 
   return (
     <span
