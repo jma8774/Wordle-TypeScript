@@ -6,14 +6,13 @@ interface WindowState {
 }
 function useWindowSize() {
   const [windowSize, setWindowSize] = useState<WindowState>({
-    width: window.innerWidth,
+    width: document.body.clientWidth,
     height: window.innerHeight,
   });
-
   useEffect(() => {
     function handleResize() {
       setWindowSize({
-        width: window.innerWidth,
+        width: document.body.clientWidth,
         height: window.innerHeight,
       });
     }
