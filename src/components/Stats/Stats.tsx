@@ -4,7 +4,7 @@ import { resetStats } from "../../redux/features/localStorage/localStorageSlice"
 import { resetModals } from "../../redux/features/setting/settingSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { handleResetStats } from "../../redux/thunkActions/toolbarActions";
-import Divider from "../Divider";
+import Divider from "../Divider/Divider";
 import { CloseIcon } from "../icons";
 import { DistributionCard } from "./DistributionCard";
 import { StatCard } from "./StatCard";

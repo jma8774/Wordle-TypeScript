@@ -32,7 +32,7 @@ const Node = ({ className, children, onClick, pair }: Props) => {
     className,
     backgroundColor[pair.color],
     transition,
-    "w-8 h-8 xs:w-11 xs:h-11 sm:w-12 sm:h-12 rounded hover:cursor-pointer", // Box size/shape
+    "w-8 h-8 xs:w-10 xs:h-10 sm:w-12 sm:h-12 rounded hover:cursor-pointer", // Box size/shape
     "flex justify-center items-center", // Center the character
     "transition ease-linear duration-200" // Transition for color change
   );

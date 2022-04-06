@@ -35,16 +35,32 @@ const Notification = (props: Props) => {
   return (
     <div className="absolute flex flex-col gap-2 top-0 right-0 w-fit z-10 p-4 overflow-x-hidden">
       {errorSubmit && (
-        <Error title="Word Error" body="That is not a valid word!" />
+        <Error
+          title="Word Error"
+          body="That is not a valid word!"
+          onClick={() => dispatch(closeErrorSubmit())}
+        />
       )}
       {hintGiven && (
-        <Success title="Hint Updated" body="Keyboard has been marked yellow." />
+        <Success
+          title="Hint Updated"
+          body="Keyboard has been marked yellow."
+          onClick={() => dispatch(closeHint())}
+        />
       )}
       {restart && (
-        <Success title="Game Restarted" body="A new word has been selected!" />
+        <Success
+          title="Game Restarted"
+          body="A new word has been selected!"
+          onClick={() => dispatch(closeRestart())}
+        />
       )}
       {resetStats && (
-        <Success title="Stats Reset" body="Enjoy your fresh start!" />
+        <Success
+          title="Stats Reset"
+          body="Enjoy your fresh start!"
+          onClick={() => dispatch(closeResetStats())}
+        />
       )}
     </div>
   );

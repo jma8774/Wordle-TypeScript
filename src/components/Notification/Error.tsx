@@ -3,6 +3,7 @@ import React from "react";
 interface Props {
   title?: string;
   body?: string;
+  onClick?: () => void;
 }
 
 const ErrorIcon = () => {
@@ -21,9 +22,12 @@ const ErrorIcon = () => {
   );
 };
 
-const Error = ({ title, body }: Props) => {
+const Error = ({ title, body, onClick }: Props) => {
   return (
-    <div className="flex gap-2 bg-slate-200 w-64 sm:w-80 min-h-[5rem] p-2 shadow-xl rounded-md border-l-4 border-red-600 animate-notification">
+    <div
+      onClick={onClick}
+      className="flex gap-2 bg-slate-200 w-64 sm:w-80 min-h-[5rem] p-2 shadow-xl rounded-md border-l-4 border-red-600 animate-notification hover:cursor-pointer"
+    >
       <ErrorIcon />
       <div className="grow flex flex-col gap-1">
         <div className="font-bold"> {title || "Error Title"} </div>
