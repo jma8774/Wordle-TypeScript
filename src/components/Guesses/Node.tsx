@@ -53,13 +53,13 @@ const Node = ({ pair, animate = true }: Props) => {
 
   const cardClass = classNames(
     transition,
-    flipAnimation.cardAnim,
     "w-12 h-12 sm:w-16 sm:h-16 border-2 rounded", // Box size/shape
     "flex justify-center items-center", // Center the character
     "transition ease-linear duration-100", // Transition for new character
     animationDelay,
     allBrowserIsAnimating ? "bg-transparent" : backgroundColors[pair.color],
-    allBrowserIsAnimating ? "border-zinc-700" : getBorderColor(pair)
+    allBrowserIsAnimating ? "border-zinc-700" : getBorderColor(pair),
+    flipAnimation.cardAnim
   );
 
   const charClass = classNames("block", flipAnimation.charAnim, animationDelay);

@@ -24,8 +24,8 @@
 }
 
 .animate-flipNever {
-  -webkit-animation-duration: 0.5s;
-  animation-duration: 0.5s;
+  -webkit-animation-duration: 5s;
+  animation-duration: 5s;
   -webkit-animation-name: flip-never;
   animation-name: flip-never;
   -webkit-animation-timing-function: ease-in;
@@ -33,8 +33,8 @@
 }
 
 .animate-flipSuccess {
-  -webkit-animation-duration: 0.5s;
-  animation-duration: 0.5s;
+  -webkit-animation-duration: 5s;
+  animation-duration: 5s;
   -webkit-animation-name: flip-success;
   animation-name: flip-success;
   -webkit-animation-timing-function: ease-in;
@@ -42,8 +42,8 @@
 }
 
 .animate-flipAlmost {
-  -webkit-animation-duration: 0.5s;
-  animation-duration: 0.5s;
+  -webkit-animation-duration: 5s;
+  animation-duration: 5s;
   -webkit-animation-name: flip-almost;
   animation-name: flip-almost;
   -webkit-animation-timing-function: ease-in;
@@ -51,8 +51,8 @@
 }
 
 .animate-flipCharReverse {
-  -webkit-animation-duration: 0.5s;
-  animation-duration: 0.5s;
+  -webkit-animation-duration: 5s;
+  animation-duration: 5s;
   -webkit-animation-name: flip-char-reverse;
   animation-name: flip-char-reverse;
   -webkit-animation-timing-function: ease-in;
