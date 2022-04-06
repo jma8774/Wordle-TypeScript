@@ -49,10 +49,15 @@ module.exports = {
           "0%": { transform: "translate(50%)", opacity: "0.5" },
           "100%": { transform: "translate(0%)", opacity: "1" },
         },
+        slideInFromLeftAbsolute: {
+          "0%": { left: "-100%" },
+          "100%": { left: 0 },
+        },
       },
       animation: {
         modal: "pop 0.2s ease-in-out 1",
         notification: "slideInFromRight 0.25s ease-in-out 1",
+        keyboard: "slideInFromLeftAbsolute 0.4s ease-in 1",
       },
     },
   },
