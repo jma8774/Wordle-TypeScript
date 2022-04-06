@@ -40,9 +40,10 @@ const getBorderColor = ({ ch, color }: CharColor): string => {
 
 const Node = ({ pair, animate = true }: Props) => {
   const [transition, setTransition] = useState("scale-100");
-  const [backgroundColor, setBackgroundColor] = useState(
-    backgroundColors[pair.color]
-  );
+  const [color, setColor] = useState({
+    background: backgroundColors[pair.color],
+    border: getBorderColor(pair),
+  });
   const [flipAnimation, setFlipAnimation] = useState({
     animating: false,
     cardAnim: "",
@@ -51,20 +52,25 @@ const Node = ({ pair, animate = true }: Props) => {
   const animationDelay =
     pair?.id !== undefined ? `animation-delay-${pair.id % WORDLE_LEN}` : ``;
 
+  // Trigger transition animation when user types
   useEffect(() => {
     if (pair.ch === " " || !animate) return;
     setTransition("scale-110");
-  }, [pair.ch]);
+  }, [pair.ch, animate]);
 
+  // Update border/background color when user submits a word and trigger animation
   useEffect(() => {
-    setBackgroundColor(backgroundColors[pair.color]);
+    setColor({
+      background: backgroundColors[pair.color],
+      border: getBorderColor(pair),
+    });
     if (pair.color === "init" || !animate) return;
-    setFlipAnimation({
-      ...flipAnimation,
+    setFlipAnimation((previousFlipAnimation) => ({
+      ...previousFlipAnimation,
       cardAnim: cardAnimation[pair.color],
       charAnim: "animate-flipCharReverse", // Reverse the effect to prevent the character from rotating too
-    });
-  }, [pair.color]);
+    }));
+  }, [pair, animate]);
 
   const cardClass = classNames(
     transition,
@@ -72,8 +78,8 @@ const Node = ({ pair, animate = true }: Props) => {
     "flex justify-center items-center", // Center the character
     "transition ease-linear duration-100", // Transition for new character
     animationDelay,
-    flipAnimation.cardAnim ? "bg-transparent" : backgroundColor,
-    flipAnimation.cardAnim ? "border-zinc-700" : getBorderColor(pair),
+    flipAnimation.cardAnim ? "bg-transparent" : color.background,
+    flipAnimation.cardAnim ? "border-zinc-700" : color.border,
     flipAnimation.cardAnim
   );
 
