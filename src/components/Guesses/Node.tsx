@@ -57,13 +57,13 @@ const Node = ({ pair, animate = true }: Props) => {
   }, [pair.ch]);
 
   useEffect(() => {
+    setBackgroundColor(backgroundColors[pair.color]);
     if (pair.color === "init" || !animate) return;
     setFlipAnimation({
       ...flipAnimation,
       cardAnim: cardAnimation[pair.color],
       charAnim: "animate-flipCharReverse", // Reverse the effect to prevent the character from rotating too
     });
-    setBackgroundColor(backgroundColors[pair.color]);
   }, [pair.color]);
 
   const cardClass = classNames(
