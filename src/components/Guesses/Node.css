@@ -17,3 +17,93 @@
 .animation-delay-4 {
   animation-delay: 500ms;
 }
+
+.animate-flipNever {
+  animation-duration: 0.5s;
+  animation-name: flip-never;
+  animation-timing-function: ease-in;
+}
+
+.animate-flipSuccess {
+  animation-duration: 0.5s;
+  animation-name: flip-success;
+  animation-timing-function: ease-in;
+}
+
+.animate-flipAlmost {
+  animation-duration: 0.5s;
+  animation-name: flip-almost;
+  animation-timing-function: ease-in;
+}
+
+.animate-flipCharReverse {
+  animation-duration: 0.5s;
+  animation-name: flip-char-reverse;
+  animation-timing-function: ease-in;
+}
+
+@keyframes flip-never {
+  0% {
+    transform: rotateY(0deg) scale(1, 1);
+    background-color: transparent;
+    border-color: rgb(63 63 70);
+  }
+  50% {
+    transform: rotateY(90deg) scale(0, 1);
+    background-color: transparent;
+    border-color: rgb(63 63 70);
+  }
+  100% {
+    transform: rotateY(180deg) scale(1, 1);
+    background-color: rgb(63 63 70);
+    border-color: rgb(63 63 70);
+  }
+}
+
+@keyframes flip-success {
+  0% {
+    transform: rotateY(0deg) scale(1, 1);
+    background-color: transparent;
+    border-color: rgb(63 63 70);
+  }
+  50% {
+    transform: rotateY(90deg) scale(0, 1);
+    background-color: transparent;
+    border-color: rgb(63 63 70);
+  }
+  100% {
+    transform: rotateY(180deg) scale(1, 1);
+    background-color: rgb(22 163 74);
+    border-color: rgb(22 163 74);
+  }
+}
+
+@keyframes flip-almost {
+  0% {
+    transform: rotateY(0deg) scale(1, 1);
+    background-color: transparent;
+    border-color: rgb(63 63 70);
+  }
+  50% {
+    transform: rotateY(90deg) scale(0, 1);
+    background-color: transparent;
+    border-color: rgb(63 63 70);
+  }
+  100% {
+    transform: rotateY(180deg) scale(1, 1);
+    background-color: rgb(202 138 4);
+    border-color: rgb(202 138 4);
+  }
+}
+
+@keyframes flip-char-reverse {
+  0% {
+    transform: rotateY(0deg) scale(1, 1);
+  }
+  50% {
+    transform: rotateY(-90deg) scale(0, 1);
+  }
+  100% {
+    transform: rotateY(-180deg) scale(1, 1);
+  }
+}

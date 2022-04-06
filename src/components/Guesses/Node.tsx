@@ -11,9 +11,9 @@ const backgroundColors: Record<string, string> = {
 };
 
 const cardAnimation: Record<string, string> = {
-  success: "animate-charFlipSuccess",
-  almost: "animate-charFlipAlmost",
-  never: "animate-charFlipNever",
+  success: "animate-flipSuccess",
+  almost: "animate-flipAlmost",
+  never: "animate-flipNever",
 };
 
 interface CharColor {
@@ -74,7 +74,7 @@ const Node = ({ pair, animate = true }: Props) => {
     setFlipAnimation({
       ...flipAnimation,
       cardAnim: cardAnimation[pair.color],
-      charAnim: "animate-reverseCharFlip", // Reverse the effect to prevent the character from rotating too
+      charAnim: "animate-flipCharReverse", // Reverse the effect to prevent the character from rotating too
     });
   }, [pair.color]);
 
