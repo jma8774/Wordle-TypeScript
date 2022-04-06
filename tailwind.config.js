@@ -81,6 +81,7 @@ module.exports = {
           "50%": {
             transform: "rotateY(90deg) scale(0, 1)",
             backgroundColor: "transparent",
+            borderColor: "rgb(63 63 70)",
           },
           "100%": {
             transform: "rotateY(180deg) scale(1, 1)",
@@ -97,6 +98,7 @@ module.exports = {
           "50%": {
             transform: "rotateY(90deg) scale(0, 1)",
             backgroundColor: "transparent",
+            borderColor: "rgb(63 63 70)",
           },
           "100%": {
             transform: "rotateY(180deg) scale(1, 1)",
@@ -113,6 +115,7 @@ module.exports = {
           "50%": {
             transform: "rotateY(90deg) scale(0, 1)",
             backgroundColor: "transparent",
+            borderColor: "rgb(63 63 70)",
           },
           "100%": {
             transform: "rotateY(180deg) scale(1, 1)",
@@ -135,11 +138,11 @@ module.exports = {
       animation: {
         modal: "pop 0.2s ease-in-out 1",
         notification: "slideInFromRight 0.25s ease-in-out 1",
-        charFlip: "flip 0.5s linear 1",
-        charFlipNever: "flipNever 0.5s linear 1",
-        charFlipSuccess: "flipSuccess 0.5s linear 1",
-        charFlipAlmost: "flipAlmost 0.5s linear 1",
-        reverseCharFlip: "flipReverse 0.5s linear 1",
+        charFlip: "flip 0.5s linear 0.01s 1",
+        charFlipNever: "flipNever 0.5s linear 0.01s 1",
+        charFlipSuccess: "flipSuccess 0.5s linear 0.01s 1",
+        charFlipAlmost: "flipAlmost 0.5s linear 0.01s 1",
+        reverseCharFlip: "flipReverse 0.5s linear 0.01s  1",
       },
     },
   },
