@@ -61,17 +61,17 @@
 
 @-webkit-keyframes flip-never {
   0% {
-    transform: rotateY(0deg) scale(1, 1);
+    -webkit-transform: rotateY(0deg) scale(1, 1);
     background-color: transparent;
     border-color: rgb(63 63 70);
   }
   50% {
-    transform: rotateY(90deg) scale(0, 1);
+    -webkit-transform: rotateY(90deg) scale(0, 1);
     background-color: transparent;
     border-color: rgb(63 63 70);
   }
   100% {
-    transform: rotateY(180deg) scale(1, 1);
+    -webkit-transform: rotateY(180deg) scale(1, 1);
     background-color: rgb(63 63 70);
     border-color: rgb(63 63 70);
   }
@@ -97,17 +97,17 @@
 
 @-webkit-keyframes flip-success {
   0% {
-    transform: rotateY(0deg) scale(1, 1);
+    -webkit-transform: rotateY(0deg) scale(1, 1);
     background-color: transparent;
     border-color: rgb(63 63 70);
   }
   50% {
-    transform: rotateY(90deg) scale(0, 1);
+    -webkit-transform: rotateY(90deg) scale(0, 1);
     background-color: transparent;
     border-color: rgb(63 63 70);
   }
   100% {
-    transform: rotateY(180deg) scale(1, 1);
+    -webkit-transform: rotateY(180deg) scale(1, 1);
     background-color: rgb(22 163 74);
     border-color: rgb(22 163 74);
   }
@@ -133,17 +133,17 @@
 
 @-webkit-keyframes flip-almost {
   0% {
-    transform: rotateY(0deg) scale(1, 1);
+    -webkit-transform: rotateY(0deg) scale(1, 1);
     background-color: transparent;
     border-color: rgb(63 63 70);
   }
   50% {
-    transform: rotateY(90deg) scale(0, 1);
+    -webkit-transform: rotateY(90deg) scale(0, 1);
     background-color: transparent;
     border-color: rgb(63 63 70);
   }
   100% {
-    transform: rotateY(180deg) scale(1, 1);
+    -webkit-transform: rotateY(180deg) scale(1, 1);
     background-color: rgb(202 138 4);
     border-color: rgb(202 138 4);
   }
@@ -169,13 +169,13 @@
 
 @-webkit-keyframes flip-char-reverse {
   0% {
-    transform: rotateY(0deg) scale(1, 1);
+    -webkit-transform: rotateY(0deg) scale(1, 1);
   }
   50% {
-    transform: rotateY(-90deg) scale(0, 1);
+    -webkit-transform: rotateY(-90deg) scale(0, 1);
   }
   100% {
-    transform: rotateY(-180deg) scale(1, 1);
+    -webkit-transform: rotateY(-180deg) scale(1, 1);
   }
 }
 
