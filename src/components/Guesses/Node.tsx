@@ -62,7 +62,7 @@ const Node = ({ pair, animate = true }: Props) => {
     allBrowserIsAnimating ? "border-zinc-700" : getBorderColor(pair)
   );
 
-  const charClass = classNames(flipAnimation.charAnim, animationDelay);
+  const charClass = classNames("block", flipAnimation.charAnim, animationDelay);
 
   useEffect(() => {
     if (pair.ch === " " || !animate) return;
