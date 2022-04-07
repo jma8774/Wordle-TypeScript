@@ -3,6 +3,7 @@ import React from "react";
 interface IconProps {
   children: React.ReactNode;
   onClick?: () => void;
+  altText?: string;
   className?: string;
 }
 
@@ -12,7 +13,12 @@ interface IconProps {
     <path ... />
   </IconWrapper> 
 */
-const IconWrapper = ({ children, onClick, className = "" }: IconProps) => {
+const IconWrapper = ({
+  children,
+  onClick,
+  altText,
+  className = "",
+}: IconProps) => {
   return (
     <span onClick={onClick} className="hover:cursor-pointer">
       <svg
@@ -22,6 +28,7 @@ const IconWrapper = ({ children, onClick, className = "" }: IconProps) => {
         strokeWidth="1"
         viewBox="0 0 20 20"
       >
+        <title>{altText}</title>
         {children}
       </svg>
     </span>

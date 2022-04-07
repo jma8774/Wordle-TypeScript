@@ -94,6 +94,7 @@ const Stats = (props: Props) => {
           <DistributionCard />
           <div className="flex justify-end w-full mt-1">
             <button
+              aria-label={deleteOnce ? "Confirm Reset" : "Reset Stats"}
               onClick={handleDelete}
               className="bg-red-500/25 hover:bg-red-600/70 border border-red-600 rounded p-2 h-11 w-24"
             >
