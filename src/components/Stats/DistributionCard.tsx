@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useAppSelector } from "../../redux/hooks";
 
 const Bar = ({
@@ -9,12 +10,19 @@ const Bar = ({
   wins: number;
   percent: number;
 }) => {
+  const [basis, setBasis] = useState("0%");
+
+  useEffect(() => {
+    const delay = setTimeout(() => setBasis(`${percent || 0}%`), 100);
+    return () => clearTimeout(delay);
+  }, [percent]);
+
   return (
     <div className="flex">
       <div className="w-4 shrink-0">{row}</div>
       <div
-        style={{ flexBasis: `${percent}%` }}
-        className={`text-right rounded bg-blue-600 px-1`}
+        style={{ flexBasis: basis }}
+        className={`text-right rounded bg-blue-600 px-1 transition-all duration-1000`}
       >
         {wins}
       </div>

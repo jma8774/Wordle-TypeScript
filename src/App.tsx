@@ -40,16 +40,15 @@ const App = () => {
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent): void => {
-      if (showHelp || showStat) return;
-      if (status !== "ongoing") {
-        if (e.code === "Space") {
-          dispatch(newGame(answers.current));
-          e.preventDefault();
-        }
-        return;
-      }
+      const preventDefault = ["Enter", "Backspace", "Space"];
+      if (preventDefault.includes(e.code)) e.preventDefault();
 
-      let preventDefault = true;
+      // Only key press available when game result is shown
+      if (showGameResult && e.code === "Space")
+        dispatch(newGame(answers.current));
+      // Key presses are disabled when these screens are present
+      if (showHelp || showStat || status !== "ongoing") return;
+
       if (e.code === "Enter") {
         dispatch(submitWord(words.current));
       } else if (e.code === "Backspace") {
@@ -58,9 +57,7 @@ const App = () => {
         dispatch(submitChar(e.key.toLowerCase()));
       } else if (e.code === "Space") {
         dispatch(newGame(answers.current));
-      } else preventDefault = false;
-
-      if (preventDefault) e.preventDefault();
+      }
     };
     // Add event listeners on new render
     window.addEventListener("keydown", handleKeyPress);
@@ -91,10 +88,12 @@ const App = () => {
         <div className="w-min">
           <Toolbar
             className="mt-12 xs:mt-16"
-            handleRefresh={() => dispatch(newGame(answers.current))}
+            handleRefresh={() =>
+              status === "ongoing" && dispatch(newGame(answers.current))
+            }
             handleHint={() => dispatch(handleHint())}
-            handleHelp={() => dispatch(openHelp())}
-            handleStat={() => dispatch(openStat())}
+            handleHelp={() => status === "ongoing" && dispatch(openHelp())}
+            handleStat={() => status === "ongoing" && dispatch(openStat())}
           />
           <Guesses guesses={guesses} />
         </div>

@@ -1,16 +1,18 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../../store";
 
 // Define a type for the slice state
 export interface GameState {
   status: "ongoing" | "lose" | "win";
   wordle: string;
+  definition: string;
   hintGiven: boolean;
 }
 
 // Define the initial state using that type
 const initialState: GameState = {
   status: "ongoing",
+  definition: "",
   wordle: "",
   hintGiven: false,
 };
@@ -20,13 +22,14 @@ export const gameSlice = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    resetGame: (state) => {
-      state.status = "ongoing";
-      state.wordle = "";
-      state.hintGiven = false;
+    resetGame: () => {
+      return initialState;
     },
     updateWordle: (state, action: PayloadAction<string>) => {
       state.wordle = action.payload;
+    },
+    updateDefinition: (state, action: PayloadAction<string>) => {
+      state.definition = action.payload;
     },
     changeStatus: (
       state,
@@ -41,10 +44,36 @@ export const gameSlice = createSlice({
       state.hintGiven = false;
     },
   },
+  extraReducers(builder) {
+    builder.addCase(fetchDefinition.fulfilled, (state, action) => {
+      state.definition = action.payload;
+    });
+    builder.addCase(fetchDefinition.rejected, (state, action) => {
+      state.definition = "Definition not found";
+    });
+  },
 });
 
-export const { resetGame, updateWordle, changeStatus, openHint, closeHint } =
-  gameSlice.actions;
+export const fetchDefinition = createAsyncThunk(
+  "users/fetchDefinition",
+  async (wordle: string) => {
+    const response = await fetch(
+      `https://api.dictionaryapi.dev/api/v2/entries/en/${wordle}`
+    );
+    const data = await response.json();
+    console.log(data?.[0].meanings[0].definitions[0].definition);
+    return data?.[0].meanings[0].definitions[0].definition;
+  }
+);
+
+export const {
+  resetGame,
+  updateWordle,
+  updateDefinition,
+  changeStatus,
+  openHint,
+  closeHint,
+} = gameSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectStatus = (state: RootState) => state.game.status;

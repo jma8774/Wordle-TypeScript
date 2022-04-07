@@ -1,4 +1,9 @@
-import { openHint, resetGame, updateWordle } from "../features/game/gameSlice";
+import {
+  fetchDefinition,
+  openHint,
+  resetGame,
+  updateWordle,
+} from "../features/game/gameSlice";
 import { resetGuesses } from "../features/guesses/guessesSlice";
 import {
   keyboardSubmit,
@@ -13,18 +18,24 @@ import { showResetStats, showRestart } from "../features/setting/settingSlice";
 import { WORDLE_LEN } from "../../utils/constants";
 import { randomInt } from "../../utils/helper";
 
-const newGame = (answers: string[]): AppThunkAction => {
+const newGame = (
+  answers: string[],
+  preload: boolean = false
+): AppThunkAction => {
   return (dispatch, getState) => {
     const { status } = getState().game;
-    if (status === "ongoing") dispatch(resetStreak());
+    // Reset streak if it is ongoing and user restarts
+    if (!preload && status === "ongoing") dispatch(resetStreak());
     // Reset everything
     dispatch(resetGame());
     dispatch(resetGuesses());
     dispatch(resetKeyboard());
     // Get new word
-    const index = randomInt(0, answers.length);
+    const index = randomInt(0, answers.length - 1);
     dispatch(updateWordle(answers[index]));
-    dispatch(showRestart());
+    dispatch(fetchDefinition(answers[index]));
+    // Show restart notification except on preload (when parsing my 2 text files useFetchWords hook)
+    if (!preload) dispatch(showRestart());
   };
 };
 

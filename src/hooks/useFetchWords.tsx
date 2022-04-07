@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { useAppDispatch } from "../redux/hooks";
 import { updateWordle } from "../redux/features/game/gameSlice";
 import { randomInt } from "../utils/helper";
+import { newGame } from "../redux/thunkActions/toolbarActions";
 
 // Purpose of this hook is to mimic normal arrays, this allows us to 'mutate' our state which we otherwise wouldn't be able to in React
 const useFetchWords = () => {
@@ -28,10 +29,7 @@ const useFetchWords = () => {
     };
 
     // Pick a random wordle after fetching our answers + all words
-    fetchWords().then(() => {
-      const index = randomInt(0, answers.current.length);
-      dispatch(updateWordle(answers.current[index]));
-    });
+    fetchWords().then(() => dispatch(newGame(answers.current, true)));
   }, [dispatch]);
 
   return {

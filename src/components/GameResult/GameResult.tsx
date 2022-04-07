@@ -1,12 +1,29 @@
 import classNames from "classnames";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   closeGameResult,
   openGameResult,
 } from "../../redux/features/setting/settingSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { newGame } from "../../redux/thunkActions/toolbarActions";
+import { randomInt } from "../../utils/helper";
 import Divider from "../Divider/Divider";
+import { RefreshIcon } from "../icons";
+import Definition from "./Definition";
+
+const winText = [
+  "Nice cheats!",
+  "Got it on the first try, luck or skill?",
+  "Wow that was fast!",
+  "Good job you guessed it!",
+  "Phew, that was close!",
+  "Could be better, but hey you got it!",
+];
+const tips = [
+  "It may help to start with adieu or about.",
+  "It may help to target vowels first.",
+  "It may help to use characters that have not been used before.",
+];
 
 interface Props {
   answers: string[];
@@ -14,7 +31,8 @@ interface Props {
 
 const GameResult = ({ answers }: Props) => {
   const dispatch = useAppDispatch();
-  const { status } = useAppSelector((state) => state.game);
+  const { wordle, status } = useAppSelector((state) => state.game);
+  const { row } = useAppSelector((state) => state.guesses);
   const { showGameResult } = useAppSelector((state) => state.setting);
   const containerClass = classNames(
     "absolute bg-transparent w-screen h-screen z-10"
@@ -26,7 +44,7 @@ const GameResult = ({ answers }: Props) => {
   useEffect(() => {
     let timeId: NodeJS.Timeout;
     if (status === "ongoing") {
-      dispatch(closeGameResult());
+      if (showGameResult) dispatch(closeGameResult());
     } else {
       timeId = setTimeout(() => {
         dispatch(openGameResult());
@@ -39,15 +57,29 @@ const GameResult = ({ answers }: Props) => {
   if (!showGameResult) return null;
 
   return (
-    <div className={containerClass} onClick={() => dispatch(newGame(answers))}>
+    <div className={containerClass}>
       <div className={bodyClass}>
-        <span className="font-bold text-3xl">Game Result (WIP)</span>
-        <Divider />
-        <div>You {status.toUpperCase()}!</div>
-        <div>
-          Press SPACE to start a new game or tap your screen if you're on
-          mobile! 😄
+        <div className="flex items-center">
+          <span className="grow font-bold text-3xl">
+            {status.toUpperCase()}
+          </span>
+          <RefreshIcon
+            altText="New Game"
+            onClick={() => dispatch(newGame(answers))}
+            className="h-6 w-6 sm:h-7 sm:w-7 fill-neutral-400 hover:fill-green-500 hover:scale-110"
+          />
         </div>
+        <div className="text-slate-300">
+          {status === "win"
+            ? winText[row]
+            : tips[randomInt(0, tips.length - 1)]}
+        </div>
+        <Divider />
+        <Definition wordle={wordle} />
+        <div>
+          Press SPACE or tap the button on the top right to start a new game. 😄
+        </div>
+        <div className="mt-8"> This section is still a work in progress.</div>
       </div>
     </div>
   );

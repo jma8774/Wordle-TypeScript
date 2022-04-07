@@ -8,6 +8,7 @@ import reducer, {
 const initState = {
   status: "ongoing",
   wordle: "",
+  definition: "",
   hintGiven: false,
 };
 
@@ -26,22 +27,7 @@ describe("reset state", () => {
     const previousState: GameState = {
       status: "win",
       wordle: "hello",
-      hintGiven: false,
-    };
-    expect(reducer(previousState, resetGame())).toEqual(initState);
-  });
-  it("should return the initial state (status = 'ongoing')", () => {
-    const previousState: GameState = {
-      status: "ongoing",
-      wordle: "hello",
-      hintGiven: false,
-    };
-    expect(reducer(previousState, resetGame())).toEqual(initState);
-  });
-  it("should return the initial state (status = 'lose')", () => {
-    const previousState: GameState = {
-      status: "lose",
-      wordle: "hello",
+      definition: "",
       hintGiven: false,
     };
     expect(reducer(previousState, resetGame())).toEqual(initState);
@@ -53,6 +39,7 @@ describe("update wordle", () => {
     const previousState: GameState = {
       status: "ongoing",
       wordle: "",
+      definition: "",
       hintGiven: false,
     };
     expect(reducer(previousState, updateWordle("books"))).toEqual({
@@ -64,6 +51,7 @@ describe("update wordle", () => {
     const previousState: GameState = {
       status: "lose",
       wordle: "hello",
+      definition: "",
       hintGiven: false,
     };
     expect(reducer(previousState, updateWordle("trees"))).toEqual({
@@ -77,6 +65,7 @@ describe("update status", () => {
   const previousState: GameState = {
     status: "ongoing",
     wordle: "",
+    definition: "",
     hintGiven: false,
   };
   it("status should be ongoing", () => {

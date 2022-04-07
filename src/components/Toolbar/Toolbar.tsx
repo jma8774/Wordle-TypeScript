@@ -41,7 +41,7 @@ const Toolbar = ({
         <LightbulbIcon
           altText="Give Hint"
           onClick={handleHint}
-          className="h-6 w-6 sm:h-7 sm:w-7 fill-yellow-500 hover:fill-yellow-600"
+          className="h-6 w-6 sm:h-7 sm:w-7 fill-yellow-600 hover:fill-yellow-400"
         />
       </span>
       <span className="flex gap-1">
