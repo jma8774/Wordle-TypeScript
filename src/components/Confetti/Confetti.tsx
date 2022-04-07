@@ -31,7 +31,7 @@ const Confetti = ({ status }: Props) => {
   return (
     <ConfettiBody
       width={windowSize.width}
-      height={windowSize.height}
+      height={windowSize.height - 1}
       tweenDuration={7500}
       recycle={false}
       run

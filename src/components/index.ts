@@ -9,3 +9,4 @@ export { default as Divider } from "./Divider/Divider";
 export { default as Notification } from "./Notification/Notification";
 export { default as MadeWithLove } from "./MadeWithLove/MadeWithLove";
 export { default as Debug } from "./Debug/Debug";
+export { default as GameResult } from "./GameResult/GameResult";

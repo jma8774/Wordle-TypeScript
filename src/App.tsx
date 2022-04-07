@@ -16,6 +16,7 @@ import {
   Notification,
   MadeWithLove,
   Debug,
+  GameResult,
 } from "./components";
 import { KEYS } from "./utils/constants";
 import { openHelp, openStat } from "./redux/features/setting/settingSlice";
@@ -32,12 +33,21 @@ const App = () => {
   const { status, wordle } = useAppSelector((state) => state.game);
   const { guesses, row, col } = useAppSelector((state) => state.guesses);
   const { keyboard } = useAppSelector((state) => state.keyboard);
-  const { showHelp, showStat } = useAppSelector((state) => state.setting);
+  const { showHelp, showStat, showGameResult } = useAppSelector(
+    (state) => state.setting
+  );
   const { answers, words } = useFetchWords();
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent): void => {
       if (showHelp || showStat) return;
+      if (status !== "ongoing") {
+        if (e.code === "Space") {
+          dispatch(newGame(answers.current));
+          e.preventDefault();
+        }
+        return;
+      }
 
       let preventDefault = true;
       if (e.code === "Enter") {
@@ -63,21 +73,24 @@ const App = () => {
   const bodyClass = classNames(
     "min-h-screen min-w-screen flex flex-col items-center gap-1 text-slate-200 mx-auto bg-slate-800",
     {
-      "brightness-50": showHelp || showStat,
-      "brightness-100": !(showHelp || showStat),
-    }
+      "brightness-50": showHelp || showStat || showGameResult,
+      "brightness-100": !(showHelp || showStat || showGameResult),
+    },
+    "transition duration-500", // Transition properties
+    { "scale-125": showGameResult }
   );
   return (
     <>
       <Confetti status={status} />
       <Stats />
       <Instruction />
+      <GameResult answers={answers.current} />
       <Notification />
       <div className={bodyClass}>
         <Header className="mt-3" />
         <div className="w-min">
           <Toolbar
-            className="mt-10"
+            className="mt-12 xs:mt-16"
             handleRefresh={() => dispatch(newGame(answers.current))}
             handleHint={() => dispatch(handleHint())}
             handleHelp={() => dispatch(openHelp())}

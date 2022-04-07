@@ -1,23 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../../store";
 
-// Define a type for the slice state
+// Some of these states might not be necessary for Redux but since I am learning it, I might as well put all of them in here for organiziation
 export interface SettingState {
   theme: "dark" | "light";
   restart: boolean;
   resetStats: boolean;
   showHelp: boolean;
   showStat: boolean;
+  showGameResult: boolean;
   errorSubmit: boolean;
 }
 
-// Define the initial state using that type
 const initialState: SettingState = {
   theme: "dark",
   restart: false,
   resetStats: false,
   showHelp: false,
   showStat: false,
+  showGameResult: false,
   errorSubmit: false,
 };
 
@@ -52,6 +53,12 @@ export const settingSlice = createSlice({
     closeStat: (state) => {
       state.showStat = false;
     },
+    openGameResult: (state) => {
+      state.showGameResult = true;
+    },
+    closeGameResult: (state) => {
+      state.showGameResult = false;
+    },
     showErrorSubmit: (state) => {
       state.errorSubmit = true;
     },
@@ -78,6 +85,8 @@ export const {
   closeRestart,
   showResetStats,
   closeResetStats,
+  openGameResult,
+  closeGameResult,
 } = settingSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type

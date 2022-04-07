@@ -1,6 +1,6 @@
 import { RefObject, useEffect } from "react";
 
-// Purpose of this hook is to mimic normal arrays, this allows us to 'mutate' our state which we otherwise wouldn't be able to in React
+// Pass a ref and when the user clicks outside of the ref, the ref element will perform the handler (in thie case we should close it)
 const useCLoseOnClickOutside = (
   ref: RefObject<HTMLElement>,
   handler: () => void
