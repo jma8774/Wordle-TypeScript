@@ -6,7 +6,7 @@ const Definition = ({ wordle }: { wordle: string }) => {
   const { definition } = useAppSelector((state) => state.game);
 
   return (
-    <div className="flex flex-col gap-1 border-2 border-slate-500 border-dashed rounded-lg w-full min-h-[7rem] p-5 mt-2">
+    <div className="flex flex-col gap-1 border-2 border-slate-500 border-dashed rounded-lg w-full min-h-[6rem] p-5 mt-2">
       <div className="flex items-center">
         <span className="grow font-semibold text-lg">
           Definition of{" "}

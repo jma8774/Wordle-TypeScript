@@ -45,11 +45,15 @@ export const gameSlice = createSlice({
     },
   },
   extraReducers(builder) {
+    builder.addCase(fetchDefinition.pending, (state, action) => {
+      state.definition = "Definition loading stalled...";
+    });
     builder.addCase(fetchDefinition.fulfilled, (state, action) => {
       state.definition = action.payload;
     });
     builder.addCase(fetchDefinition.rejected, (state, action) => {
-      state.definition = "Definition not found";
+      state.definition =
+        "Sorry, definition not found in the API that I am using 😞";
     });
   },
 });
@@ -61,7 +65,6 @@ export const fetchDefinition = createAsyncThunk(
       `https://api.dictionaryapi.dev/api/v2/entries/en/${wordle}`
     );
     const data = await response.json();
-    console.log(data?.[0].meanings[0].definitions[0].definition);
     return data?.[0].meanings[0].definitions[0].definition;
   }
 );

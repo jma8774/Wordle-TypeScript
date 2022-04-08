@@ -1,9 +1,6 @@
 import classNames from "classnames";
 import React, { useEffect } from "react";
-import {
-  closeGameResult,
-  openGameResult,
-} from "../../redux/features/setting/settingSlice";
+import { openGameResult } from "../../redux/features/setting/settingSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { newGame } from "../../redux/thunkActions/toolbarActions";
 import { randomInt } from "../../utils/helper";
@@ -12,12 +9,12 @@ import { RefreshIcon } from "../icons";
 import Definition from "./Definition";
 
 const winText = [
-  "Nice cheats!",
+  "Nice cheats! 😂",
   "Got it on the first try, luck or skill?",
+  "Wow, you're getting really good at this!",
   "Wow that was fast!",
-  "Good job you guessed it!",
-  "Phew, that was close!",
-  "Could be better, but hey you got it!",
+  "Good job you guessed correctly!",
+  "Phew, that was a close one!",
 ];
 const tips = [
   "It may help to start with adieu or about.",
@@ -43,16 +40,14 @@ const GameResult = ({ answers }: Props) => {
 
   useEffect(() => {
     let timeId: NodeJS.Timeout;
-    if (status === "ongoing") {
-      if (showGameResult) dispatch(closeGameResult());
-    } else {
+    if (status !== "ongoing") {
       timeId = setTimeout(() => {
         dispatch(openGameResult());
       }, 1200);
     }
 
     return () => clearTimeout(timeId);
-  }, [status]);
+  }, [status, dispatch]);
 
   if (!showGameResult) return null;
 

@@ -14,7 +14,11 @@ import {
   resetStreak,
 } from "../features/localStorage/localStorageSlice";
 import { AppThunkAction } from "../store";
-import { showResetStats, showRestart } from "../features/setting/settingSlice";
+import {
+  closeGameResult,
+  showResetStats,
+  showRestart,
+} from "../features/setting/settingSlice";
 import { WORDLE_LEN } from "../../utils/constants";
 import { randomInt } from "../../utils/helper";
 
@@ -24,8 +28,13 @@ const newGame = (
 ): AppThunkAction => {
   return (dispatch, getState) => {
     const { status } = getState().game;
-    // Reset streak if it is ongoing and user restarts
-    if (!preload && status === "ongoing") dispatch(resetStreak());
+    // Only do these when the website is not initially loading
+    if (!preload) {
+      // Reset streak if it is ongoing
+      if (status === "ongoing") dispatch(resetStreak());
+      dispatch(showRestart());
+      dispatch(closeGameResult());
+    }
     // Reset everything
     dispatch(resetGame());
     dispatch(resetGuesses());
@@ -34,8 +43,6 @@ const newGame = (
     const index = randomInt(0, answers.length - 1);
     dispatch(updateWordle(answers[index]));
     dispatch(fetchDefinition(answers[index]));
-    // Show restart notification except on preload (when parsing my 2 text files useFetchWords hook)
-    if (!preload) dispatch(showRestart());
   };
 };
 

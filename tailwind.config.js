@@ -41,9 +41,9 @@ module.exports = {
     extend: {
       keyframes: {
         pop: {
-          "0%": { transform: "scale(70%)" },
-          "80%": { transform: "scale(110%)" },
-          "100%": { transform: "scale(100%)" },
+          "0%": { transform: "scale(0.7)" },
+          "80%": { transform: "scale(1.05)" },
+          "100%": { transform: "scale(1)" },
         },
         slideInFromRight: {
           "0%": { transform: "translate(50%)", opacity: "0.5" },
@@ -55,11 +55,11 @@ module.exports = {
         },
         slideInFromLeftAbsolute: {
           "0%": { left: "-100%" },
-          "100%": { left: 0 },
+          "100%": { left: "0%" },
         },
       },
       animation: {
-        modal: "pop 0.2s ease-in-out 1",
+        modal: "pop 0.3s ease-in-out 1",
         notification: "slideInFromRight 0.25s ease-in-out 1",
         keyboard: "slideInFromLeftAbsolute 0.4s ease-in 1",
         gameScreen: "slideInFromTop 0.3s ease-in 1",
