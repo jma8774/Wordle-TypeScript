@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import React, { useRef, useState } from "react";
 import useCloseOnClickOutside from "../../hooks/useCloseOnClickOutside";
 import { resetStats } from "../../redux/features/localStorage/localStorageSlice";
@@ -58,7 +59,7 @@ const Stats = (props: Props) => {
   return (
     <div className="absolute bg-transparent w-screen h-screen z-10">
       <div
-        className="flex flex-col gap-2 border-2 border-slate-700 bg-slate-800 max-w-sm sm:max-w-lg mx-auto my-28 p-5 rounded text-slate-200 animate-modal"
+        className="relative flex flex-col gap-2 border-2 border-slate-700 bg-slate-800 max-w-sm sm:max-w-lg mx-auto my-28 p-5 rounded text-slate-200 animate-modal"
         ref={ref}
       >
         <span className="flex items-center">

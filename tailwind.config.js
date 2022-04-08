@@ -58,8 +58,8 @@ module.exports = {
           "100%": { left: "0%" },
         },
         buttonSurprise: {
-          "0%": { transform: "scale(0.9)" },
-          "80%": { transform: "scale(1.05)" },
+          "0%": { transform: "scale(0.95)" },
+          "80%": { transform: "scale(1.1)" },
           "100%": { transform: "scale(1)" },
         },
       },

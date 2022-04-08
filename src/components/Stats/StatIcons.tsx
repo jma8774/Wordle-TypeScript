@@ -2,7 +2,7 @@ const SVGWrapper = ({ children }: { children: JSX.Element }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="h-8 w-8 stroke-white p-1 bg-blue-600 rounded"
+      className="h-8 w-8 stroke-white p-1 bg-blue-600 rounded border-b-2 border-blue-800"
       fill="none"
       viewBox="0 0 24 24"
       strokeWidth={2}

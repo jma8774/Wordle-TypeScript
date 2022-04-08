@@ -22,7 +22,7 @@ const NewGameButton = ({ onClick }: React.HTMLAttributes<HTMLElement>) => {
   const buttonClass = classNames(
     "relative flex items-center justify-center", // Flex props
     "border-b-4 border-green-700", // Border
-    "rounded-md overflow-hidden min-w-[7rem] min-h-[3rem] shadow-md text-slate-200 bg-green-600",
+    "rounded-md overflow-hidden min-w-[7rem] min-h-[3rem] shadow-md text-slate-200 bg-gradient-to-tr from-green-600 to-green-500",
     isHover && "animate-buttonSurprise"
   );
   const iconClass = classNames("scale-125");
