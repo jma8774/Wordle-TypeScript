@@ -10,7 +10,7 @@ export interface GameState {
 }
 
 // Define the initial state using that type
-const initialState: GameState = {
+export const initialState: GameState = {
   status: "ongoing",
   definition: "",
   wordle: "",

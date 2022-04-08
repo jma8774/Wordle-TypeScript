@@ -2,12 +2,29 @@ import { AnyAction, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import { gameSlice } from "./features/game/gameSlice";
 import { guessesSlice } from "./features/guesses/guessesSlice";
 import { keyboardSlice } from "./features/keyboard/keyboardSlice";
-import { settingSlice } from "./features/setting/settingSlice";
-import { localStorageSlice } from "./features/localStorage/localStorageSlice";
 import {
+  initialState as settingInitState,
+  settingSlice,
+} from "./features/setting/settingSlice";
+import {
+  localStorageSlice,
   LocalStorageState,
   initialState as localStorageInitState,
 } from "./features/localStorage/localStorageSlice";
+
+const loadIsFirstVisit = (): boolean => {
+  try {
+    const isFirstVisit = localStorage.getItem("first_visit") || "true";
+    if (isFirstVisit === "true") {
+      localStorage.setItem("first_visit", "false");
+      return true;
+    }
+    return false;
+  } catch (e) {
+    console.log(e);
+    return true;
+  }
+};
 
 const loadStatsFromLocalStorage = (): LocalStorageState => {
   try {
@@ -40,7 +57,10 @@ const store = configureStore({
     setting: settingSlice.reducer,
     localStorage: localStorageSlice.reducer,
   },
-  preloadedState: { localStorage: loadStatsFromLocalStorage() },
+  preloadedState: {
+    setting: { ...settingInitState, showHelp: loadIsFirstVisit() },
+    localStorage: loadStatsFromLocalStorage(),
+  },
 });
 
 // Update my local storage

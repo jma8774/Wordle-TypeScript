@@ -12,7 +12,7 @@ export interface SettingState {
   errorSubmit: boolean;
 }
 
-const initialState: SettingState = {
+export const initialState: SettingState = {
   theme: "dark",
   restart: false,
   resetStats: false,
