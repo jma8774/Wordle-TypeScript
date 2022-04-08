@@ -1,11 +1,7 @@
+import { IconProps } from "../../types/propTypes";
 import IconWrapper from "./IconWrapper";
 
-interface BackspaceProp {
-  onClick?: () => void;
-  className: string;
-}
-
-const BackspaceIcon = ({ className, onClick }: BackspaceProp) => {
+const BackspaceIcon = ({ className, onClick }: IconProps) => {
   return (
     <IconWrapper onClick={onClick} className={className}>
       <path

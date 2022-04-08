@@ -1,12 +1,7 @@
+import { IconProps } from "../../types/propTypes";
 import IconWrapper from "./IconWrapper";
 
-interface CodeProp {
-  onClick?: () => void;
-  altText?: string;
-  className: string;
-}
-
-const CodeIcon = ({ className, altText, onClick }: CodeProp) => {
+const CodeIcon = ({ className, altText, onClick }: IconProps) => {
   return (
     <IconWrapper onClick={onClick} altText={altText} className={className}>
       <path

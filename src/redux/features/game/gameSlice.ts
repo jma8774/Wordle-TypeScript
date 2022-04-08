@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Status } from "../../../types/types";
 import type { RootState } from "../../store";
 
 // Define a type for the slice state
 export interface GameState {
-  status: "ongoing" | "lose" | "win";
+  status: Status;
   wordle: string;
   definition: string;
   hintGiven: boolean;

@@ -34,7 +34,7 @@ const Toolbar = ({
     <div className={containerClass}>
       <span className="flex grow gap-1">
         <RefreshIcon
-          altText="New Game"
+          altText="New Game (SPACE)"
           onClick={handleRefresh}
           className="h-6 w-6 sm:h-7 sm:w-7 fill-neutral-400 hover:fill-neutral-500"
         />

@@ -1,11 +1,5 @@
 import React from "react";
-
-interface IconProps {
-  children: React.ReactNode;
-  onClick?: () => void;
-  altText?: string;
-  className?: string;
-}
+import { IconProps } from "../../types/propTypes";
 
 /*
  General purpose component for SVG icons:
@@ -15,8 +9,8 @@ interface IconProps {
 */
 const IconWrapper = ({
   children,
-  onClick,
   altText,
+  onClick,
   className = "",
 }: IconProps) => {
   return (

@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import React, { useState, useEffect } from "react";
+import { CharColor } from "../../types/types";
 import { WORDLE_LEN } from "../../utils/constants";
 import "./Node.css";
 
@@ -16,13 +17,7 @@ const cardAnimation: Record<string, string> = {
   never: "animate-flipNever",
 };
 
-interface CharColor {
-  id?: number;
-  ch: string;
-  color: string;
-}
-
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLElement> {
   pair: CharColor;
   animate?: boolean;
 }

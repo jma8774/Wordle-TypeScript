@@ -1,12 +1,7 @@
+import { IconProps } from "../../types/propTypes";
 import IconWrapper from "./IconWrapper";
 
-interface QuestionProp {
-  onClick?: () => void;
-  altText?: string;
-  className: string;
-}
-
-const QuestionIcon = ({ className, altText, onClick }: QuestionProp) => {
+const QuestionIcon = ({ className, altText, onClick }: IconProps) => {
   return (
     <IconWrapper onClick={onClick} altText={altText} className={className}>
       <path

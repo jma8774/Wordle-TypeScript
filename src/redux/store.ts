@@ -14,9 +14,10 @@ import {
 
 const loadIsFirstVisit = (): boolean => {
   try {
-    const isFirstVisit = localStorage.getItem("first_visit") || "true";
+    const key = "first-visit";
+    const isFirstVisit = localStorage.getItem(key) || "true";
     if (isFirstVisit === "true") {
-      localStorage.setItem("first_visit", "false");
+      localStorage.setItem(key, "false");
       return true;
     }
     return false;

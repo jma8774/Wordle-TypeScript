@@ -1,9 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 
-interface HeaderProps {
-  className?: string;
-}
+interface HeaderProps extends React.HTMLAttributes<HTMLElement> {}
 
 const Header = ({ className }: HeaderProps) => {
   const containerClass = classNames(

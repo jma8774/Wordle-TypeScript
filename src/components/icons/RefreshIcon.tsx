@@ -1,13 +1,8 @@
 import classNames from "classnames";
+import { IconProps } from "../../types/propTypes";
 import IconWrapper from "./IconWrapper";
 
-interface StatIconProps {
-  onClick?: () => void;
-  altText?: string;
-  className: string;
-}
-
-const RefreshIcon = ({ className, altText, onClick }: StatIconProps) => {
+const RefreshIcon = ({ className, altText, onClick }: IconProps) => {
   const wrapperClass = classNames(
     className,
     "transition linear duration-[400ms] hover:rotate-180"

@@ -30,7 +30,7 @@ const Row = ({
         return (
           <Node
             key={idx}
-            pair={{ ch: ch, color: getColor(idx) }}
+            pair={{ id: -1, ch: ch, color: getColor(idx) }}
             animate={false}
           />
         );

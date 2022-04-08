@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../../store";
 import { MAX_GUESSES, WORDLE_LEN } from "../../../utils/constants";
+import { CharColor } from "../../../types/types";
 
 // Returns a 2d array of our initial history array for our game
 export const initGuesses = (): CharColor[][] => {
@@ -13,12 +14,6 @@ export const initGuesses = (): CharColor[][] => {
   }
   return history;
 };
-
-export interface CharColor {
-  id: number;
-  ch: string;
-  color: string;
-}
 
 // Define a type for the slice state
 export interface GuessesState {

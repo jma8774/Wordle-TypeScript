@@ -7,6 +7,8 @@ import { randomInt } from "../../utils/helper";
 import Divider from "../Divider/Divider";
 import { RefreshIcon } from "../icons";
 import Definition from "./Definition";
+import { NewGameButton } from "./NewGameButton";
+import { ShareWordButton } from "./ShareWordButton";
 
 const winText = [
   "Nice cheats! 😂",
@@ -59,7 +61,7 @@ const GameResult = ({ answers }: Props) => {
             {status.toUpperCase()}
           </span>
           <RefreshIcon
-            altText="New Game"
+            altText="New Game (SPACE)"
             onClick={() => dispatch(newGame(answers))}
             className="h-6 w-6 sm:h-7 sm:w-7 fill-neutral-400 hover:fill-green-500 hover:scale-110"
           />
@@ -71,10 +73,10 @@ const GameResult = ({ answers }: Props) => {
         </div>
         <Divider />
         <Definition wordle={wordle} />
-        <div>
-          Press SPACE or tap the button on the top right to start a new game. 😄
+        <div className="flex flex-wrap mt-4 gap-4 justify-center">
+          <NewGameButton />
+          <ShareWordButton />
         </div>
-        <div className="mt-8"> This section is still a work in progress.</div>
       </div>
     </div>
   );

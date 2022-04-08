@@ -1,11 +1,7 @@
+import { IconProps } from "../../types/propTypes";
 import IconWrapper from "./IconWrapper";
 
-interface CloseIconProp {
-  onClick?: () => void;
-  className: string;
-}
-
-const CloseIcon = ({ className, onClick }: CloseIconProp) => {
+const CloseIcon = ({ className, onClick }: IconProps) => {
   return (
     <IconWrapper onClick={onClick} className={className}>
       <path

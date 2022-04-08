@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import ConfettiBody from "react-confetti";
 import useWindowSize from "../../hooks/useWindowSize";
+import { Status } from "../../types/types";
 
 interface Props {
-  status: "ongoing" | "lose" | "win";
+  status: Status;
 }
 
 const Confetti = ({ status }: Props) => {

@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import React, { useState, useEffect } from "react";
+import { CharColor } from "../../types/types";
 
 const backgroundColor: Record<string, string> = {
   init: "bg-gray-600",
@@ -8,16 +9,8 @@ const backgroundColor: Record<string, string> = {
   never: "bg-zinc-700",
 };
 
-interface Props {
-  className?: string;
-  children?: JSX.Element;
-  onClick?: () => void;
+interface Props extends React.HTMLAttributes<HTMLElement> {
   pair: CharColor;
-}
-
-interface CharColor {
-  ch: string;
-  color: string;
 }
 
 const Node = ({ className, children, onClick, pair }: Props) => {

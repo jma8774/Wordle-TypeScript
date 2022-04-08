@@ -1,6 +1,7 @@
 import React from "react";
 import Node from "./Node";
 import { BackspaceIcon } from "../icons";
+import { AlphabetColor } from "../../types/types";
 
 const rows = [
   ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
@@ -8,12 +9,8 @@ const rows = [
   ["z", "x", "c", "v", "b", "n", "m"],
 ];
 
-interface Alphabet {
-  [key: string]: string;
-}
-
 interface Props {
-  alphabet: Alphabet;
+  alphabet: AlphabetColor;
   handleChar: (ch: string) => void;
   handleBackspace: () => void;
   submitGuess: () => void;
@@ -35,7 +32,7 @@ const Keyboard = ({
           <Node
             key={ch}
             onClick={() => handleChar(ch)}
-            pair={{ ch: ch.toUpperCase(), color: alphabet?.[ch] }}
+            pair={{ id: -1, ch: ch.toUpperCase(), color: alphabet?.[ch] }}
           />
         ))}
       </div>
@@ -45,7 +42,7 @@ const Keyboard = ({
           <Node
             key={ch}
             onClick={() => handleChar(ch)}
-            pair={{ ch: ch.toUpperCase(), color: alphabet?.[ch] }}
+            pair={{ id: -1, ch: ch.toUpperCase(), color: alphabet?.[ch] }}
           />
         ))}
       </div>
@@ -54,18 +51,18 @@ const Keyboard = ({
         <Node
           onClick={submitGuess}
           className="grow"
-          pair={{ ch: "Enter", color: "init" }}
+          pair={{ id: -1, ch: "Enter", color: "init" }}
         />
         {rows[2].map((ch) => (
           <Node
             key={ch}
             onClick={() => handleChar(ch)}
-            pair={{ ch: ch.toUpperCase(), color: alphabet?.[ch] }}
+            pair={{ id: -1, ch: ch.toUpperCase(), color: alphabet?.[ch] }}
           />
         ))}
         <Node
           className="grow"
-          pair={{ ch: "Back", color: "init" }}
+          pair={{ id: -1, ch: "Back", color: "init" }}
           onClick={handleBackspace}
           children={<BackspaceIcon className="h-6 w-6 sm:h-8 sm:w-8" />}
         />

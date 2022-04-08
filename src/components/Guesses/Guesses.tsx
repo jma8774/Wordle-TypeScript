@@ -1,11 +1,6 @@
 import React from "react";
+import { CharColor } from "../../types/types";
 import Node from "./Node";
-
-interface CharColor {
-  id: number;
-  ch: string;
-  color: string;
-}
 
 interface Props {
   guesses: CharColor[][];

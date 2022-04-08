@@ -1,17 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { AlphabetColor } from "../../../types/types";
 import type { RootState } from "../../store";
-
-interface Alphabet {
-  [key: string]: string;
-}
 
 // Define a type for the slice state
 export interface KeyboardState {
-  keyboard: Alphabet;
+  keyboard: AlphabetColor;
 }
 
-export const initAlphabet = (): Alphabet => {
-  let alphabet: Alphabet = {};
+export const initAlphabet = (): AlphabetColor => {
+  let alphabet: AlphabetColor = {};
   const start = "a".charCodeAt(0);
   for (let i = start; i < start + 26; i++) {
     alphabet[String.fromCharCode(i)] = "init";
