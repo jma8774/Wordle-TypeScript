@@ -60,11 +60,11 @@ const GameResult = ({ answers }: Props) => {
           <span className="grow font-bold text-3xl">
             {status.toUpperCase()}
           </span>
-          <RefreshIcon
+          {/* <RefreshIcon
             altText="New Game (SPACE)"
             onClick={() => dispatch(newGame(answers))}
             className="h-6 w-6 sm:h-7 sm:w-7 fill-neutral-400 hover:fill-green-500 hover:scale-110"
-          />
+          /> */}
         </div>
         <div className="text-slate-300">
           {status === "win"
@@ -73,9 +73,12 @@ const GameResult = ({ answers }: Props) => {
         </div>
         <Divider />
         <Definition wordle={wordle} />
-        <div className="flex flex-wrap mt-4 gap-4 justify-center">
-          <NewGameButton />
-          <ShareWordButton />
+        <div className="flex flex-wrap mt-6 gap-4 justify-center">
+          <NewGameButton onClick={() => dispatch(newGame(answers))} />
+          {/* <ShareWordButton onClick={() => console.log("Linked copied")} /> */}
+        </div>
+        <div className="text-slate-300 mt-12 text-sm">
+          *You can also start a new game by pressing SPACEBAR.
         </div>
       </div>
     </div>

@@ -54,7 +54,7 @@ export const gameSlice = createSlice({
     });
     builder.addCase(fetchDefinition.rejected, (state, action) => {
       state.definition =
-        "Sorry, definition not found in the API that I am using 😞";
+        "Sorry, definition not found on the API that I am using 😞";
     });
   },
 });

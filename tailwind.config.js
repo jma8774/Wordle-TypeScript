@@ -57,12 +57,18 @@ module.exports = {
           "0%": { left: "-100%" },
           "100%": { left: "0%" },
         },
+        buttonSurprise: {
+          "0%": { transform: "scale(0.9)" },
+          "80%": { transform: "scale(1.05)" },
+          "100%": { transform: "scale(1)" },
+        },
       },
       animation: {
         modal: "pop 0.3s ease-in-out 1",
         notification: "slideInFromRight 0.25s ease-in-out 1",
         keyboard: "slideInFromLeftAbsolute 0.4s ease-in 1",
         gameScreen: "slideInFromTop 0.3s ease-in 1",
+        buttonSurprise: "buttonSurprise 0.3s ease-in-out 1",
       },
     },
   },
