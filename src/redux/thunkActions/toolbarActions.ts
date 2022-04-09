@@ -2,6 +2,7 @@ import {
   fetchDefinition,
   openHint,
   resetGame,
+  updateStartTime,
   updateWordle,
 } from "../features/game/gameSlice";
 import { resetGuesses } from "../features/guesses/guessesSlice";
@@ -21,6 +22,8 @@ import {
 } from "../features/setting/settingSlice";
 import { WORDLE_LEN } from "../../utils/constants";
 import { randomInt } from "../../utils/helper";
+
+// Note: Thunk Actions are used to handle async logic and also to utilize multiple dispatches with just 1 render
 
 const newGame = (
   answers: string[],
@@ -43,6 +46,7 @@ const newGame = (
     const index = randomInt(0, answers.length - 1);
     dispatch(updateWordle(answers[index]));
     dispatch(fetchDefinition(answers[index]));
+    dispatch(updateStartTime());
   };
 };
 

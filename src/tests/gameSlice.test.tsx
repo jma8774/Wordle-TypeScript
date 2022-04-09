@@ -1,16 +1,10 @@
 import reducer, {
+  initialState as initState,
   GameState,
   resetGame,
   changeStatus,
   updateWordle,
 } from "../redux/features/game/gameSlice";
-
-const initState = {
-  status: "ongoing",
-  wordle: "",
-  definition: "",
-  hintGiven: false,
-};
 
 describe("init state", () => {
   it("should return the initial state", () => {
@@ -25,6 +19,7 @@ describe("init state", () => {
 describe("reset state", () => {
   it("should return the initial state (status = 'win')", () => {
     const previousState: GameState = {
+      ...initState,
       status: "win",
       wordle: "hello",
       definition: "",
@@ -37,6 +32,7 @@ describe("reset state", () => {
 describe("update wordle", () => {
   it("wordle should be books", () => {
     const previousState: GameState = {
+      ...initState,
       status: "ongoing",
       wordle: "",
       definition: "",
@@ -49,6 +45,7 @@ describe("update wordle", () => {
   });
   it("wordle should be trees", () => {
     const previousState: GameState = {
+      ...initState,
       status: "lose",
       wordle: "hello",
       definition: "",
@@ -63,6 +60,7 @@ describe("update wordle", () => {
 
 describe("update status", () => {
   const previousState: GameState = {
+    ...initState,
     status: "ongoing",
     wordle: "",
     definition: "",

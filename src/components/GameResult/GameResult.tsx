@@ -7,6 +7,7 @@ import { randomInt } from "../../utils/helper";
 import Divider from "../Divider/Divider";
 import Definition from "./Definition";
 import { NewGameButton } from "./NewGameButton";
+import { Time } from "./Time";
 
 const winText = [
   "First try? Nice cheats! 😂",
@@ -58,6 +59,7 @@ const GameResult = ({ answers }: Props) => {
           <span className="grow font-bold text-3xl">
             {status.toUpperCase()}
           </span>
+          <Time />
         </div>
         <div className="text-slate-300">
           {status === "win"

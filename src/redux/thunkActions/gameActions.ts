@@ -1,5 +1,5 @@
 import { MAX_GUESSES } from "../../utils/constants";
-import { changeStatus } from "../features/game/gameSlice";
+import { changeStatus, updateEndTime } from "../features/game/gameSlice";
 import {
   handleBackspace,
   handleChar,
@@ -13,6 +13,8 @@ import {
 } from "../features/localStorage/localStorageSlice";
 import { showErrorSubmit } from "../features/setting/settingSlice";
 import { AppThunkAction } from "../store";
+
+// Note: Thunk Actions are used to handle async logic and also to utilize multiple dispatches with just 1 render
 
 const submitChar = (ch: string): AppThunkAction => {
   return (dispatch, getState) => {
@@ -43,9 +45,11 @@ const submitWord = (words: Set<string>): AppThunkAction => {
       if (curGuess === wordle) {
         dispatch(changeStatus("win"));
         dispatch(handleWin(row + 1));
+        dispatch(updateEndTime());
       } else if (row === MAX_GUESSES - 1) {
         dispatch(changeStatus("lose"));
         dispatch(resetStreak());
+        dispatch(updateEndTime());
       }
     } else {
       dispatch(showErrorSubmit());

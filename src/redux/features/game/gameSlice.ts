@@ -8,6 +8,8 @@ export interface GameState {
   wordle: string;
   definition: string;
   hintGiven: boolean;
+  timeStart: number;
+  timeEnd: number;
 }
 
 // Define the initial state using that type
@@ -16,6 +18,8 @@ export const initialState: GameState = {
   definition: "",
   wordle: "",
   hintGiven: false,
+  timeStart: new Date().getTime(),
+  timeEnd: new Date().getTime(),
 };
 
 export const gameSlice = createSlice({
@@ -31,6 +35,12 @@ export const gameSlice = createSlice({
     },
     updateDefinition: (state, action: PayloadAction<string>) => {
       state.definition = action.payload;
+    },
+    updateStartTime: (state) => {
+      state.timeStart = new Date().getTime();
+    },
+    updateEndTime: (state) => {
+      state.timeEnd = new Date().getTime();
     },
     changeStatus: (
       state,
@@ -74,6 +84,8 @@ export const {
   resetGame,
   updateWordle,
   updateDefinition,
+  updateStartTime,
+  updateEndTime,
   changeStatus,
   openHint,
   closeHint,
