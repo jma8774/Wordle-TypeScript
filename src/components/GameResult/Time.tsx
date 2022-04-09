@@ -23,7 +23,7 @@ const TimeIcon = () => {
 const formatTime = (timeStart: number, timeEnd: number): string => {
   const MIN = 60;
   const HOUR = 60 * 60;
-  const elapsedSeconds = Math.ceil((timeEnd - timeStart) / 1000);
+  const elapsedSeconds = Math.floor((timeEnd - timeStart) / 1000);
   if (elapsedSeconds < MIN) {
     return `${elapsedSeconds}s`;
   } else if (elapsedSeconds < HOUR) {

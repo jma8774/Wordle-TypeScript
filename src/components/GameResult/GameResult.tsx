@@ -10,8 +10,8 @@ import { NewGameButton } from "./NewGameButton";
 import { Time } from "./Time";
 
 const winText = [
-  "First try? Nice cheats! 😂",
-  "Got it on the second try, is this luck or skill?",
+  "First guess? Nice cheats! 😂",
+  "Got it on the second guess, is this luck or skill?",
   "Wow that was fast!",
   "Nicely done, you're getting better and better!",
   "Good job you guessed correctly!",
