@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { IconProps } from "../../types/propTypes";
 
 const Icon = ({ className }: IconProps) => {
-  const iconClass = classNames(className, "h-5 w-5 fill-green-600");
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

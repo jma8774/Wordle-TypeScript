@@ -27,7 +27,8 @@ import { randomInt } from "../../utils/helper";
 
 const newGame = (
   answers: string[],
-  preload: boolean = false
+  preload: boolean = false,
+  challengeWord: string = ""
 ): AppThunkAction => {
   return (dispatch, getState) => {
     const { status } = getState().game;
@@ -44,8 +45,9 @@ const newGame = (
     dispatch(resetKeyboard());
     // Get new word
     const index = randomInt(0, answers.length - 1);
-    dispatch(updateWordle(answers[index]));
-    dispatch(fetchDefinition(answers[index]));
+    const newWord = challengeWord || answers[index];
+    dispatch(updateWordle(newWord));
+    dispatch(fetchDefinition(newWord));
     dispatch(updateStartTime());
   };
 };

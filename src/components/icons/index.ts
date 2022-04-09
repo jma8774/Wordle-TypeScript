@@ -7,3 +7,4 @@ export { default as BackspaceIcon } from "./BackspaceIcon";
 export { default as LightbulbIcon } from "./LightbulbIcon";
 export { default as CloseIcon } from "./CloseIcon";
 export { default as LinkIcon } from "./LinkIcon";
+export { default as ChallengeIcon } from "./ChallengeIcon";

@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useAppSelector } from "../../redux/hooks";
 import { LinkIcon } from "../icons";
 

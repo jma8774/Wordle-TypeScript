@@ -1,9 +1,9 @@
 // Package imports
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "./redux/hooks";
 import classNames from "classnames";
 
 // Custom imports
+import { useAppDispatch, useAppSelector } from "./redux/hooks";
 import useFetchWords from "./hooks/useFetchWords";
 import {
   Header,

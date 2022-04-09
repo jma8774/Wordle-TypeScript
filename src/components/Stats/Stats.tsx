@@ -1,7 +1,5 @@
-import classNames from "classnames";
 import React, { useRef, useState } from "react";
 import useCloseOnClickOutside from "../../hooks/useCloseOnClickOutside";
-import { resetStats } from "../../redux/features/localStorage/localStorageSlice";
 import { resetModals } from "../../redux/features/setting/settingSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { handleResetStats } from "../../redux/thunkActions/toolbarActions";

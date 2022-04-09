@@ -1,5 +1,4 @@
 import { act, renderHook } from "@testing-library/react-hooks";
-import useArray from "../hooks/useArray";
 import useWindowSize from "../hooks/useWindowSize";
 
 describe("Initialize hook", () => {
