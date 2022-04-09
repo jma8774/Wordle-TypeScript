@@ -1,11 +1,13 @@
 import classNames from "classnames";
 import { useState } from "react";
-import { useAppSelector } from "../../redux/hooks";
+import { toggleShowDebug } from "../../redux/features/setting/settingSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { EyeIcon } from "./EyeIcon";
 
 const Debug = () => {
+  const dispatch = useAppDispatch();
+  const { showDebug } = useAppSelector((state) => state.setting);
   const { wordle, status } = useAppSelector((state) => state.game);
-  const [open, setOpen] = useState(false);
   const rowClass = classNames(
     "w-full bg-transparent hover:bg-slate-700/50 rounded p-1 select-all"
   );
@@ -15,11 +17,11 @@ const Debug = () => {
         <span className="grow font-extrabold text-red-500">DEBUG</span>
         <EyeIcon
           className="self-end hover:cursor-pointer"
-          onClick={() => setOpen(!open)}
-          open={open}
+          onClick={() => dispatch(toggleShowDebug())}
+          open={showDebug}
         />
       </div>
-      {open && (
+      {showDebug && (
         <span className="mt-2">
           <div className={rowClass}> status: {status}</div>
           <div className={rowClass}> wordle: {wordle} </div>

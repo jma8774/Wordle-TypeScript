@@ -27,7 +27,7 @@ const loadIsFirstVisit = (): boolean => {
   }
 };
 
-const loadStatsFromLocalStorage = (): LocalStorageState => {
+const localStats = (): LocalStorageState => {
   try {
     const persistedStats = localStorage.getItem("stats");
     if (persistedStats) return JSON.parse(persistedStats);
@@ -50,6 +50,28 @@ const saveStatsToLocalStorage = (): void => {
   }
 };
 
+const loadShowDebug = (): boolean => {
+  try {
+    const showDebug = localStorage.getItem("show-debug");
+    if (showDebug) return JSON.parse(showDebug);
+
+    localStorage.setItem("show-debug", "false");
+    return false;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
+
+const saveShowDebug = (): void => {
+  try {
+    const showDebug = store.getState().setting.showDebug;
+    localStorage.setItem("show-debug", JSON.stringify(showDebug));
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 const store = configureStore({
   reducer: {
     game: gameSlice.reducer,
@@ -59,14 +81,19 @@ const store = configureStore({
     localStorage: localStorageSlice.reducer,
   },
   preloadedState: {
-    setting: { ...settingInitState, showHelp: loadIsFirstVisit() },
-    localStorage: loadStatsFromLocalStorage(),
+    setting: {
+      ...settingInitState,
+      showHelp: loadIsFirstVisit(),
+      showDebug: loadShowDebug(),
+    },
+    localStorage: localStats(),
   },
 });
 
 // Update my local storage
 store.subscribe(() => {
   saveStatsToLocalStorage();
+  saveShowDebug();
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

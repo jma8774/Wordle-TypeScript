@@ -4,6 +4,7 @@ import type { RootState } from "../../store";
 // Some of these states might not be necessary for Redux but since I am learning it, I might as well put all of them in here for organiziation
 export interface SettingState {
   theme: "dark" | "light";
+  showDebug: boolean;
   restart: boolean;
   resetStats: boolean;
   showHelp: boolean;
@@ -14,6 +15,7 @@ export interface SettingState {
 
 export const initialState: SettingState = {
   theme: "dark",
+  showDebug: false,
   restart: false,
   resetStats: false,
   showHelp: false,
@@ -65,6 +67,9 @@ export const settingSlice = createSlice({
     closeErrorSubmit: (state) => {
       state.errorSubmit = false;
     },
+    toggleShowDebug: (state) => {
+      state.showDebug = !state.showDebug;
+    },
     resetModals: (state) => {
       state.showHelp = false;
       state.showStat = false;
@@ -87,6 +92,7 @@ export const {
   closeResetStats,
   openGameResult,
   closeGameResult,
+  toggleShowDebug,
 } = settingSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
