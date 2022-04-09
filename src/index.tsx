@@ -13,8 +13,8 @@ ReactDOM.render(
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
-          {/* Default root */}
           <Route path="/" element={<App />}></Route>
+          <Route path="Wordle-TypeScript" element={<App />}></Route>
         </Routes>
       </BrowserRouter>
     </Provider>
