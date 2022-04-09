@@ -14,6 +14,7 @@ const useFetchWords = () => {
   const words = useRef<Set<string>>(new Set());
   const location = useLocation();
   const searchParams = useSearchParams()[0];
+  console.log(location);
 
   // Function to read my text file from the 'public' folder on load
   useEffect(() => {
@@ -35,8 +36,7 @@ const useFetchWords = () => {
 
     // Pick a random wordle after fetching our answers + all words
     fetchWords().then(() => {
-      const challengeWord =
-        matchPath(location.pathname, "challenge") && searchParams.get("word");
+      const challengeWord = searchParams.get("word");
       if (challengeWord && answers.current.includes(challengeWord)) {
         dispatch(newGame(answers.current, true, challengeWord));
       } else {

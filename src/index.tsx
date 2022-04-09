@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import { Header } from "./components";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -13,13 +14,7 @@ ReactDOM.render(
       <BrowserRouter>
         <Routes>
           {/* Default root */}
-          <Route path="/" element={<App />}>
-            <Route path="challenge" element={<App />}></Route>
-            {/* Support root starting with /Wordle-TypeScript/ */}
-            <Route path="Wordle-TypeScript" element={<App />}>
-              <Route path="challenge" element={<App />}></Route>
-            </Route>
-          </Route>
+          <Route path="/" element={<App />}></Route>
         </Routes>
       </BrowserRouter>
     </Provider>
