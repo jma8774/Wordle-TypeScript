@@ -5,13 +5,11 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { newGame } from "../../redux/thunkActions/toolbarActions";
 import { randomInt } from "../../utils/helper";
 import Divider from "../Divider/Divider";
-import { RefreshIcon } from "../icons";
 import Definition from "./Definition";
 import { NewGameButton } from "./NewGameButton";
-import { ShareWordButton } from "./ShareWordButton";
 
 const winText = [
-  "Nice cheats! 😂",
+  "First try? Nice cheats! 😂",
   "Got it on the second try, is this luck or skill?",
   "Wow that was fast!",
   "Nicely done, you're getting better and better!",

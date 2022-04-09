@@ -18,11 +18,11 @@ const Bar = ({
   }, [percent]);
 
   return (
-    <div className="flex">
+    <div className="flex select-none">
       <div className="w-4 shrink-0">{row}</div>
       <div
         style={{ flexBasis: basis }}
-        className={`text-right rounded bg-blue-600 px-1 transition-all duration-1000`}
+        className="text-right rounded bg-blue-600 px-1 transition-all ease-out duration-1000"
       >
         {wins}
       </div>

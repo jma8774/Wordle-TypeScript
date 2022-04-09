@@ -69,7 +69,7 @@ const Node = ({ pair, animate = true }: Props) => {
 
   const cardClass = classNames(
     transition,
-    "w-12 h-12 sm:w-16 sm:h-16 border-2 rounded", // Box size/shape
+    "w-12 h-12 sm:w-16 sm:h-16 border-2 rounded select-none", // Box size/shape/misc
     "flex justify-center items-center", // Center the character
     "transition ease-linear duration-100", // Transition for new character
     animationDelay,

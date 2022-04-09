@@ -97,7 +97,7 @@ const Stats = (props: Props) => {
             <button
               aria-label={deleteOnce ? "Confirm Reset" : "Reset Stats"}
               onClick={handleDelete}
-              className="bg-red-500/25 hover:bg-red-600/70 border border-red-600 rounded p-2 h-11 w-24"
+              className="bg-red-500/25 hover:bg-red-600/70 border border-red-600 rounded p-2 h-11 w-24 select-none"
             >
               {deleteOnce ? <GarbageIcon /> : "Reset"}
             </button>
