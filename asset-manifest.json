@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Wordle-TypeScript/static/css/main.35cd8567.css",
-    "main.js": "/Wordle-TypeScript/static/js/main.68bb4367.js",
+    "main.css": "/Wordle-TypeScript/static/css/main.f1f00ccd.css",
+    "main.js": "/Wordle-TypeScript/static/js/main.4f99e354.js",
     "static/js/787.e01666d6.chunk.js": "/Wordle-TypeScript/static/js/787.e01666d6.chunk.js",
     "index.html": "/Wordle-TypeScript/index.html",
-    "main.35cd8567.css.map": "/Wordle-TypeScript/static/css/main.35cd8567.css.map",
-    "main.68bb4367.js.map": "/Wordle-TypeScript/static/js/main.68bb4367.js.map",
+    "main.f1f00ccd.css.map": "/Wordle-TypeScript/static/css/main.f1f00ccd.css.map",
+    "main.4f99e354.js.map": "/Wordle-TypeScript/static/js/main.4f99e354.js.map",
     "787.e01666d6.chunk.js.map": "/Wordle-TypeScript/static/js/787.e01666d6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.35cd8567.css",
-    "static/js/main.68bb4367.js"
+    "static/css/main.f1f00ccd.css",
+    "static/js/main.4f99e354.js"
   ]
 }
