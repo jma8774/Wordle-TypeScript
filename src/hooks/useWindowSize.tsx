@@ -4,12 +4,14 @@ interface WindowState {
   width: number;
   height: number;
 }
+
 // Hook to get the most up to date window width and height
 function useWindowSize() {
   const [windowSize, setWindowSize] = useState<WindowState>({
     width: document.body.clientWidth,
     height: window.innerHeight,
   });
+
   useEffect(() => {
     function handleResize() {
       setWindowSize({
