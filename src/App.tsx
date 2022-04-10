@@ -19,13 +19,18 @@ import {
   GameResult,
 } from "./components";
 import { KEYS } from "./utils/constants";
-import { openHelp, openStat } from "./redux/features/setting/settingSlice";
+import {
+  openHelp,
+  openStat,
+  openChallenge,
+} from "./redux/features/setting/settingSlice";
 import {
   submitBackspace,
   submitChar,
   submitWord,
 } from "./redux/thunkActions/gameActions";
 import { handleHint, newGame } from "./redux/thunkActions/toolbarActions";
+import Challenge from "./components/Challenge/Challenge";
 
 const App = () => {
   // console.log("App render");
@@ -33,21 +38,24 @@ const App = () => {
   const { status, wordle } = useAppSelector((state) => state.game);
   const { guesses, row, col } = useAppSelector((state) => state.guesses);
   const { keyboard } = useAppSelector((state) => state.keyboard);
-  const { showHelp, showStat, showGameResult } = useAppSelector(
+  const { showHelp, showStat, showGameResult, showChallenge } = useAppSelector(
     (state) => state.setting
   );
   const { answers, words } = useFetchWords();
+  const modalOpen = showHelp || showStat || showGameResult || showChallenge;
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent): void => {
+      // Ignore default when these keys are pressed for our application
       const preventDefault = ["Enter", "Backspace", "Space"];
-      if (preventDefault.includes(e.code)) e.preventDefault();
+      if (!showChallenge && preventDefault.includes(e.code)) e.preventDefault();
 
       // Only key press available when game result is shown
       if (showGameResult && e.code === "Space")
         dispatch(newGame(answers.current));
+
       // Key presses are disabled when these screens are present
-      if (showHelp || showStat || status !== "ongoing") return;
+      if (modalOpen || status !== "ongoing") return;
 
       if (e.code === "Enter") {
         dispatch(submitWord(words.current));
@@ -70,8 +78,8 @@ const App = () => {
   const bodyClass = classNames(
     "min-h-screen min-w-screen flex flex-col items-center gap-1 text-slate-200 mx-auto bg-slate-800",
     {
-      "brightness-50": showHelp || showStat || showGameResult,
-      "brightness-100": !(showHelp || showStat || showGameResult),
+      "brightness-50": modalOpen,
+      "brightness-100": !modalOpen,
     },
     "transition duration-500", // Transition properties
     { "scale-125": showGameResult }
@@ -81,6 +89,7 @@ const App = () => {
       <Confetti status={status} />
       <Stats />
       <Instruction />
+      <Challenge answers={answers.current} />
       <GameResult answers={answers.current} />
       <Notification />
       <div className={bodyClass}>
@@ -94,6 +103,9 @@ const App = () => {
             handleHint={() => dispatch(handleHint())}
             handleHelp={() => status === "ongoing" && dispatch(openHelp())}
             handleStat={() => status === "ongoing" && dispatch(openStat())}
+            handleChallenge={() =>
+              status === "ongoing" && dispatch(openChallenge())
+            }
           />
           <Guesses guesses={guesses} />
         </div>

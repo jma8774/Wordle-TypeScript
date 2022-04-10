@@ -5,23 +5,31 @@ import type { RootState } from "../../store";
 export interface SettingState {
   theme: "dark" | "light";
   showDebug: boolean;
-  restart: boolean;
-  resetStats: boolean;
+  // Modals
   showHelp: boolean;
   showStat: boolean;
+  showChallenge: boolean;
   showGameResult: boolean;
+  // Notifications
+  restart: boolean;
+  resetStats: boolean;
   errorSubmit: boolean;
+  wordleLinkCopied: boolean;
 }
 
 export const initialState: SettingState = {
   theme: "dark",
   showDebug: false,
-  restart: false,
-  resetStats: false,
+  // Modals
   showHelp: false,
   showStat: false,
+  showChallenge: false,
   showGameResult: false,
+  // Notifications
+  restart: false,
+  resetStats: false,
   errorSubmit: false,
+  wordleLinkCopied: false,
 };
 
 export const settingSlice = createSlice({
@@ -31,6 +39,31 @@ export const settingSlice = createSlice({
     toggleTheme: (state) => {
       state.theme = state.theme === "light" ? "dark" : "light";
     },
+    toggleShowDebug: (state) => {
+      state.showDebug = !state.showDebug;
+    },
+    // Modals
+    openHelp: (state) => {
+      state.showHelp = true;
+    },
+    openStat: (state) => {
+      state.showStat = true;
+    },
+    openChallenge: (state) => {
+      state.showChallenge = true;
+    },
+    openGameResult: (state) => {
+      state.showGameResult = true;
+    },
+    closeGameResult: (state) => {
+      state.showGameResult = false;
+    },
+    resetModals: (state) => {
+      state.showHelp = false;
+      state.showStat = false;
+      state.showChallenge = false;
+    },
+    // Notifications
     showRestart: (state) => {
       state.restart = true;
     },
@@ -43,56 +76,40 @@ export const settingSlice = createSlice({
     closeResetStats: (state) => {
       state.resetStats = false;
     },
-    openHelp: (state) => {
-      state.showHelp = true;
-    },
-    closeHelp: (state) => {
-      state.showHelp = false;
-    },
-    openStat: (state) => {
-      state.showStat = true;
-    },
-    closeStat: (state) => {
-      state.showStat = false;
-    },
-    openGameResult: (state) => {
-      state.showGameResult = true;
-    },
-    closeGameResult: (state) => {
-      state.showGameResult = false;
-    },
     showErrorSubmit: (state) => {
       state.errorSubmit = true;
     },
     closeErrorSubmit: (state) => {
       state.errorSubmit = false;
     },
-    toggleShowDebug: (state) => {
-      state.showDebug = !state.showDebug;
+    showWordleLinkCopied: (state) => {
+      state.wordleLinkCopied = true;
     },
-    resetModals: (state) => {
-      state.showHelp = false;
-      state.showStat = false;
+    closeWordleLinkCopied: (state) => {
+      state.wordleLinkCopied = false;
     },
   },
 });
 
 export const {
   toggleTheme,
+  toggleShowDebug,
+  // Modals
   openHelp,
-  closeHelp,
   openStat,
-  closeStat,
+  openChallenge,
+  openGameResult,
+  closeGameResult,
+  resetModals,
+  // Notifications
   showErrorSubmit,
   closeErrorSubmit,
-  resetModals,
   showRestart,
   closeRestart,
   showResetStats,
   closeResetStats,
-  openGameResult,
-  closeGameResult,
-  toggleShowDebug,
+  showWordleLinkCopied,
+  closeWordleLinkCopied,
 } = settingSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type

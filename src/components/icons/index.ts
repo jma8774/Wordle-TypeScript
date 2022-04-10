@@ -8,3 +8,6 @@ export { default as LightbulbIcon } from "./LightbulbIcon";
 export { default as CloseIcon } from "./CloseIcon";
 export { default as LinkIcon } from "./LinkIcon";
 export { default as ChallengeIcon } from "./ChallengeIcon";
+export { default as SearchIcon } from "./SearchIcon";
+export { default as CopyIcon } from "./CopyIcon";
+export { default as ExclamationIcon } from "./ExclamationIcon";

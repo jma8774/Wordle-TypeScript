@@ -15,6 +15,7 @@ interface ToolbarProps {
   handleHint: () => void;
   handleStat: () => void;
   handleHelp: () => void;
+  handleChallenge: () => void;
 }
 
 const handleCodeClick = () => {
@@ -27,6 +28,7 @@ const Toolbar = ({
   handleHint,
   handleStat,
   handleHelp,
+  handleChallenge,
 }: ToolbarProps) => {
   const containerClass = classNames("flex w-full", className);
   return (
@@ -51,7 +53,7 @@ const Toolbar = ({
         />
         <ChallengeIcon
           altText="Challenge a Friend"
-          onClick={() => console.log("Challenge")}
+          onClick={handleChallenge}
           className="h-6 w-6 sm:h-7 sm:w-7 fill-red-500 hover:fill-red-600"
         />
         <QuestionIcon

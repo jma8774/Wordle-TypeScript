@@ -5,6 +5,7 @@ import {
   closeErrorSubmit,
   closeResetStats,
   closeRestart,
+  closeWordleLinkCopied,
 } from "../../redux/features/setting/settingSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import Error from "./Error";
@@ -14,7 +15,7 @@ interface Props {}
 
 const Notification = (props: Props) => {
   const dispatch = useAppDispatch();
-  const { restart, errorSubmit, resetStats } = useAppSelector(
+  const { restart, errorSubmit, resetStats, wordleLinkCopied } = useAppSelector(
     (state) => state.setting
   );
   const { hintGiven } = useAppSelector((state) => state.game);
@@ -29,6 +30,11 @@ const Notification = (props: Props) => {
   useCloseNotificationAfter(
     resetStats,
     () => dispatch(closeResetStats()),
+    3000
+  );
+  useCloseNotificationAfter(
+    wordleLinkCopied,
+    () => dispatch(closeWordleLinkCopied()),
     3000
   );
 
@@ -60,6 +66,13 @@ const Notification = (props: Props) => {
           title="Stats Reset"
           body="Enjoy your fresh start!"
           onClick={() => dispatch(closeResetStats())}
+        />
+      )}
+      {wordleLinkCopied && (
+        <Success
+          title="Link Copied"
+          body="Share the link to a friend!"
+          onClick={() => dispatch(closeWordleLinkCopied())}
         />
       )}
     </div>
