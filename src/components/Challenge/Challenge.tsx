@@ -46,14 +46,14 @@ const Challenge = ({ answers }: Props) => {
     if (answerSet.has(word)) {
       try {
         await navigator.clipboard.writeText(
-          `${window.location.host}Wordle-TypeScript/?word=${window.btoa(
+          `${window.location.host}/Wordle-TypeScript/?word=${window.btoa(
             word.toLowerCase()
           )}`
         );
+        dispatch(showWordleLinkCopied());
       } catch (e) {
         alert("HTTPS connection required to copy link. (https://www...)");
       }
-      dispatch(showWordleLinkCopied());
     }
   };
 
