@@ -40,13 +40,19 @@ const Challenge = ({ answers }: Props) => {
   }, [showChallenge]);
 
   // Copy the wordle link if the word is valid
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement> | null) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement> | null) => {
     e?.preventDefault();
     const word = value.toLowerCase();
     if (answerSet.has(word)) {
-      navigator.clipboard.writeText(
-        `${window.location.host}/?word=${window.btoa(word.toLowerCase())}`
-      );
+      try {
+        await navigator.clipboard.writeText(
+          `${window.location.host}Wordle-TypeScript/?word=${window.btoa(
+            word.toLowerCase()
+          )}`
+        );
+      } catch (e) {
+        alert("HTTPS connection required to copy link. (https://www...)");
+      }
       dispatch(showWordleLinkCopied());
     }
   };
@@ -60,7 +66,7 @@ const Challenge = ({ answers }: Props) => {
   if (!showChallenge) return null;
 
   const searchClass = classNames(
-    "flex items-center gap-2 bg-slate-800 max-w-md h-16 p-4 mx-auto my-28 rounded shadow-lg text-slate-200 animate-search"
+    "flex items-center gap-2 bg-slate-800 max-w-sm sm:max-w-md h-16 p-4 mx-auto my-28 rounded shadow-lg text-slate-200 animate-search"
   );
   return (
     <div className="absolute bg-transparent w-screen h-screen z-10">
