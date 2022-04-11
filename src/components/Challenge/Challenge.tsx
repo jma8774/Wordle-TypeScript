@@ -7,6 +7,8 @@ import {
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { CopyIcon, ExclamationIcon, SearchIcon } from "../icons";
 import classNames from "classnames";
+import { Trie } from "../../utils/trie";
+import { Suggestion } from "./Suggestion";
 
 interface Props {
   answers: string[];
@@ -16,16 +18,19 @@ const Challenge = ({ answers }: Props) => {
   const dispatch = useAppDispatch();
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
-  const [answerSet, setAnswerSet] = useState(new Set(answers));
   const { showChallenge } = useAppSelector((state) => state.setting);
+  const answersTrie = useRef(Trie());
+  const [suggestions, setSuggestions] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
+
   // Close the modal when the user clicks outside of it
   const modalRef = useRef<HTMLDivElement>(null);
   useCloseOnClickOutside(modalRef, () => dispatch(resetModals()));
 
   // Convert answers array into a set for faster look up
   useEffect(() => {
-    setAnswerSet(new Set(answers));
+    answersTrie.current = Trie();
+    answers.forEach((answer) => answersTrie.current.insert(answer));
   }, [answers]);
 
   // Reset form on hide and focus input on show
@@ -33,6 +38,7 @@ const Challenge = ({ answers }: Props) => {
     if (!showChallenge) {
       setValue("");
       setError(false);
+      setSuggestions([]);
     } else if (inputRef.current) {
       inputRef.current.focus();
     }
@@ -42,12 +48,10 @@ const Challenge = ({ answers }: Props) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement> | null) => {
     e?.preventDefault();
     const word = value.toLowerCase();
-    if (answerSet.has(word)) {
+    if (answersTrie.current.has(word)) {
       try {
         await navigator.clipboard.writeText(
-          `${window.location.host}/Wordle-TypeScript/?word=${window.btoa(
-            word.toLowerCase()
-          )}`
+          `${window.location.host}/Wordle-TypeScript/?word=${window.btoa(word)}`
         );
         dispatch(showWordleLinkCopied());
       } catch (e) {
@@ -57,22 +61,33 @@ const Challenge = ({ answers }: Props) => {
     }
   };
 
-  // Controlled input
+  // Handle set value (which will propogate changes to suggestions/error)
+  const handleSetValue = (word: string) => {
+    setValue(word);
+    setSuggestions(answersTrie.current.getSuggestions(word));
+    setError(!answersTrie.current.has(word));
+    if (inputRef.current) inputRef.current.focus();
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-    const word = e.target.value.toLowerCase();
-    setError(!answerSet.has(word));
+    handleSetValue(e.target.value);
   };
 
   if (!showChallenge) return null;
 
-  const searchClass = classNames(
-    "flex items-center gap-2 bg-slate-800 max-w-sm sm:max-w-md h-16 p-4 mx-auto my-28 rounded shadow-lg text-slate-200 animate-search"
-  );
   return (
     <div className="absolute bg-transparent w-screen h-screen z-10">
-      <form onSubmit={handleSubmit}>
-        <div className={searchClass} ref={modalRef}>
+      <div
+        className="flex flex-col items-center gap-2 bg-slate-800 text-slate-200 shadow-lg max-w-sm sm:max-w-md mx-auto mt-28 rounded animate-search"
+        ref={modalRef}
+      >
+        <form
+          className={classNames(
+            "flex items-center gap-3 h-16 w-full p-4 mx-auto border-b",
+            suggestions.length ? "border-slate-700" : "border-transparent"
+          )}
+          onSubmit={handleSubmit}
+        >
           <SearchIcon className="h-5 w-5 sm:h-6 sm:w-6 fill-slate-400 cursor-default shrink-0" />
           <input
             type="text"
@@ -94,8 +109,9 @@ const Challenge = ({ answers }: Props) => {
               altText="Copy Challenge Link"
             />
           )}
-        </div>
-      </form>
+        </form>
+        <Suggestion suggestions={suggestions} handleSetValue={handleSetValue} />
+      </div>
     </div>
   );
 };
