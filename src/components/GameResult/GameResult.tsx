@@ -24,10 +24,10 @@ const tips = [
 ];
 
 interface Props {
-  answers: string[];
+  handleNewGame: () => void;
 }
 
-const GameResult = ({ answers }: Props) => {
+const GameResult = ({ handleNewGame }: Props) => {
   const dispatch = useAppDispatch();
   const { wordle, status } = useAppSelector((state) => state.game);
   const { row } = useAppSelector((state) => state.guesses);
@@ -69,7 +69,7 @@ const GameResult = ({ answers }: Props) => {
         <Divider />
         <Definition wordle={wordle} />
         <div className="flex flex-wrap mt-6 gap-4 justify-center">
-          <NewGameButton onClick={() => dispatch(newGame(answers))} />
+          <NewGameButton onClick={handleNewGame} win={status === "win"} />
           {/* <ShareWordButton onClick={() => console.log("Linked copied")} /> */}
         </div>
         <div className="relative text-slate-300 mt-12 text-sm">

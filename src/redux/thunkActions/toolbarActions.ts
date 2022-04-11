@@ -2,8 +2,6 @@ import {
   fetchDefinition,
   openHint,
   resetGame,
-  updateStartTime,
-  updateWordle,
 } from "../features/game/gameSlice";
 import { resetGuesses } from "../features/guesses/guessesSlice";
 import {
@@ -32,23 +30,21 @@ const newGame = (
 ): AppThunkAction => {
   return (dispatch, getState) => {
     const { status } = getState().game;
+    const { showGameResult } = getState().setting;
     // Only do these when the website is not initially loading
     if (!preload) {
-      // Reset streak if it is ongoing
       if (status === "ongoing") dispatch(resetStreak());
+      if (showGameResult) dispatch(closeGameResult());
       dispatch(showRestart());
-      dispatch(closeGameResult());
     }
-    // Reset everything
-    dispatch(resetGame());
-    dispatch(resetGuesses());
-    dispatch(resetKeyboard());
     // Get new word
     const index = randomInt(0, answers.length - 1);
     const newWord = challengeWord || answers[index];
-    dispatch(updateWordle(newWord));
+    // Reset everything
+    dispatch(resetGame(newWord));
     dispatch(fetchDefinition(newWord));
-    dispatch(updateStartTime());
+    dispatch(resetGuesses());
+    dispatch(resetKeyboard());
   };
 };
 

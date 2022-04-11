@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useAppDispatch } from "../redux/hooks";
 import { newGame } from "../redux/thunkActions/toolbarActions";
 
@@ -7,11 +7,13 @@ const useFetchWords = () => {
   const dispatch = useAppDispatch();
   const answers = useRef<string[]>([]);
   const words = useRef<Set<string>>(new Set());
-  const location = useLocation();
   const searchParams = useSearchParams()[0];
 
   // Function to read my text file from the 'public' folder on load
   useEffect(() => {
+    // Ignore this useEffect run if answers/words are already populated
+    if (answers.current.length) return;
+
     const parseTextFile = (filename: string): Promise<string[]> => {
       return fetch(`${process.env.PUBLIC_URL}/${filename}`)
         .then((res) => res.text())
@@ -44,7 +46,7 @@ const useFetchWords = () => {
         dispatch(newGame(answers.current, true));
       }
     });
-  }, [dispatch, location, searchParams]);
+  }, [dispatch, searchParams]);
 
   return {
     answers,

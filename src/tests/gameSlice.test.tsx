@@ -3,8 +3,12 @@ import reducer, {
   GameState,
   resetGame,
   changeStatus,
-  updateWordle,
+  updateDefinition,
 } from "../redux/features/game/gameSlice";
+
+beforeEach(() => {
+  jest.useFakeTimers();
+});
 
 describe("init state", () => {
   it("should return the initial state", () => {
@@ -17,43 +21,17 @@ describe("init state", () => {
 });
 
 describe("reset state", () => {
-  it("should return the initial state (status = 'win')", () => {
+  it("should return the initial state", () => {
     const previousState: GameState = {
       ...initState,
       status: "win",
       wordle: "hello",
-      definition: "",
+      definition: "hello world",
       hintGiven: false,
     };
-    expect(reducer(previousState, resetGame())).toEqual(initState);
-  });
-});
-
-describe("update wordle", () => {
-  it("wordle should be books", () => {
-    const previousState: GameState = {
+    expect(reducer(previousState, resetGame(""))).toEqual({
       ...initState,
-      status: "ongoing",
-      wordle: "",
-      definition: "",
-      hintGiven: false,
-    };
-    expect(reducer(previousState, updateWordle("books"))).toEqual({
-      ...previousState,
-      wordle: "books",
-    });
-  });
-  it("wordle should be trees", () => {
-    const previousState: GameState = {
-      ...initState,
-      status: "lose",
-      wordle: "hello",
-      definition: "",
-      hintGiven: false,
-    };
-    expect(reducer(previousState, updateWordle("trees"))).toEqual({
-      ...previousState,
-      wordle: "trees",
+      timeStart: new Date().getTime(),
     });
   });
 });
@@ -82,6 +60,19 @@ describe("update status", () => {
     expect(reducer(previousState, changeStatus("lose"))).toEqual({
       ...previousState,
       status: "lose",
+    });
+  });
+});
+
+describe("update definition", () => {
+  const previousState: GameState = {
+    ...initState,
+    definition: "hello world",
+  };
+  it("definition should be bye world", () => {
+    expect(reducer(previousState, updateDefinition("bye world"))).toEqual({
+      ...previousState,
+      definition: "bye world",
     });
   });
 });

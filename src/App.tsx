@@ -1,7 +1,7 @@
 // Package imports
 import { useEffect } from "react";
 import classNames from "classnames";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 // Custom imports
 import { useAppDispatch, useAppSelector } from "./redux/hooks";
@@ -44,12 +44,13 @@ const App = () => {
   );
   const { answers, words } = useFetchWords();
   const navigate = useNavigate();
+  const searchParams = useSearchParams()[0];
   const modalOpen = showHelp || showStat || showGameResult || showChallenge;
 
   const handleNewGame = () => {
     dispatch(newGame(answers.current));
-    // To avoid user from getting the same challenge again if they beat it and then refresh the page
-    navigate("/Wordle-TypeScript");
+    // To avoid user from getting the same challenge again if they refresh after beating it
+    if (searchParams.get("word")) navigate("/Wordle-TypeScript");
   };
 
   useEffect(() => {
@@ -97,7 +98,7 @@ const App = () => {
       <Stats />
       <Instruction />
       <Challenge answers={answers.current} />
-      <GameResult answers={answers.current} />
+      <GameResult handleNewGame={() => handleNewGame()} />
       <Notification />
       <div className={bodyClass}>
         <Header className="mt-3" />

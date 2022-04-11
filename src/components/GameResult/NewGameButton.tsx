@@ -16,12 +16,22 @@ const Icon = ({ className }: IconProps) => {
   );
 };
 
-const NewGameButton = ({ onClick }: React.HTMLAttributes<HTMLElement>) => {
+interface Props {
+  win: boolean;
+}
+
+const NewGameButton = ({
+  onClick,
+  win,
+}: React.HTMLAttributes<HTMLElement> & Props) => {
   const [isHover, setIsHover] = useState(false);
   const buttonClass = classNames(
     "relative flex items-center justify-center", // Flex props
-    "border-b-4 border-green-700", // Border
-    "rounded-md overflow-hidden min-w-[7rem] min-h-[3rem] shadow-md text-slate-200 bg-gradient-to-tr from-green-600 to-green-500",
+    "border-b-4", // Border
+    "rounded-md overflow-hidden min-w-[7rem] min-h-[3rem] shadow-md text-slate-200 bg-gradient-to-tr",
+    win
+      ? "from-green-600 to-green-500 border-green-700"
+      : "from-red-600 to-red-500 border-red-700",
     isHover && "animate-buttonSurprise"
   );
   const iconClass = classNames("scale-125");

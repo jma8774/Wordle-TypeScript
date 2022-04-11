@@ -27,17 +27,15 @@ export const gameSlice = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    resetGame: () => {
-      return initialState;
-    },
-    updateWordle: (state, action: PayloadAction<string>) => {
-      state.wordle = action.payload;
+    resetGame: (state, action: PayloadAction<string>) => {
+      return {
+        ...initialState,
+        wordle: action.payload,
+        timeStart: new Date().getTime(),
+      };
     },
     updateDefinition: (state, action: PayloadAction<string>) => {
       state.definition = action.payload;
-    },
-    updateStartTime: (state) => {
-      state.timeStart = new Date().getTime();
     },
     updateEndTime: (state) => {
       state.timeEnd = new Date().getTime();
@@ -82,9 +80,7 @@ export const fetchDefinition = createAsyncThunk(
 
 export const {
   resetGame,
-  updateWordle,
   updateDefinition,
-  updateStartTime,
   updateEndTime,
   changeStatus,
   openHint,
