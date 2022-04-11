@@ -30,7 +30,14 @@ const useFetchWords = () => {
 
     // Pick a random wordle after fetching our answers + all words
     fetchWords().then(() => {
-      const challengeWord = window.atob(searchParams.get("word") || "");
+      let challengeWord;
+      try {
+        challengeWord = window.atob(searchParams.get("word") || "");
+      } catch (e) {
+        console.log(
+          "Error decoding base64 Wordle: a random Wordle will be chosen instead"
+        );
+      }
       if (challengeWord && answers.current.includes(challengeWord)) {
         dispatch(newGame(answers.current, true, challengeWord));
       } else {

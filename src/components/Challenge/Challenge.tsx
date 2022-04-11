@@ -19,7 +19,6 @@ const Challenge = ({ answers }: Props) => {
   const [answerSet, setAnswerSet] = useState(new Set(answers));
   const { showChallenge } = useAppSelector((state) => state.setting);
   const inputRef = useRef<HTMLInputElement>(null);
-
   // Close the modal when the user clicks outside of it
   const modalRef = useRef<HTMLDivElement>(null);
   useCloseOnClickOutside(modalRef, () => dispatch(resetModals()));
@@ -29,7 +28,7 @@ const Challenge = ({ answers }: Props) => {
     setAnswerSet(new Set(answers));
   }, [answers]);
 
-  // Reset form and everything on hide
+  // Reset form on hide and focus input on show
   useEffect(() => {
     if (!showChallenge) {
       setValue("");
@@ -52,11 +51,13 @@ const Challenge = ({ answers }: Props) => {
         );
         dispatch(showWordleLinkCopied());
       } catch (e) {
+        // Theoretically, this should never happen because my page will force HTTPS but just in case
         alert("HTTPS connection required to copy link. (https://www...)");
       }
     }
   };
 
+  // Controlled input
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
     const word = e.target.value.toLowerCase();
@@ -79,12 +80,12 @@ const Challenge = ({ answers }: Props) => {
             onChange={handleChange}
             ref={inputRef}
             className="placeholder:text-slate-400 bg-transparent w-full h-full outline-none"
-            placeholder="Send a wordle challenge to a friend"
+            placeholder="Share a five letter Wordle challenge"
           />
           {error ? (
             <ExclamationIcon
               className="h-5 w-5 sm:h-6 sm:w-6 fill-yellow-500 shrink-0 cursor-default"
-              altText="Invalid word"
+              altText="Invalid Word"
             />
           ) : (
             <CopyIcon
