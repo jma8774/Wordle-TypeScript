@@ -27,7 +27,7 @@ const Challenge = ({ answers }: Props) => {
   const modalRef = useRef<HTMLDivElement>(null);
   useCloseOnClickOutside(modalRef, () => dispatch(resetModals()));
 
-  // Convert answers array into a set for faster look up
+  // Convert answers array into a Trie for faster look up
   useEffect(() => {
     answersTrie.current = Trie();
     answers.forEach((answer) => answersTrie.current.insert(answer));
