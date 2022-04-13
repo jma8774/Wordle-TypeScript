@@ -19,36 +19,42 @@ Currently hosted via [GitHub Pages](https://www.jiamingma.me/Wordle-TypeScript/)
 Clone the project from source:
 
     git clone https://github.com/jma8774/Wordle-TypeScript.git
-    cd Wordle-TypeScript
+    cd Wordle-TypeScript/root
 
-## Docker Usage
+## Docker Production Containers
 
 Install [Docker](http://docker.com) container before you proceed. (Confirm installation by typing `docker --version`)
 
+The production build only has frontend at the moment, will eventually containerize the backend server.
+
 ### Run production container
 
-The production container will build the React project into static files and will be served with a nginx server.
+The production container will build the React project into static files and serve them with nginx.
 
-Run the docker-compose.prod file and go to http://localhost:8080/ to see the app:
+Run the docker-compose.prod file and go to http://localhost:3000/ to see the app:
 
-    docker-compose -f docker-compose.prod.yml up --build -d
+    docker compose -f docker-compose.prod.yml up --build -d
 
 To stop it:
 
-    docker-compose -f docker-compose.prod.yml down
+    docker compose -f docker-compose.prod.yml down
 
-## Node.js Usage
+## Frontend Dev
 
 Install [Node.js](https://nodejs.org/en/) before you proceed. (Confirm installation by typing `node --version`)
 
-Install dependencies and start it, then go to http://localhost:3000/ to see the app:
+Go to the frontend directory:
+
+    cd frontend
 
 ### Install and start
+
+Install dependencies and start it, then go to http://localhost:3000/ to see the app:
 
     npm install
     npm start
 
-# Testing
+### Testing
 
 Jest is the testing framework used for this project, all the tests end with `.test.tsx` extension. They are located in the folder at `/src/test`. In the future, test files may be moved to the folder alongside their src file.
 

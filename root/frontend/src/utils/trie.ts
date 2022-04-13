@@ -72,7 +72,7 @@ const Trie = (words: string[] = []) => {
 
   const getLength = (): number => length;
 
-  // Constructor: Iniitialize Trie with default words if any
+  // Constructor: Initialize Trie with default words if any
   const root = TrieNode();
   let length = 0;
   words.forEach((word) => insert(word));

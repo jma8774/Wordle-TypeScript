@@ -4,7 +4,7 @@ services:
   dev-frontend:
     container_name: "wordle-dev"
     build:
-      context: . # Where the dockerfile will be executed (root of our project)
+      context: ./frontend # Where the dockerfile will be executed (root of our project)
       dockerfile: ./docker/Dockerfile.dev # Dir of dockerfile
     environment:
       CHOKIDAR_USEPOLLING: "true" # Required for React hot-reload when files change
@@ -13,5 +13,5 @@ services:
       - "3000:3000" # Expose ports
     stdin_open: true
     volumes:
-      - .:/app # Map host working src directory to container src directory
+      - ./frontend:/app # Map host working src directory to container src directory
       - /app/node_modules # Excluding node_modules

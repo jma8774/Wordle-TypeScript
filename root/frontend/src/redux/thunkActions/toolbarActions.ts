@@ -30,10 +30,11 @@ const newGame = (
 ): AppThunkAction => {
   return (dispatch, getState) => {
     const { status } = getState().game;
+    const { row } = getState().guesses;
     const { showGameResult } = getState().setting;
     // Only do these when the website is not initially loading
     if (!preload) {
-      if (status === "ongoing") dispatch(resetStreak());
+      if (status === "ongoing" && row > 0) dispatch(resetStreak());
       if (showGameResult) dispatch(closeGameResult());
       dispatch(showRestart());
     }

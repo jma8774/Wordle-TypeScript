@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./root/frontend
     steps:
       - name: Check out code
         uses: actions/checkout@v2
@@ -17,8 +20,9 @@ jobs:
         with:
           node-version: "16.x"
           cache: "npm"
+          cache-dependency-path: "./root/frontend/package-lock.json"
 
-      - name: Run tests
+      - name: Run frontend tests
         run: |
           npm ci
           npm run test

@@ -1,7 +1,7 @@
 # I am deploying on both GitHub pages and AWS, just want to try both with GitHub Action CI/CD
 # On Push:
 #   This action will run tests on the Node project:
-#     If tests pass: 
+#     If tests pass:
 #       Deploy GitHub Page
 name: Build to GH Page Branch
 
@@ -12,6 +12,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./root/frontend
     steps:
       - name: Check out code
         uses: actions/checkout@v2
@@ -21,6 +24,7 @@ jobs:
         with:
           node-version: "16.x"
           cache: "npm"
+          cache-dependency-path: "./root/frontend/package-lock.json"
 
       - name: Run tests
         run: |
