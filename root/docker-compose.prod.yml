@@ -4,7 +4,7 @@ services:
   prod-frontend:
     container_name: "wordle-prod"
     build:
-      context: . # Where the dockerfile will be executed (root of our project)
+      context: ./frontend # Where the dockerfile will be executed (root of our project)
       dockerfile: ./docker/Dockerfile.prod # Dir of dockerfile
     ports:
-      - "8080:80" # Expose ports
+      - "3000:80" # Expose ports
