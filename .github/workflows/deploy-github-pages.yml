@@ -1,7 +1,7 @@
 # I am deploying on both GitHub pages and AWS, just want to try both with GitHub Action CI/CD
 # On Push:
 #   This action will run tests on the Node project:
-#     If tests pass: 
+#     If tests pass:
 #       Deploy GitHub Page
 name: Build to GH Page Branch
 
@@ -24,6 +24,7 @@ jobs:
 
       - name: Run tests
         run: |
+          cd root/frontend
           npm ci
           npm run test
           npm run build
