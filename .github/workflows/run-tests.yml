@@ -20,6 +20,7 @@ jobs:
         with:
           node-version: "16.x"
           cache: "npm"
+          cache-dependency-path: "./root/frontend/package-lock.json"
 
       - name: Run frontend tests
         run: |
