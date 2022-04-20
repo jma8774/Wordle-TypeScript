@@ -1,5 +1,4 @@
 import classNames from "classnames";
-import { useState } from "react";
 import { toggleShowDebug } from "../../../redux/features/setting/settingSlice";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { EyeIcon } from "./EyeIcon";

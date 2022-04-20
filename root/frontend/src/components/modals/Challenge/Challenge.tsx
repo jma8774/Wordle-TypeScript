@@ -16,11 +16,12 @@ interface Props {
 
 const Challenge = ({ answers }: Props) => {
   const dispatch = useAppDispatch();
+  const showChallenge = useAppSelector((state) => state.setting.showChallenge);
+  // Form
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
-  const { showChallenge } = useAppSelector((state) => state.setting);
-  const answersTrie = useRef(Trie());
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const answersTrie = useRef(Trie());
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Close the modal when the user clicks outside of it

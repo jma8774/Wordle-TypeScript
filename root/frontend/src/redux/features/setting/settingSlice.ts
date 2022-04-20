@@ -11,10 +11,10 @@ export interface SettingState {
   showChallenge: boolean;
   showGameResult: boolean;
   // Notifications
-  restart: boolean;
-  resetStats: boolean;
-  errorSubmit: boolean;
-  wordleLinkCopied: boolean;
+  notifRestart: boolean;
+  notifResetStats: boolean;
+  notifErrorSubmit: boolean;
+  notifWordleLinkCopied: boolean;
 }
 
 export const initialState: SettingState = {
@@ -26,10 +26,10 @@ export const initialState: SettingState = {
   showChallenge: false,
   showGameResult: false,
   // Notifications
-  restart: false,
-  resetStats: false,
-  errorSubmit: false,
-  wordleLinkCopied: false,
+  notifRestart: false,
+  notifResetStats: false,
+  notifErrorSubmit: false,
+  notifWordleLinkCopied: false,
 };
 
 export const settingSlice = createSlice({
@@ -65,28 +65,28 @@ export const settingSlice = createSlice({
     },
     // Notifications
     showRestart: (state) => {
-      state.restart = true;
+      state.notifRestart = true;
     },
     closeRestart: (state) => {
-      state.restart = false;
+      state.notifRestart = false;
     },
     showResetStats: (state) => {
-      state.resetStats = true;
+      state.notifResetStats = true;
     },
     closeResetStats: (state) => {
-      state.resetStats = false;
+      state.notifResetStats = false;
     },
     showErrorSubmit: (state) => {
-      state.errorSubmit = true;
+      state.notifErrorSubmit = true;
     },
     closeErrorSubmit: (state) => {
-      state.errorSubmit = false;
+      state.notifErrorSubmit = false;
     },
     showWordleLinkCopied: (state) => {
-      state.wordleLinkCopied = true;
+      state.notifWordleLinkCopied = true;
     },
     closeWordleLinkCopied: (state) => {
-      state.wordleLinkCopied = false;
+      state.notifWordleLinkCopied = false;
     },
   },
 });
@@ -114,5 +114,28 @@ export const {
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectTheme = (state: RootState) => state.setting.theme;
+export const selectNotifications = (state: RootState) => {
+  const {
+    notifRestart,
+    notifResetStats,
+    notifErrorSubmit,
+    notifWordleLinkCopied,
+  } = state.setting;
+  return {
+    notifRestart,
+    notifResetStats,
+    notifErrorSubmit,
+    notifWordleLinkCopied,
+  };
+};
+export const selectModals = (state: RootState) => {
+  const { showHelp, showStat, showChallenge, showGameResult } = state.setting;
+  return {
+    showHelp,
+    showStat,
+    showChallenge,
+    showGameResult,
+  };
+};
 
 export default settingSlice.reducer;

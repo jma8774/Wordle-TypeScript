@@ -46,7 +46,7 @@ export const guessesSlice = createSlice({
     },
     handleChar: (state, action: PayloadAction<string>) => {
       if (state.row >= MAX_GUESSES || state.col === WORDLE_LEN) return;
-      state.guesses[state.row][state.col].ch = action.payload;
+      state.guesses[state.row][state.col].ch = action.payload.toLowerCase();
       state.col = Math.min(WORDLE_LEN, state.col + 1);
     },
     handleSubmit: (state, action: PayloadAction<string>) => {

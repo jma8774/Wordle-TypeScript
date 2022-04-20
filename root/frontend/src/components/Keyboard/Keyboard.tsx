@@ -1,7 +1,12 @@
 import React from "react";
 import Node from "./Node";
 import { BackspaceIcon } from "../icons";
-import { AlphabetColor } from "../../types/types";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import {
+  submitBackspace,
+  submitChar,
+  submitWord,
+} from "../../redux/thunkActions/gameActions";
 
 const rows = [
   ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
@@ -10,20 +15,26 @@ const rows = [
 ];
 
 interface Props {
-  alphabet: AlphabetColor;
-  handleChar: (ch: string) => void;
-  handleBackspace: () => void;
-  submitGuess: () => void;
   className: string;
+  words: Set<string>;
 }
 
-const Keyboard = ({
-  className,
-  alphabet,
-  handleChar,
-  handleBackspace,
-  submitGuess,
-}: Props) => {
+const Keyboard = ({ className, words }: Props) => {
+  const dispatch = useAppDispatch();
+  const { keyboard } = useAppSelector((state) => state.keyboard);
+
+  const handleChar = (ch: string) => {
+    dispatch(submitChar(ch));
+  };
+
+  const handleBackspace = () => {
+    dispatch(submitBackspace());
+  };
+
+  const handleSubmit = () => {
+    dispatch(submitWord(words));
+  };
+
   const rowClasses = "flex gap-1.5 justify-center";
   return (
     <div className={`${className} flex flex-col gap-1.5`}>
@@ -32,7 +43,7 @@ const Keyboard = ({
           <Node
             key={ch}
             onClick={() => handleChar(ch)}
-            pair={{ id: -1, ch: ch.toUpperCase(), color: alphabet?.[ch] }}
+            pair={{ id: -1, ch: ch.toUpperCase(), color: keyboard?.[ch] }}
           />
         ))}
       </div>
@@ -42,14 +53,14 @@ const Keyboard = ({
           <Node
             key={ch}
             onClick={() => handleChar(ch)}
-            pair={{ id: -1, ch: ch.toUpperCase(), color: alphabet?.[ch] }}
+            pair={{ id: -1, ch: ch.toUpperCase(), color: keyboard?.[ch] }}
           />
         ))}
       </div>
 
       <div className={rowClasses}>
         <Node
-          onClick={submitGuess}
+          onClick={handleSubmit}
           className="grow"
           pair={{ id: -1, ch: "Enter", color: "init" }}
         />
@@ -57,7 +68,7 @@ const Keyboard = ({
           <Node
             key={ch}
             onClick={() => handleChar(ch)}
-            pair={{ id: -1, ch: ch.toUpperCase(), color: alphabet?.[ch] }}
+            pair={{ id: -1, ch: ch.toUpperCase(), color: keyboard?.[ch] }}
           />
         ))}
         <Node

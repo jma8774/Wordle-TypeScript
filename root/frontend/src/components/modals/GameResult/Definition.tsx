@@ -2,7 +2,7 @@ import { useAppSelector } from "../../../redux/hooks";
 import { LinkIcon } from "../../icons";
 
 const Definition = ({ wordle }: { wordle: string }) => {
-  const { definition } = useAppSelector((state) => state.game);
+  const definition = useAppSelector((state) => state.game.definition);
 
   return (
     <div className="flex flex-col gap-1 border-2 border-slate-500 border-dashed rounded-lg w-full min-h-[6rem] p-5 mt-2">

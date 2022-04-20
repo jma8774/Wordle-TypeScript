@@ -1,13 +1,13 @@
 import React from "react";
-import { CharColor } from "../../types/types";
+import { useAppSelector } from "../../redux/hooks";
 import Node from "./Node";
 
 interface Props {
-  guesses: CharColor[][];
   className?: string;
 }
 
-const Guesses = ({ className, guesses }: Props) => {
+const Guesses = ({ className }: Props) => {
+  const guesses = useAppSelector((state) => state.guesses.guesses);
   return (
     <div className={className}>
       {guesses.map((guess, index) => (

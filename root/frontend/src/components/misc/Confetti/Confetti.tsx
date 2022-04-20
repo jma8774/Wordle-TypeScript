@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import ConfettiBody from "react-confetti";
 import useWindowSize from "../../../hooks/useWindowSize";
-import { Status } from "../../../types/types";
+import { useAppSelector } from "../../../redux/hooks";
 
-interface Props {
-  status: Status;
-}
-
-const Confetti = ({ status }: Props) => {
+const Confetti = () => {
+  const status = useAppSelector((state) => state.game.status);
   const [show, setShow] = useState(false);
   const windowSize = useWindowSize();
 

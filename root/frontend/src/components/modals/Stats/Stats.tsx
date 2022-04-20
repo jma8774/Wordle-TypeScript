@@ -36,10 +36,11 @@ interface Props {}
 
 const Stats = (props: Props) => {
   const dispatch = useAppDispatch();
-  const [deleteOnce, setDeleteOnce] = useState(false);
   const { gamesPlayed, gamesWon, currentStreak, longestStreak } =
     useAppSelector((state) => state.localStorage);
   const { showStat } = useAppSelector((state) => state.setting);
+  const [deleteOnce, setDeleteOnce] = useState(false);
+  // Close modal on click outside
   const ref = useRef<HTMLDivElement>(null);
   useCloseOnClickOutside(ref, () => {
     dispatch(resetModals());

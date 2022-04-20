@@ -6,6 +6,7 @@ import {
   closeResetStats,
   closeRestart,
   closeWordleLinkCopied,
+  selectNotifications,
 } from "../../../redux/features/setting/settingSlice";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import Error from "./Error";
@@ -15,60 +16,63 @@ interface Props {}
 
 const Notification = (props: Props) => {
   const dispatch = useAppDispatch();
-  const { restart, errorSubmit, resetStats, wordleLinkCopied } = useAppSelector(
-    (state) => state.setting
-  );
-  const { hintGiven } = useAppSelector((state) => state.game);
+  const {
+    notifErrorSubmit,
+    notifResetStats,
+    notifRestart,
+    notifWordleLinkCopied,
+  } = useAppSelector(selectNotifications);
+  const notifHintGiven = useAppSelector((state) => state.game.hintGiven);
 
   useCloseNotificationAfter(
-    errorSubmit,
+    notifErrorSubmit,
     () => dispatch(closeErrorSubmit()),
     2000
   );
-  useCloseNotificationAfter(hintGiven, () => dispatch(closeHint()), 3000);
-  useCloseNotificationAfter(restart, () => dispatch(closeRestart()), 2000);
+  useCloseNotificationAfter(notifHintGiven, () => dispatch(closeHint()), 3000);
+  useCloseNotificationAfter(notifRestart, () => dispatch(closeRestart()), 2000);
   useCloseNotificationAfter(
-    resetStats,
+    notifResetStats,
     () => dispatch(closeResetStats()),
     3000
   );
   useCloseNotificationAfter(
-    wordleLinkCopied,
+    notifWordleLinkCopied,
     () => dispatch(closeWordleLinkCopied()),
     3000
   );
 
   return (
     <div className="absolute flex flex-col gap-2 top-0 right-0 w-fit z-10 p-4 overflow-x-hidden">
-      {errorSubmit && (
+      {notifErrorSubmit && (
         <Error
           title="Word Error"
           body="That is not a valid word!"
           onClick={() => dispatch(closeErrorSubmit())}
         />
       )}
-      {hintGiven && (
+      {notifHintGiven && (
         <Success
           title="Hint Updated"
           body="Keyboard has been marked yellow."
           onClick={() => dispatch(closeHint())}
         />
       )}
-      {restart && (
+      {notifRestart && (
         <Success
           title="Game Restarted"
           body="A new word has been selected!"
           onClick={() => dispatch(closeRestart())}
         />
       )}
-      {resetStats && (
+      {notifResetStats && (
         <Success
           title="Stats Reset"
           body="Enjoy your fresh start!"
           onClick={() => dispatch(closeResetStats())}
         />
       )}
-      {wordleLinkCopied && (
+      {notifWordleLinkCopied && (
         <Success
           title="Link Copied"
           body="Share the link to a friend!"
