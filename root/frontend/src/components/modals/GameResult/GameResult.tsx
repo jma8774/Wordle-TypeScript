@@ -1,10 +1,10 @@
 import classNames from "classnames";
 import React, { useEffect } from "react";
-import { openGameResult } from "../../redux/features/setting/settingSlice";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { newGame } from "../../redux/thunkActions/toolbarActions";
-import { randomInt } from "../../utils/helper";
-import Divider from "../Divider/Divider";
+import { openGameResult } from "../../../redux/features/setting/settingSlice";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { newGame } from "../../../redux/thunkActions/toolbarActions";
+import { randomInt } from "../../../utils/helper";
+import Divider from "../../misc/Divider/Divider";
 import Definition from "./Definition";
 import { NewGameButton } from "./NewGameButton";
 import { Time } from "./Time";

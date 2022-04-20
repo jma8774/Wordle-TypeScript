@@ -6,71 +6,14 @@ import {
   initialState as settingInitState,
   settingSlice,
 } from "./features/setting/settingSlice";
+import { localStorageSlice } from "./features/localStorage/localStorageSlice";
 import {
-  localStorageSlice,
-  LocalStorageState,
-  initialState as localStorageInitState,
-} from "./features/localStorage/localStorageSlice";
-
-const loadIsFirstVisit = (): boolean => {
-  try {
-    const key = "first-visit";
-    const isFirstVisit = localStorage.getItem(key) || "true";
-    if (isFirstVisit === "true") {
-      localStorage.setItem(key, "false");
-      return true;
-    }
-    return false;
-  } catch (e) {
-    console.log(e);
-    return true;
-  }
-};
-
-const localStats = (): LocalStorageState => {
-  try {
-    const persistedStats = localStorage.getItem("stats");
-    if (persistedStats) return JSON.parse(persistedStats);
-
-    localStorage.setItem("don't change it 😔", "");
-    localStorage.setItem("stats", JSON.stringify(localStorageInitState));
-    return localStorageInitState;
-  } catch (e) {
-    console.log(e);
-    return localStorageInitState;
-  }
-};
-
-const saveStatsToLocalStorage = (): void => {
-  try {
-    const reduxStatState = store.getState().localStorage;
-    localStorage.setItem("stats", JSON.stringify(reduxStatState));
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-const loadShowDebug = (): boolean => {
-  try {
-    const showDebug = localStorage.getItem("show-debug");
-    if (showDebug) return JSON.parse(showDebug);
-
-    localStorage.setItem("show-debug", "false");
-    return false;
-  } catch (e) {
-    console.log(e);
-    return false;
-  }
-};
-
-const saveShowDebug = (): void => {
-  try {
-    const showDebug = store.getState().setting.showDebug;
-    localStorage.setItem("show-debug", JSON.stringify(showDebug));
-  } catch (e) {
-    console.log(e);
-  }
-};
+  loadIsFirstVisit,
+  loadLocalStats,
+  loadShowDebug,
+  saveShowDebug,
+  saveStatsToLocalStorage,
+} from "./utils/localStorageHelper";
 
 const store = configureStore({
   reducer: {
@@ -86,14 +29,14 @@ const store = configureStore({
       showHelp: loadIsFirstVisit(),
       showDebug: loadShowDebug(),
     },
-    localStorage: localStats(),
+    localStorage: loadLocalStats(),
   },
 });
 
 // Update my local storage
 store.subscribe(() => {
-  saveStatsToLocalStorage();
-  saveShowDebug();
+  saveStatsToLocalStorage(store);
+  saveShowDebug(store);
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

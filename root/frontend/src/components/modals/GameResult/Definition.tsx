@@ -1,5 +1,5 @@
-import { useAppSelector } from "../../redux/hooks";
-import { LinkIcon } from "../icons";
+import { useAppSelector } from "../../../redux/hooks";
+import { LinkIcon } from "../../icons";
 
 const Definition = ({ wordle }: { wordle: string }) => {
   const { definition } = useAppSelector((state) => state.game);

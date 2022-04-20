@@ -1,10 +1,10 @@
 import React, { useRef, useState } from "react";
-import useCloseOnClickOutside from "../../hooks/useCloseOnClickOutside";
-import { resetModals } from "../../redux/features/setting/settingSlice";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { handleResetStats } from "../../redux/thunkActions/toolbarActions";
-import Divider from "../Divider/Divider";
-import { CloseIcon } from "../icons";
+import useCloseOnClickOutside from "../../../hooks/useCloseOnClickOutside";
+import { resetModals } from "../../../redux/features/setting/settingSlice";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { handleResetStats } from "../../../redux/thunkActions/toolbarActions";
+import Divider from "../../misc/Divider/Divider";
+import { CloseIcon } from "../../icons";
 import { DistributionCard } from "./DistributionCard";
 import { StatCard } from "./StatCard";
 import {

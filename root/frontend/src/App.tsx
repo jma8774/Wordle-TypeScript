@@ -18,6 +18,7 @@ import {
   MadeWithLove,
   Debug,
   GameResult,
+  Challenge,
 } from "./components";
 import { KEYS } from "./utils/constants";
 import {
@@ -31,7 +32,6 @@ import {
   submitWord,
 } from "./redux/thunkActions/gameActions";
 import { handleHint, newGame } from "./redux/thunkActions/toolbarActions";
-import Challenge from "./components/Challenge/Challenge";
 
 const App = () => {
   // console.log("App render");

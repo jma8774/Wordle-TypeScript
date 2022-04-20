@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React, { useState } from "react";
-import { IconProps } from "../../types/propTypes";
+import { IconProps } from "../../../types/propTypes";
 
 const Icon = ({ className }: IconProps) => {
   return (

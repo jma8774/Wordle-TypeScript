@@ -1,5 +1,5 @@
-import { useAppSelector } from "../../redux/hooks";
-import { RootState } from "../../redux/store";
+import { useAppSelector } from "../../../redux/hooks";
+import { RootState } from "../../../redux/store";
 
 const TimeIcon = () => {
   return (

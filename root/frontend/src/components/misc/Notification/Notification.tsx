@@ -1,13 +1,13 @@
 import React from "react";
-import useCloseNotificationAfter from "../../hooks/useCloseNotificationAfter";
-import { closeHint } from "../../redux/features/game/gameSlice";
+import useCloseNotificationAfter from "../../../hooks/useCloseNotificationAfter";
+import { closeHint } from "../../../redux/features/game/gameSlice";
 import {
   closeErrorSubmit,
   closeResetStats,
   closeRestart,
   closeWordleLinkCopied,
-} from "../../redux/features/setting/settingSlice";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+} from "../../../redux/features/setting/settingSlice";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import Error from "./Error";
 import Success from "./Success";
 

@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
-import useCloseOnClickOutside from "../../hooks/useCloseOnClickOutside";
-import { resetModals } from "../../redux/features/setting/settingSlice";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { CloseIcon } from "../icons";
-import { Divider } from "..";
-import Node from "../Guesses/Node";
+import useCloseOnClickOutside from "../../../hooks/useCloseOnClickOutside";
+import { resetModals } from "../../../redux/features/setting/settingSlice";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { CloseIcon } from "../../icons";
+import { Divider } from "../..";
+import Node from "../../Guesses/Node";
 import classNames from "classnames";
 
 interface Props {}

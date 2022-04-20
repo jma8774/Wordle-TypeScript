@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import useCloseOnClickOutside from "../../hooks/useCloseOnClickOutside";
+import useCloseOnClickOutside from "../../../hooks/useCloseOnClickOutside";
 import {
   resetModals,
   showWordleLinkCopied,
-} from "../../redux/features/setting/settingSlice";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { CopyIcon, ExclamationIcon, SearchIcon } from "../icons";
+} from "../../../redux/features/setting/settingSlice";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { CopyIcon, ExclamationIcon, SearchIcon } from "../../icons";
 import classNames from "classnames";
-import { Trie } from "../../utils/trie";
+import { Trie } from "../../../utils/trie";
 import { Suggestion } from "./Suggestion";
 
 interface Props {

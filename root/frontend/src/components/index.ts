@@ -1,12 +1,18 @@
+// Main Components
 export { default as Header } from "./Header/Header";
 export { default as Toolbar } from "./Toolbar/Toolbar";
 export { default as Guesses } from "./Guesses/Guesses";
 export { default as Keyboard } from "./Keyboard/Keyboard";
-export { default as Stats } from "./Stats/Stats";
-export { default as Instruction } from "./Instruction/Instruction";
-export { default as Confetti } from "./Confetti/Confetti";
-export { default as Divider } from "./Divider/Divider";
-export { default as Notification } from "./Notification/Notification";
-export { default as MadeWithLove } from "./MadeWithLove/MadeWithLove";
-export { default as Debug } from "./Debug/Debug";
-export { default as GameResult } from "./GameResult/GameResult";
+
+// Modals
+export { default as Instruction } from "./modals/Instruction/Instruction";
+export { default as GameResult } from "./modals/GameResult/GameResult";
+export { default as Stats } from "./modals/Stats/Stats";
+export { default as Challenge } from "./modals/Challenge/Challenge";
+
+// Misc
+export { default as Confetti } from "./misc/Confetti/Confetti";
+export { default as Divider } from "./misc/Divider/Divider";
+export { default as Notification } from "./misc/Notification/Notification";
+export { default as MadeWithLove } from "./misc/MadeWithLove/MadeWithLove";
+export { default as Debug } from "./misc/Debug/Debug";
