@@ -1,19 +1,15 @@
 import { useEffect } from "react";
-import { selectModals } from "../redux/features/setting/settingSlice";
-import { useAppSelector } from "../redux/hooks";
+import { Callback } from "../types/types";
 
 type EventCode = string;
-type Callback = () => void;
 type Operations = Record<EventCode, Callback>;
 
-const useKeyPress = (operations: Operations) => {
-  const { showHelp, showStat, showChallenge, showGameResult } =
-    useAppSelector(selectModals);
-  const modalOpen = showHelp || showStat || showGameResult || showChallenge;
+type Checks = boolean[];
 
+const useKeyPress = (operations: Operations, checks?: Checks) => {
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent): void => {
-      if (modalOpen) return;
+      if (checks?.some((x) => x === false)) return;
 
       // Ignore default when these keys are pressed for our application
       if (operations.hasOwnProperty(e.code)) {
@@ -25,7 +21,7 @@ const useKeyPress = (operations: Operations) => {
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
     };
-  }, [modalOpen, operations]);
+  }, [operations, checks]);
 };
 
 export default useKeyPress;

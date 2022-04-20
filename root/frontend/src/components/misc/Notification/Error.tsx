@@ -1,9 +1,10 @@
 import React from "react";
+import { Callback } from "../../../types/types";
 
 interface Props {
   title?: string;
   body?: string;
-  onClick?: () => void;
+  onClick?: Callback;
 }
 
 const ErrorIcon = () => {

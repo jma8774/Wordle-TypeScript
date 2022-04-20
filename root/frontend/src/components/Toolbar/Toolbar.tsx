@@ -8,6 +8,7 @@ import {
 } from "../../redux/features/setting/settingSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { handleHint, newGame } from "../../redux/thunkActions/toolbarActions";
+import { Callback } from "../../types/types";
 import {
   StatIcon,
   QuestionIcon,
@@ -32,7 +33,7 @@ const Toolbar = ({ className, answers }: ToolbarProps) => {
   const { navigateToRoot } = useNavigateOnChallenge();
 
   // Function composition (must pass check before executing)
-  const doIfOngoing = (fn: () => void) => {
+  const doIfOngoing = (fn: Callback) => {
     if (status === "ongoing") fn();
   };
   const handleGiveHint = () => doIfOngoing(() => dispatch(handleHint()));

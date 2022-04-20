@@ -34,6 +34,7 @@ import { selectModals } from "./redux/features/setting/settingSlice";
 
 // Misc
 import { KEYS } from "./utils/constants";
+import { Callback } from "./types/types";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -44,18 +45,23 @@ const App = () => {
   const { answers, words } = useFetchWords();
   const { navigateToRoot } = useNavigateOnChallenge();
 
-  useKeyPress({
-    Backspace: () => dispatch(submitBackspace()),
-    Enter: () => dispatch(submitWord(words.current)),
-    Space: () => {
-      dispatch(newGame(answers.current));
-      navigateToRoot();
+  useKeyPress(
+    {
+      Backspace: () => dispatch(submitBackspace()),
+      Enter: () => dispatch(submitWord(words.current)),
+      Space: () => {
+        dispatch(newGame(answers.current));
+        navigateToRoot();
+      },
+      // KeyA...KeyZ: () => dispatch(submitChar(key)),
+      ...Array.from(KEYS).reduce((acc: Record<string, Callback>, key) => {
+        const code = `Key${key}`;
+        acc[code] = () => dispatch(submitChar(key));
+        return acc;
+      }, {}),
     },
-    // KeyA...KeyZ: (key) => dispatch(submitChar(key)),
-    ...Array.from(KEYS)
-      .map((code) => ({ [`Key${code}`]: () => dispatch(submitChar(code)) }))
-      .reduce((acc, op) => ({ ...acc, ...op }), {}),
-  });
+    [!modalOpen] // Only listen to keypresses when checks pass
+  );
 
   const bodyClass = classNames(
     "min-h-screen min-w-screen flex flex-col items-center gap-1 text-slate-200 mx-auto bg-slate-800 pt-3",

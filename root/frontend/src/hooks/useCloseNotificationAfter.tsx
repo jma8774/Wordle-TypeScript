@@ -1,9 +1,10 @@
 import { useEffect } from "react";
+import { Callback } from "../types/types";
 
 // Pass a callback to be executed after ms time, (setState to false)
 const useCloseNotificationAfter = (
   open: boolean,
-  callback: () => void,
+  callback: Callback,
   ms: number
 ) => {
   useEffect(() => {

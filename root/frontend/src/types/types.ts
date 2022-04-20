@@ -38,4 +38,6 @@ interface AlphabetColor {
 
 type Status = "ongoing" | "lose" | "win";
 
-export type { CharColor, AlphabetColor, Status };
+type Callback = () => void;
+
+export type { CharColor, AlphabetColor, Status, Callback };

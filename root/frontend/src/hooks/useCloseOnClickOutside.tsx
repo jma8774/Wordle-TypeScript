@@ -1,9 +1,10 @@
 import { RefObject, useEffect } from "react";
+import { Callback } from "../types/types";
 
 // Pass a ref and when the user clicks outside of the ref, the ref element will perform the handler (in thie case we should close it)
 const useCLoseOnClickOutside = (
   ref: RefObject<HTMLElement>,
-  handler: () => void
+  handler: Callback
 ) => {
   useEffect(() => {
     const handleMouseClick = (e: MouseEvent | TouchEvent) => {
