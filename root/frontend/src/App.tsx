@@ -55,19 +55,18 @@ const App = () => {
       },
       // KeyA...KeyZ: () => dispatch(submitChar(key)),
       ...Array.from(KEYS).reduce((acc: Record<string, Callback>, key) => {
-        const code = `Key${key}`;
-        acc[code] = () => dispatch(submitChar(key));
+        acc[`Key${key}`] = () => dispatch(submitChar(key));
         return acc;
       }, {}),
     },
-    [!modalOpen] // Only listen to keypresses when checks pass
+    [!modalOpen] // Only listen to keypresses when all checks pass
   );
 
   const bodyClass = classNames(
     "min-h-screen min-w-screen flex flex-col items-center gap-1 text-slate-200 mx-auto bg-slate-800 pt-3",
     modalOpen ? "brightness-50" : "brightness-100",
     "transition duration-500", // Transition properties
-    showGameResult && "scale-125"
+    showGameResult ? "scale-125" : "scale-100"
   );
 
   return (

@@ -9,9 +9,10 @@ type Checks = boolean[];
 const useKeyPress = (operations: Operations, checks?: Checks) => {
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent): void => {
-      if (checks?.some((x) => x === false)) return;
+      // If any check is false, don't listen to keypresses
+      if (checks?.some((x) => !x)) return;
 
-      // Ignore default when these keys are pressed for our application
+      // Perform operation if keycode is a key in operations
       if (operations.hasOwnProperty(e.code)) {
         e.preventDefault();
         operations[e.code]();
