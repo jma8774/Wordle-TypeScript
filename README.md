@@ -1,4 +1,4 @@
-# Wordle TypeScript (WIP)
+# Wordle TypeScript
 
 Just another Wordle game on the web, the game is really fun and really gets your brain going! I wanted to tackle and try to recreate my own version of this game so I can play it unlimited times (when Wordle first came out on NYT, it was a daily game).
 
